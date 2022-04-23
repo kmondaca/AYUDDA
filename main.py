@@ -16,6 +16,7 @@ class InfoForm(FlaskForm):
     phone = StringField('phone', validators=[DataRequired()])
     conpref =  RadioField('Contact Preference:',
                       choices=[('phone', 'Phone'), ('email', 'Email'), ('both', 'both')])
+    email = TextAreaField('')
     conchoice =TextAreaField('')
     submit = SubmitField('Submit')
 
@@ -26,10 +27,11 @@ class SpanForm(FlaskForm):
     sfirst = StringField('Primer nombre: ', validators=[DataRequired()])
     slast = StringField('Apellido: ', validators=[DataRequired()])
     slang = StringField('Idioma principal:')
-    sphone = StringField('Teléfono:', validators=[DataRequired()])
-    sconpref =  RadioField('Cómo prefiere comunicarse:',
-                      choices=[('phone', 'Teléfono'), ('email', 'Correo electrónico'), ('both', 'Ambos')])
+    sphone = StringField('Teléfono:', validators=[DataRequired()])
+    sconpref =  RadioField('Cómo prefiere comunicarse:',
+                      choices=[('phone', 'Teléfono'), ('email', 'Correo electrónico'), ('both', 'Ambos')])
     sconchoice =TextAreaField('')
+    semail = TextAreaField('')
     submit = SubmitField('Submit')
 
 @app.route('/english', methods=['GET', 'POST'])
@@ -43,6 +45,7 @@ def english():
         session['phone'] = form.phone.data
         session['conpref'] = form.conpref.data
         session['conchoice'] = form.conchoice.data
+        session['email'] = form.email.data
         #session['submit'] = form.submit.data
 
         return redirect(url_for("thankyou"))#only when form submitted
@@ -59,6 +62,7 @@ def spanish():
         session['sphone'] = form.sphone.data
         session['sconpref'] = form.sconpref.data
         session['sconchoice'] = form.sconchoice.data
+        session['semail'] = form.semail.data
         # session['submit'] = form.submit.data
 
         return redirect(url_for("gracias"))  # only when form submitted
