@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="jumbotron">
+
+    <h1> Gracias. Aquí está la información que nos dio:</h1>
+
+<ul>
+    <li>First: {{session['sfirst']}} </li>
+    <li>Last: {{session['slast']}}</li>
+    <li>Primary Language: {{session['slang']}}</li>
+    <li>Phone: {{session['sphone']}}</li>
+    <li>Contact Preference: {{session['sconpref']}}</li>
+    <li>{{session['sconchoice']}}</li>
+</ul>
+
+</div>
+
+{% endblock %}

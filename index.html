@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block content %}
+<div class = "jumbotron text-center">
+    <p><h1>Welcome to AYUDDA!</h1></p>
+    <h2>Estamos contigo! We are with you!</h2>
+
+   <div>
+     <p>
+         As we have experienced the difficulties of acquiring disability youth services, the intention of this page is to explain the application process and tips we have learned along the way.
+         This is not professional advice, any information provided does not guarantee an approved application.
+       </p>
+       <p>
+           Como hemos experimentado las dificultades de adquirir servicios para jóvenes discapacitados, la intención de esta página es explicar el proceso de solicitud y los consejos que hemos aprendido en el camino.
+           Esto no es un consejo profesional, cualquier información proporcionada no garantiza una solicitud aprobada.
+       </p>
+   </div>
+   </div>
+
+    <div>
+     <br>
+        <p> The following documents are needed for your Division of Developmental Disability(DDD) visit:</p> </br>
+        <p>Los siguientes documentos son necesarios para su visita a la División de Discapacidades del Desarrollo(DDD)</p>
+        </br>
+        <ul>
+            <li>Copy of U.S. birth certificate OR citizenship / immigration for the child // Copia del acta de nacimiento de los EE. UU. O ciudadanía / inmigración para el niño</li>
+            <li>Guardianship / Legal responsibility documents // Documentos de tutela / responsabilidad legal</li>
+            <li>Copy of all medical insurance cards for the child // Copia de todas las tarjetas de seguro médico </li>
+            <li>Diagnosis evaluation / School report showing proof of the lifelong condition. // Evaluación de diagnóstico / Informe escolar que muestra prueba de la afección de por vida.</li>
+        </ul>
+    </div>
+
+
+<div class="text-center">
+<p>
+    Please select a language to learn more about the application breakdown.
+    Seleccione un idioma para obtener más información sobre el desglose de la aplicación.
+</p>
+    <table align="center">
+        <tr>
+            <td>
+    <form align = "center" action="{{url_for('sinfo')}}">
+        <input style="background-color:#17a2b8" type="submit" value="Spanish">
+    </form>
+    </td>
+            <td>
+        <form align= "center" action="{{url_for('einfo')}}">
+        <input style="background-color:#17a2b8" type="submit" value="English">
+
+    </form>
+            </td>
+        </tr>
+        </table>
+</div>
+
+
+{% endblock content %}

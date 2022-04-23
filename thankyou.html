@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="jumbotron">
+
+    <h1> Thank you. Here is the info you gave us:</h1>
+    <p> We will be sure to get in contact with you within 72 hours! </p>
+
+<ul>
+    <li>First: {{session['first']}} </li>
+    <li>Last: {{session['last']}}</li>
+    <li>Primary Language: {{session['lang']}}</li>
+    <li>Phone: {{session['phone']}}</li>
+    <li>Contact Preference: {{session['conpref']}}</li>
+    <li>{{session['conchoice']}}</li>
+</ul>
+
+</div>
+
+{% endblock %}
