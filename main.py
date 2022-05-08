@@ -1,9 +1,10 @@
-from flask import Flask, render_template, session, redirect, url_for
+from flask import Flask, render_template, session, redirect, url_for, send_file
 from flask_wtf import FlaskForm
 from wtforms import (StringField , SubmitField,BooleanField ,
                      RadioField , SelectField , TextField , TextAreaField)
 
 from wtforms.validators import DataRequired
+from util import fill_one_pdf
 
 app = Flask(__name__) #create application
 
@@ -32,6 +33,11 @@ class SpanForm(FlaskForm):
                       choices=[('phone', 'Teléfono'), ('email', 'Correo electrónico'), ('both', 'Ambos')])
     sconchoice =TextAreaField('')
     semail = TextAreaField('')
+    submit = SubmitField('Submit')
+
+class TestForm(FlaskForm):
+    name = StringField("Name: ", validators=[DataRequired()])
+    dob = StringField("Date of Birth: ", validators=[DataRequired()])
     submit = SubmitField('Submit')
 
 @app.route('/english', methods=['GET', 'POST'])
@@ -88,6 +94,21 @@ def einfo():
 @app.route('/sinfo')
 def sinfo():
     return render_template('sinfo.html')
+
+@app.route('/test', methods=['GET', 'POST'])
+def test():
+    form = TestForm()
+    if form.validate_on_submit():
+        print("HERE")
+        data_for_pdf = dict(
+            SecA_Name=form.name.data,
+            appDOB=form.dob.data
+        )
+        complete_pdf = fill_one_pdf("DDD-2069A", data_for_pdf)
+        return send_file(complete_pdf, as_attachment=True)
+    else:
+        return render_template('test.html', form=form)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
