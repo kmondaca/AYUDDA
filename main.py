@@ -40,6 +40,30 @@ class TestForm(FlaskForm):
     dob = StringField("Date of Birth: ", validators=[DataRequired()])
     submit = SubmitField('Submit')
 
+
+class SectionA(FlaskForm):
+    ParentName = StringField('Full Name: ', validators=[DataRequired()])
+    ParentDOB = StringField("Date of Birth: ", validators=[DataRequired()])
+    ParentAddress = StringField('Address:', validators=[DataRequired()])
+    ParentCity = StringField('City:', validators=[DataRequired()])
+    ParentState = StringField('State:', validators=[DataRequired()])
+    ParentZip = StringField('ZIP Code:', validators=[DataRequired()])
+    phone = StringField('phone', validators=[DataRequired()])
+    ethnicity = RadioField('Ethnicity:',
+                         choices=[('Asian', 'Asian'), ('Native Hawaiian or Other Pacific Islander', 'Native Hawaiian or Other Pacific Islander') , ('White', 'White'), ('Black or African American', 'Black or African American'), ('American Indian / Alaskan Native'), ('American Indian / Alaskan Native')])
+    tribe = StringField('Tribe (if applicable)')
+    ParentMailAddress = StringField('Address:', validators=[DataRequired()])
+    ParentMailCity = StringField('City:', validators=[DataRequired()])
+    ParentMailState = StringField('State:', validators=[DataRequired()])
+    ParentMailZip = StringField('ZIP Code:', validators=[DataRequired()])
+    conpref = RadioField('Contact Preference:',
+                         choices=[('phone', 'Phone'), ('email', 'Email'), ('both', 'both')])
+    email = TextAreaField('')
+    conchoice = TextAreaField('')
+    vote = RadioField('Do you want to register to vote?:',
+                         choices=[('Yes', 'Yes'), ('No', 'No')])
+    submit = SubmitField('Submit')
+
 @app.route('/english', methods=['GET', 'POST'])
 def english():
 
