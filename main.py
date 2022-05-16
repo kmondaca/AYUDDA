@@ -92,6 +92,15 @@ class SectionB(FlaskForm):
     legalZip = StringField('ZIP Code:', validators=[DataRequired()])
     submit = SubmitField('Submit')
 
+class SectionC(FlaskForm):
+    coverage = StringField('Type of Coverage:', validators=[DataRequired()])
+    healthPlan = StringField('Name of Health Plan:', validators=[DataRequired()])
+    policyName = StringField('Policy Holder Name:', validators=[DataRequired()])
+    IDNum = StringField('ID/Group Number:', validators=[DataRequired()])
+    policyNum = StringField('Policy Number:', validators=[DataRequired()])
+    date = StringField('Effective Date:', validators=[DataRequired()])
+    dob = StringField("Policy Holder's Date of Birth:", validators=[DataRequired()])
+    submit = SubmitField('Submit')
 
 @app.route('/english', methods=['GET', 'POST'])
 def english():
