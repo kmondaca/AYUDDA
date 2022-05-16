@@ -42,20 +42,20 @@ class TestForm(FlaskForm):
 
 
 class SectionA(FlaskForm):
-    ParentName = StringField('Full Name: ', validators=[DataRequired()])
-    ParentDOB = StringField("Date of Birth: ", validators=[DataRequired()])
-    ParentAddress = StringField('Address:', validators=[DataRequired()])
-    ParentCity = StringField('City:', validators=[DataRequired()])
-    ParentState = StringField('State:', validators=[DataRequired()])
-    ParentZip = StringField('ZIP Code:', validators=[DataRequired()])
+    childName = StringField('Full Name: ', validators=[DataRequired()])
+    childDOB = StringField("Date of Birth: ", validators=[DataRequired()])
+    childAddress = StringField('Address:', validators=[DataRequired()])
+    childCity = StringField('City:', validators=[DataRequired()])
+    childState = StringField('State:', validators=[DataRequired()])
+    childZip = StringField('ZIP Code:', validators=[DataRequired()])
     phone = StringField('phone', validators=[DataRequired()])
     ethnicity = RadioField('Ethnicity:',
                          choices=[('Asian', 'Asian'), ('Native Hawaiian or Other Pacific Islander', 'Native Hawaiian or Other Pacific Islander') , ('White', 'White'), ('Black or African American', 'Black or African American'), ('American Indian / Alaskan Native'), ('American Indian / Alaskan Native')])
     tribe = StringField('Tribe (if applicable)')
-    ParentMailAddress = StringField('Address:', validators=[DataRequired()])
-    ParentMailCity = StringField('City:', validators=[DataRequired()])
-    ParentMailState = StringField('State:', validators=[DataRequired()])
-    ParentMailZip = StringField('ZIP Code:', validators=[DataRequired()])
+    childMailAddress = StringField('Address:', validators=[DataRequired()])
+    childMailCity = StringField('City:', validators=[DataRequired()])
+    childMailState = StringField('State:', validators=[DataRequired()])
+    childMailZip = StringField('ZIP Code:', validators=[DataRequired()])
     conpref = RadioField('Contact Preference:',
                          choices=[('phone', 'Phone'), ('email', 'Email'), ('both', 'both')])
     email = TextAreaField('')
@@ -63,6 +63,35 @@ class SectionA(FlaskForm):
     vote = RadioField('Do you want to register to vote?:',
                          choices=[('Yes', 'Yes'), ('No', 'No')])
     submit = SubmitField('Submit')
+
+
+class SectionA1(FlaskForm):
+    profName = StringField('Professionals name', validators=[DataRequired()])
+    profPhone = StringField('Professionals phone', validators=[DataRequired()])
+    type = StringField('Professional type', validators=[DataRequired()])
+    date = StringField('Evaluation date', validators=[DataRequired()])
+    submit = SubmitField('Submit')
+
+class SectionB(FlaskForm):
+    parentName = StringField('Full Name: ', validators=[DataRequired()])
+    relationship = StringField("Relationship: ", validators=[DataRequired()])
+    phone = StringField('phone', validators=[DataRequired()])
+    email = TextAreaField('')
+    parentAddress = StringField('Address:', validators=[DataRequired()])
+    parentCity = StringField('City:', validators=[DataRequired()])
+    parentState = StringField('State:', validators=[DataRequired()])
+    parentZip = StringField('ZIP Code:', validators=[DataRequired()])
+    conpref = RadioField('Contact Preference:',
+                         choices=[('phone', 'Phone'), ('email', 'Email'), ('both', 'both')])
+    legalName = StringField('Full Name: ', validators=[DataRequired()])
+    legalRelationship = StringField("Relationship: ", validators=[DataRequired()])
+    legalPhone = StringField('Phone', validators=[DataRequired()])
+    legalAddress = StringField('Address:', validators=[DataRequired()])
+    legalCity = StringField('City:', validators=[DataRequired()])
+    legalState = StringField('State:', validators=[DataRequired()])
+    legalZip = StringField('ZIP Code:', validators=[DataRequired()])
+    submit = SubmitField('Submit')
+
 
 @app.route('/english', methods=['GET', 'POST'])
 def english():
