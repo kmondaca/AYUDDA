@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="jumbotron">
+
+</div>
+
+<h1> Section A</h1>
+<form method="POST">
+    {{form.hidden_tag()}}
+
+    {{form.first.label}}{{form.first}}
+    <br>
+    {{form.last.label}}{{form.last}}
+    <br>
+    {{form.lang.label}}{{form.lang}}
+      <br>
+    {{form.phone.label}}{{form.phone}}
+      <br>
+    {{form.conpref.label}}{{form.conpref}}
+    <br>
+    What is your email?
+    <br>
+    {{form.email.label}}{{form.email}}
+      <br>
+    What questions do you have?
+    <br>
+    {{form.conchoice.label}}{{form.conchoice}}
+    <br>
+    {{form.submit()}}
+</form>
+
+{% endblock content %}

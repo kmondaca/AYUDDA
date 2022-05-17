@@ -102,6 +102,13 @@ class SectionC(FlaskForm):
     dob = StringField("Policy Holder's Date of Birth:", validators=[DataRequired()])
     submit = SubmitField('Submit')
 
+class SectionD(FlaskForm):
+    program = StringField('Early Intervention Program or School Name and School District:', validators=[DataRequired()])
+    type = StringField('Type of Support(IEP or 504 plan)', validators=[DataRequired()])
+    date = StringField('Dates Attended:', validators=[DataRequired()])
+    submit = SubmitField('Submit')
+
+
 @app.route('/english', methods=['GET', 'POST'])
 def english():
 
