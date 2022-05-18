@@ -30,3 +30,28 @@
 </form>
 
 {% endblock content %}
+
+--------------------------------
+###### Make sure to include these questions....
+class SectionA(FlaskForm):
+    childName = StringField('Full Name: ', validators=[DataRequired()])
+    childDOB = StringField("Date of Birth: ", validators=[DataRequired()])
+    childAddress = StringField('Address:', validators=[DataRequired()])
+    childCity = StringField('City:', validators=[DataRequired()])
+    childState = StringField('State:', validators=[DataRequired()])
+    childZip = StringField('ZIP Code:', validators=[DataRequired()])
+    phone = StringField('phone', validators=[DataRequired()])
+    ethnicity = RadioField('Ethnicity:',
+                         choices=[('Asian', 'Asian'), ('Native Hawaiian or Other Pacific Islander', 'Native Hawaiian or Other Pacific Islander') , ('White', 'White'), ('Black or African American', 'Black or African American'), ('American Indian / Alaskan Native'), ('American Indian / Alaskan Native')])
+    tribe = StringField('Tribe (if applicable)')
+    childMailAddress = StringField('Address:', validators=[DataRequired()])
+    childMailCity = StringField('City:', validators=[DataRequired()])
+    childMailState = StringField('State:', validators=[DataRequired()])
+    childMailZip = StringField('ZIP Code:', validators=[DataRequired()])
+    conpref = RadioField('Contact Preference:',
+                         choices=[('phone', 'Phone'), ('email', 'Email'), ('both', 'both')])
+    email = TextAreaField('')
+    conchoice = TextAreaField('')
+    vote = RadioField('Do you want to register to vote?:',
+                         choices=[('Yes', 'Yes'), ('No', 'No')])
+    submit = SubmitField('Submit')
