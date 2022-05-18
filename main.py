@@ -44,6 +44,8 @@ class TestForm(FlaskForm):
 class SectionA(FlaskForm):
     childName = StringField('Full Name: ', validators=[DataRequired()])
     childDOB = StringField("Date of Birth: ", validators=[DataRequired()])
+    childSex = RadioField('Sex:',
+                      choices=[('Male', 'Male'), ('Female', 'Female')])
     childAddress = StringField('Address:', validators=[DataRequired()])
     childCity = StringField('City:', validators=[DataRequired()])
     childState = StringField('State:', validators=[DataRequired()])
@@ -119,17 +121,18 @@ from fillpdf.fillpdfs import (
 BLANK_FORM = "DDD-2069A-S-blank.pdf"
 COMPLETED_FORM = "DDD-2069A-S-completed.pdf"
 
+#pdf is in directory it knows what to get
 form_fields = get_form_fields(BLANK_FORM)
 
 # Just to see how everything starts out
-for name, current_value in form_fields.items():
+for childName, current_value in form_fields.items():
     if current_value == "":
         current_value = "<blank>"
-    print(f"{name}: {current_value}")
+    print(f"{childName}: {current_value}")
 
 # Prep data to fill out a few entries
 updates = dict(
-    SecA_Name="Luisa Madrigal",
+    SecA_Name="gfhgfd" ,
     Sex="Female",
     HomeAdd="La Casita",
     A_City1="Cartagena, Colombia",
@@ -204,17 +207,38 @@ def sinfo():
 
 @app.route('/test', methods=['GET', 'POST'])
 def test():
-    form = TestForm()
+    form = SectionA()
     if form.validate_on_submit():
         print("HERE")
         data_for_pdf = dict(
-            SecA_Name=form.name.data,
-            appDOB=form.dob.data
+            SecA_Name=form.Childname.data,
+            appDOB=form.childDOB.data,
+            Sex=form.childSex.data,
+            HomeAdd=form.childAddress.data,
+            A_City1=form.childCity.data,
+            A_State1=form.childState.data,
+            A_Zip=form.childZip.data,
+            A_Phone=form.phone.data,
+            A_ethnicity=form.ethnicity.data,
+            A_tribe=form.tribe.data,
+            A_mailAdd=form.childMailAddress.data,
+            A_MailCity=form.childMailCity.data,
+            A_MailState=form.childMailState.data,
+            A_MailZip=form.childMailZip.data,
+            A_conpref = form.conpref.data,
+            A_email = form.email.data,
+            A_conchoice = form.conchoice.data,
+            A_vote = form.vote.data,
+            A1_name1="Abuela Alma",
+            A1_Type1="Matriarch",
+            A1_Date1="11/24/2021"
         )
-        complete_pdf = fill_one_pdf("DDD-2069A", data_for_pdf)
+        complete_pdf = fill_one_pdf("DDD-2069A-S", data_for_pdf)
         return send_file(complete_pdf, as_attachment=True)
     else:
         return render_template('test.html', form=form)
+
+
 
 
 if __name__ == '__main__':
