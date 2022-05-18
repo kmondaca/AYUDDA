@@ -8,9 +8,9 @@
 <form method="POST">
     {{form.hidden_tag()}}
 
-    {{form.first.label}}{{form.first}}
+    {{form.childName.label}}{{form.childName}}
     <br>
-    {{form.last.label}}{{form.last}}
+    {{form.childDOB.label}}{{form.childDOB}}
     <br>
     {{form.lang.label}}{{form.lang}}
       <br>
@@ -34,8 +34,6 @@
 --------------------------------
 ###### Make sure to include these questions....
 class SectionA(FlaskForm):
-    childName = StringField('Full Name: ', validators=[DataRequired()])
-    childDOB = StringField("Date of Birth: ", validators=[DataRequired()])
     childAddress = StringField('Address:', validators=[DataRequired()])
     childCity = StringField('City:', validators=[DataRequired()])
     childState = StringField('State:', validators=[DataRequired()])

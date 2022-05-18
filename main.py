@@ -40,7 +40,7 @@ class TestForm(FlaskForm):
     dob = StringField("Date of Birth: ", validators=[DataRequired()])
     submit = SubmitField('Submit')
 
-
+#will continue to have this coded in English, need to fix discriptions to Spanish
 class SectionA(FlaskForm):
     childName = StringField('Full Name: ', validators=[DataRequired()])
     childDOB = StringField("Date of Birth: ", validators=[DataRequired()])
@@ -108,6 +108,44 @@ class SectionD(FlaskForm):
     date = StringField('Dates Attended:', validators=[DataRequired()])
     submit = SubmitField('Submit')
 
+####################################################################
+# This is 90% of the magic right here (see https://pypi.org/project/fillpdf/):
+from fillpdf.fillpdfs import (
+    get_form_fields,
+    write_fillable_pdf,
+)
+
+# constants for filenames
+BLANK_FORM = "DDD-2069A-S-blank.pdf"
+COMPLETED_FORM = "DDD-2069A-S-completed.pdf"
+
+form_fields = get_form_fields(BLANK_FORM)
+
+# Just to see how everything starts out
+for name, current_value in form_fields.items():
+    if current_value == "":
+        current_value = "<blank>"
+    print(f"{name}: {current_value}")
+
+# Prep data to fill out a few entries
+updates = dict(
+    SecA_Name="Luisa Madrigal",
+    Sex="Female",
+    HomeAdd="La Casita",
+    A_City1="Cartagena, Colombia",
+    A1_name1="Abuela Alma",
+    A1_Type1="Matriarch",
+    A1_Date1="11/24/2021"
+)
+
+# Produce a non-editable version with entries filled in
+write_fillable_pdf(BLANK_FORM, COMPLETED_FORM, updates, flatten=True)
+
+# MAC ONLY
+os.system(f"open {COMPLETED_FORM}")
+
+
+####################################################################
 
 @app.route('/english', methods=['GET', 'POST'])
 def english():
