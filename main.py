@@ -207,6 +207,7 @@ def sinfo():
 
 @app.route('/test', methods=['GET', 'POST'])
 def test():
+    # for the other classes, I can just so SectionB.variable.data to grab the info
     form = SectionA()
     if form.validate_on_submit():
         print("HERE")
