@@ -5,6 +5,7 @@ from wtforms import (StringField , SubmitField,BooleanField ,
 
 from wtforms.validators import DataRequired
 from util import fill_one_pdf
+import os
 
 app = Flask(__name__) #create application
 
@@ -46,7 +47,9 @@ class SectionA(FlaskForm):
     childDOB = StringField("Date of Birth: ", validators=[DataRequired()])
     childSex = RadioField('Sex:',
                       choices=[('Male', 'Male'), ('Female', 'Female')])
-    childAddress = StringField('Address:', validators=[DataRequired()])
+    AHCCCS =StringField('AHCCCS A Number (if applicable)')
+    language = StringField('Primary Language:', validators=[DataRequired()])
+    childAddress = StringField('Home Address:', validators=[DataRequired()])
     childCity = StringField('City:', validators=[DataRequired()])
     childState = StringField('State:', validators=[DataRequired()])
     childZip = StringField('ZIP Code:', validators=[DataRequired()])
@@ -54,14 +57,13 @@ class SectionA(FlaskForm):
     ethnicity = RadioField('Ethnicity:',
                          choices=[('Asian', 'Asian'), ('Native Hawaiian or Other Pacific Islander', 'Native Hawaiian or Other Pacific Islander') , ('White', 'White'), ('Black or African American', 'Black or African American'), ('American Indian / Alaskan Native'), ('American Indian / Alaskan Native')])
     tribe = StringField('Tribe (if applicable)')
-    childMailAddress = StringField('Address:', validators=[DataRequired()])
+    childMailAddress = StringField('Mailing Address:', validators=[DataRequired()])
     childMailCity = StringField('City:', validators=[DataRequired()])
     childMailState = StringField('State:', validators=[DataRequired()])
     childMailZip = StringField('ZIP Code:', validators=[DataRequired()])
     conpref = RadioField('Contact Preference:',
                          choices=[('phone', 'Phone'), ('email', 'Email'), ('both', 'both')])
     email = TextAreaField('')
-    conchoice = TextAreaField('')
     vote = RadioField('Do you want to register to vote?:',
                          choices=[('Yes', 'Yes'), ('No', 'No')])
     submit = SubmitField('Submit')
@@ -77,13 +79,13 @@ class SectionA1(FlaskForm):
 class SectionB(FlaskForm):
     parentName = StringField('Full Name: ', validators=[DataRequired()])
     relationship = StringField("Relationship: ", validators=[DataRequired()])
-    phone = StringField('phone', validators=[DataRequired()])
-    email = TextAreaField('')
+    parentPhone = StringField('phone', validators=[DataRequired()])
+    parentEmail = TextAreaField('')
     parentAddress = StringField('Address:', validators=[DataRequired()])
     parentCity = StringField('City:', validators=[DataRequired()])
     parentState = StringField('State:', validators=[DataRequired()])
     parentZip = StringField('ZIP Code:', validators=[DataRequired()])
-    conpref = RadioField('Contact Preference:',
+    parentConpref = RadioField('Contact Preference:',
                          choices=[('phone', 'Phone'), ('email', 'Email'), ('both', 'both')])
     legalName = StringField('Full Name: ', validators=[DataRequired()])
     legalRelationship = StringField("Relationship: ", validators=[DataRequired()])
@@ -100,14 +102,14 @@ class SectionC(FlaskForm):
     policyName = StringField('Policy Holder Name:', validators=[DataRequired()])
     IDNum = StringField('ID/Group Number:', validators=[DataRequired()])
     policyNum = StringField('Policy Number:', validators=[DataRequired()])
-    date = StringField('Effective Date:', validators=[DataRequired()])
+    policyDate = StringField('Effective Date:', validators=[DataRequired()])
     dob = StringField("Policy Holder's Date of Birth:", validators=[DataRequired()])
     submit = SubmitField('Submit')
 
 class SectionD(FlaskForm):
     program = StringField('Early Intervention Program or School Name and School District:', validators=[DataRequired()])
-    type = StringField('Type of Support(IEP or 504 plan)', validators=[DataRequired()])
-    date = StringField('Dates Attended:', validators=[DataRequired()])
+    typeSupport = StringField('Type of Support(IEP or 504 plan)', validators=[DataRequired()])
+    eduDate = StringField('Dates Attended:', validators=[DataRequired()])
     submit = SubmitField('Submit')
 
 ####################################################################

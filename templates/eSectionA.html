@@ -4,52 +4,159 @@
 
 </div>
 
+<div class="SectionA">
 <h1> Section A</h1>
 <form method="POST">
     {{form.hidden_tag()}}
-
     {{form.childName.label}}{{form.childName}}
     <br>
     {{form.childDOB.label}}{{form.childDOB}}
     <br>
-    {{form.lang.label}}{{form.lang}}
+    {{form.childSex.label}}{{form.childSex}}
+    <br>
+    {form.AHCCCS.label}}{{form.AHCCCS}}
+    <br>
+    {{form.language.label}}{{form.language}}
+      <br>
+     {{form.childAddress.label}}{{form.childAddress}}
+      <br>
+    {{form.childCity.label}}{{form.childCity}}
+      <br>
+    {{form.childState.label}}{{form.childState}}
+      <br>
+    {{form.childZip.label}}{{form.childZip}}
       <br>
     {{form.phone.label}}{{form.phone}}
+      <br>
+    {{form.ethnicity.label}}{{form.ethnicity}}
+      <br>
+    {{form.tribe.label}}{{form.tribe}}
+      <br>
+     {{form.childMailAddress.label}}{{form.childMailAddress}}
+      <br>
+    {{form.childMailCity.label}}{{form.childMailCity}}
+      <br>
+    {{form.childMailState.label}}{{form.childMailState}}
+      <br>
+    {{form.childMailZip.label}}{{form.childMailZip}}
       <br>
     {{form.conpref.label}}{{form.conpref}}
     <br>
     What is your email?
     <br>
     {{form.email.label}}{{form.email}}
-      <br>
-    What questions do you have?
     <br>
-    {{form.conchoice.label}}{{form.conchoice}}
+    {{form.vote.label}}{{form.vote}}
     <br>
     {{form.submit()}}
 </form>
+</div>
+
+
+<!-- I need to be able to have a loop for this, I would do this in a js file for web but unsure for flask... -->
+<div class="SectionA.1">
+  <h1> Section A.1</h1>
+    <form method="POST">
+    {{form.hidden_tag()}}
+    {{form.profName.label}}{{form.profName}}
+    <br>
+    {{form.profPhone.label}}{{form.profPhone}}
+    <br>
+    {{form.type.label}}{{form.type}}
+    <br>
+    {{form.date.label}}{{form.date}}
+    <br>
+      {{form.submit()}}
+    </form>
+</div>
+
+
+<div class="SectionB">
+  <h1> Section B</h1>
+    <form method="POST">
+    {{form.hidden_tag()}}
+    {{form.parentName.label}}{{form.parentName}}
+        <br>
+    {{form.relationship.label}}{{form.relationship}}
+    <br>
+    {{form.parentPhone.label}}{{form.parentPhone}}
+    <br>
+    {{form.parentEmail.label}}{{form.parentEmail}}
+    <br>
+    {{form.parentAddress.label}}{{form.parentAddress}}
+    <br>
+    {{form.parentCity.label}}{{form.parentCity}}
+    <br>
+    {{form.parentState.label}}{{form.parentState}}
+    <br>
+    {{form.parentZip.label}}{{form.parentZip}}
+    <br>
+    {{form.parentConpref.label}}{{form.date}}
+        <br>
+    {{form.legalName.label}}{{form.legalName}}
+        <br>
+    {{form.legalRelationship.label}}{{form.legalRelationship}}
+    <br>
+    {{form.legalPhone.label}}{{form.legalPhone}}
+    <br>
+    {{form.legalAddress.label}}{{form.legalAddress}}
+    <br>
+    {{form.legalCity.label}}{{form.legalCity}}
+    <br>
+    {{form.legalState.label}}{{form.legalState}}
+    <br>
+    {{form.legalZip.label}}{{form.legalZip}}
+    <br>
+        {{form.submit()}}
+    </form>
+</div>
+
+<!-- can ask if there is another option -->
+<div class="SectionC">
+  <h1> Section C</h1>
+    <form method="POST">
+    {{form.hidden_tag()}}
+    {{form.coverage.label}}{{form.coverage}}
+    <br>
+    {{form.healthPlan.label}}{{form.healthPlan}}
+    <br>
+    {{form.policyName.label}}{{form.policyName}}
+    <br>
+          <!-- is there a way to have two variables correspond to a certain spot, or do I need to concat -->
+    {{form.IDNum.label}}{{form.IDNum}}
+    <br>
+    {{form.policyNum.label}}{{form.policyNum}}
+    <br>
+    {{form.policyDate.label}}{{form.policyDate}}
+    <br>
+    {{form.dob.label}}{{form.dob}}
+    <br>
+      {{form.submit()}}
+    </form>
+</div>
+
+<!-- ask if another option -->
+<div class="SectionD">
+  <h1> Section D</h1>
+    <form method="POST">
+    {{form.hidden_tag()}}
+    {{form.program.label}}{{form.program}}
+    <br>
+    {{form.profPhone.label}}{{form.profPhone}}
+    <br>
+    {{form.typeSupport.label}}{{form.typeSupport}}
+    <br>
+    {{form.eduDate.label}}{{form.eduDate}}
+    <br>
+      {{form.submit()}}
+    </form>
+</div>
+
+<!-- figure out the HIPAA and disclosure form -->
+
+
+
+<!-- ##########################################################-->
 
 {% endblock content %}
 
---------------------------------
-###### Make sure to include these questions....
-class SectionA(FlaskForm):
-    childAddress = StringField('Address:', validators=[DataRequired()])
-    childCity = StringField('City:', validators=[DataRequired()])
-    childState = StringField('State:', validators=[DataRequired()])
-    childZip = StringField('ZIP Code:', validators=[DataRequired()])
-    phone = StringField('phone', validators=[DataRequired()])
-    ethnicity = RadioField('Ethnicity:',
-                         choices=[('Asian', 'Asian'), ('Native Hawaiian or Other Pacific Islander', 'Native Hawaiian or Other Pacific Islander') , ('White', 'White'), ('Black or African American', 'Black or African American'), ('American Indian / Alaskan Native'), ('American Indian / Alaskan Native')])
-    tribe = StringField('Tribe (if applicable)')
-    childMailAddress = StringField('Address:', validators=[DataRequired()])
-    childMailCity = StringField('City:', validators=[DataRequired()])
-    childMailState = StringField('State:', validators=[DataRequired()])
-    childMailZip = StringField('ZIP Code:', validators=[DataRequired()])
-    conpref = RadioField('Contact Preference:',
-                         choices=[('phone', 'Phone'), ('email', 'Email'), ('both', 'both')])
-    email = TextAreaField('')
-    conchoice = TextAreaField('')
-    vote = RadioField('Do you want to register to vote?:',
-                         choices=[('Yes', 'Yes'), ('No', 'No')])
-    submit = SubmitField('Submit')
