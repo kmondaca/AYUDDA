@@ -112,6 +112,9 @@ class SectionD(FlaskForm):
     eduDate = StringField('Dates Attended:', validators=[DataRequired()])
     submit = SubmitField('Submit')
 
+class SectionHIPAA(FlaskForm):
+
+
 ####################################################################
 # This is 90% of the magic right here (see https://pypi.org/project/fillpdf/):
 from fillpdf.fillpdfs import (
