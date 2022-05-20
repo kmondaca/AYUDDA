@@ -113,8 +113,46 @@ class SectionD(FlaskForm):
     submit = SubmitField('Submit')
 
 class SectionHIPAA(FlaskForm):
+    #concat name ,last, first middle (cannot get previous since middle isn't specified
+    childLast = StringField("Child's first name:", validators=[DataRequired()])
+    childFirst = StringField("Child's last name:", validators=[DataRequired()])
+    childMiddle = StringField("Child's middle name:", validators=[DataRequired()])
+    #DOB request, gather from Section A
+    describeInfo = TextAreaField('')
+    agency = StringField("Agency requesting information:", validators=[DataRequired()])
+    requestDate= StringField("Date of Request:", validators=[DataRequired()])
+    #get Parent name
+    #need a physical signature....
+    authorizationDate = StringField("Date of Authorization:", validators=[DataRequired()])
 
-
+class SectionRelease(Flaskform):
+    #get concat version from SectionHIPAA of name
+    #get dob from SectionA
+    #get agency
+    #get request date
+    office = RadioField('Which Division of Deveopmental Disabilities office is closest?:',
+                               choices=[('Chandler', 'Chandler'),
+                                        ('Flagstaff', 'Flagstaff'),
+                                        ('Tucson', 'Tucson'),
+                                        ('Phoenix (West)', 'Phoenix (West)'),
+                                        ('Phoenix (Central)', 'Phoenix (Central)')])
+    #autofill the location of the office
+    permissions = SelectField("Permito que la informaci n de salud protegida marcada a continuacion se comparta con el profesionalmedico, la agencia, el entorno educativo u otro indicado anteriormente::",
+                               choices=[('Expedientes medicos', 'Expedientes medicos'),
+                                        ('Informes/Expedientes de audiologia', 'Informes/Expedientes de audiologia'),
+                                        ('Informes del habla y lenguaje', 'Informes del habla y lenguaje'),
+                                        ('Informe de Plan 504 o Plan de Educacion Individual y Evaluacion mas reciente', 'Informe de Plan 504 o Plan de Educacion Individual y Evaluacion mas reciente'),
+                                        ('Registros de recien nacidos', 'Registros de recien nacidos'),
+                                        ('Informes psicologicos', 'Informes psicologicos'),
+                                        ('Informes de terapia fisica', 'Informes de terapia fisica'),
+                                        ('Registros de nacimiento y parto', 'Registros de nacimiento y parto'),
+                                        ('Informes de terapia ocupacional', 'Informes de terapia ocupacional'),
+                                        ('Expedientes de salud conductual', 'Expedientes de salud conductual'),
+                                        ('Otro (Especifique):', 'Otro (Especifique):')])
+    other = StringField("")
+    #get parent name
+    #requires real signature
+    #get date of authorization
 ####################################################################
 # This is 90% of the magic right here (see https://pypi.org/project/fillpdf/):
 from fillpdf.fillpdfs import (
