@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="jumbotron">
+
+</div>
+
+<!-- can ask if there is another option -->
+<div class="SectionC">
+  <h1> Section C</h1>
+    <form method="POST">
+    {{form.hidden_tag()}}
+    {{form.coverage.label}}{{form.coverage}}
+    <br>
+    {{form.healthPlan.label}}{{form.healthPlan}}
+    <br>
+    {{form.policyName.label}}{{form.policyName}}
+    <br>
+          <!-- is there a way to have two variables correspond to a certain spot, or do I need to concat -->
+    {{form.IDNum.label}}{{form.IDNum}}
+    <br>
+    {{form.policyNum.label}}{{form.policyNum}}
+    <br>
+    {{form.policyDate.label}}{{form.policyDate}}
+    <br>
+    {{form.dob.label}}{{form.dob}}
+    <br>
+      {{form.submit()}}
+    </form>
+</div>
+
+{% endblock content %}
