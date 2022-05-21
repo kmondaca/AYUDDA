@@ -125,7 +125,7 @@ class SectionHIPAA(FlaskForm):
     #need a physical signature....
     authorizationDate = StringField("Date of Authorization:", validators=[DataRequired()])
 
-class SectionRelease(Flaskform):
+class SectionRelease(FlaskForm):
     #get concat version from SectionHIPAA of name
     #get dob from SectionA
     #get agency
@@ -137,7 +137,7 @@ class SectionRelease(Flaskform):
                                         ('Phoenix (West)', 'Phoenix (West)'),
                                         ('Phoenix (Central)', 'Phoenix (Central)')])
     #autofill the location of the office
-    permissions = SelectField("Permito que la informaci n de salud protegida marcada a continuacion se comparta con el profesionalmedico, la agencia, el entorno educativo u otro indicado anteriormente::",
+    permissions = SelectField("Permito que la informacion de salud protegida marcada a continuacion se comparta con el profesionalmedico, la agencia, el entorno educativo u otro indicado anteriormente::",
                                choices=[('Expedientes medicos', 'Expedientes medicos'),
                                         ('Informes/Expedientes de audiologia', 'Informes/Expedientes de audiologia'),
                                         ('Informes del habla y lenguaje', 'Informes del habla y lenguaje'),
