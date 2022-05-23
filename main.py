@@ -104,33 +104,33 @@ class SectionB(FlaskForm):
     submit = SubmitField('Enviar')
 
 class SectionC(FlaskForm):
-    coverage = StringField('Type of Coverage:', validators=[DataRequired()])
-    healthPlan = StringField('Name of Health Plan:', validators=[DataRequired()])
-    policyName = StringField('Policy Holder Name:', validators=[DataRequired()])
-    IDNum = StringField('ID/Group Number:', validators=[DataRequired()])
-    policyNum = StringField('Policy Number:', validators=[DataRequired()])
-    policyDate = StringField('Effective Date:', validators=[DataRequired()])
-    dob = StringField("Policy Holder's Date of Birth:", validators=[DataRequired()])
+    coverage = StringField('Tipo de cobertura(privada,pública, etc.):', validators=[DataRequired()])
+    healthPlan = StringField('Nombre del plan de salud:', validators=[DataRequired()])
+    policyName = StringField('Nombre del titular de la póliza:', validators=[DataRequired()])
+    IDNum = StringField('Número de ID/Grupo:', validators=[DataRequired()])
+    policyNum = StringField('Número de póliza:', validators=[DataRequired()])
+    policyDate = StringField('Fecha de vigencia:', validators=[DataRequired()])
+    dob = StringField("Fecha de nacimiento del titular:", validators=[DataRequired()])
     submit = SubmitField('Enviar')
 
 class SectionD(FlaskForm):
-    program = StringField('Early Intervention Program or School Name and School District:', validators=[DataRequired()])
-    typeSupport = StringField('Type of Support(IEP or 504 plan)', validators=[DataRequired()])
-    eduDate = StringField('Dates Attended:', validators=[DataRequired()])
+    program = StringField('Estado del Programa de Intervención Temprana o Nombre de la escuela y del distrito escolar:', validators=[DataRequired()])
+    typeSupport = StringField('Tipo de Apoyo (Servicios o tipo de plan tal cómo Plande Educación Individual o Plan 504):', validators=[DataRequired()])
+    eduDate = StringField('Fechas que asistió:', validators=[DataRequired()])
     submit = SubmitField('Enviar')
 
 class SectionHIPAA(FlaskForm):
     #concat name ,last, first middle (cannot get previous since middle isn't specified
-    childLast = StringField("Child's first name:", validators=[DataRequired()])
-    childFirst = StringField("Child's last name:", validators=[DataRequired()])
-    childMiddle = StringField("Child's middle name:", validators=[DataRequired()])
+    childLast = StringField("Nombre de persona/cliente cuya información de la salud se compartirá:", validators=[DataRequired()])
+    childFirst = StringField("Apellido de persona/cliente cuya información de la salud se compartirá::", validators=[DataRequired()])
+    childMiddle = StringField("Segundo de persona/cliente cuya información de la salud se compartirá::", validators=[DataRequired()])
     #DOB request, gather from Section A
     describeInfo = TextAreaField('')
-    agency = StringField("Agency requesting information:", validators=[DataRequired()])
-    requestDate= StringField("Date of Request:", validators=[DataRequired()])
+    agency = StringField("Persona/Agencia que solicita o necesita la información:", validators=[DataRequired()])
+    requestDate= StringField("Fecha de solicitud:", validators=[DataRequired()])
     #get Parent name
     #need a physical signature....
-    authorizationDate = StringField("Date of Authorization:", validators=[DataRequired()])
+    authorizationDate = StringField("Fecha de autorización:", validators=[DataRequired()])
     submit = SubmitField('Enviar')
 
 class SectionRelease(FlaskForm):
@@ -138,11 +138,11 @@ class SectionRelease(FlaskForm):
     #get dob from SectionA
     #get agency
     #get request date
-    office = RadioField('Which Division of Deveopmental Disabilities office is closest?:',
+    office = RadioField('¿Qué oficina de la División de Discapacidades del Desarrollo es la más cercana?:',
                                choices=[('Chandler', 'Chandler'),
                                         ('Flagstaff', 'Flagstaff'),
                                         ('Tucson', 'Tucson'),
-                                        ('Phoenix (West)', 'Phoenix (West)'),
+                                        ('Phoenix (Oeste)', 'Phoenix (Oeste)'),
                                         ('Phoenix (Central)', 'Phoenix (Central)')])
     #autofill the location of the office
     permissions = SelectField("Permito que la informacion de salud protegida marcada a continuacion se comparta con el profesionalmedico, la agencia, el entorno educativo u otro indicado anteriormente::",
