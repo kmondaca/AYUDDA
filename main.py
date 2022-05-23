@@ -220,22 +220,6 @@ def english():
 
     return render_template('english.html',form=form) #app
 
-@app.route('/spanish', methods=['GET', 'POST'])
-def spanish():
-    form = SpanForm()
-    if form.validate_on_submit():
-        session['sfirst'] = form.sfirst.data
-        session['slast'] = form.slast.data
-        session['slang'] = form.slang.data
-        session['sphone'] = form.sphone.data
-        session['sconpref'] = form.sconpref.data
-        session['sconchoice'] = form.sconchoice.data
-        session['semail'] = form.semail.data
-        # session['submit'] = form.submit.data
-
-        return redirect(url_for("gracias"))  # only when form submitted
-
-    return render_template('spanish.html', form=form)  # app
 
 @app.route('/')
 def index():
@@ -257,6 +241,59 @@ def einfo():
 def sinfo():
     return render_template('sinfo.html')
 
+@app.route('/spanish', methods=['GET', 'POST'])
+def spanish():
+    form = SpanForm()
+    if form.validate_on_submit():
+        session['sfirst'] = form.sfirst.data
+        session['slast'] = form.slast.data
+        session['slang'] = form.slang.data
+        session['sphone'] = form.sphone.data
+        session['sconpref'] = form.sconpref.data
+        session['sconchoice'] = form.sconchoice.data
+        session['semail'] = form.semail.data
+        # session['submit'] = form.submit.data
+
+        return redirect(url_for("gracias"))  # only when form submitted
+
+    return render_template('spanish.html', form=form)  # app
+
+@app.route('/app', methods=['GET', 'POST'])
+def app():
+    form =SectionA()
+    if form.validate_on_submit():
+        print("HERE")
+        data_for_pdf = dict(
+            SecA_Name=form.childName.data,
+            appDOB=form.childDOB.data,
+            Sex=form.childSex.data,
+            appAHCCCS=form.AHCCCS.data,
+            lang=form.language.data,
+            HomeAdd=form.childAddress.data,
+            A_City1=form.childCity.data,
+            A_State1=form.childState.data,
+            A_Zip=form.childZip.data,
+            A_Phone=form.phone.data,
+            A_ethnicity=form.ethnicity.data,
+            A_tribe=form.tribe.data,
+            A_mailAdd=form.childMailAddress.data,
+            A_MailCity=form.childMailCity.data,
+            A_MailState=form.childMailState.data,
+            A_MailZip=form.childMailZip.data,
+            A_conpref = form.conpref.data,
+            A_email = form.email.data,
+            A_conchoice = form.conchoice.data,
+            A_vote = form.vote.data
+        )
+
+        complete_pdf = fill_one_pdf("DDD-2069A-S", data_for_pdf)
+        return send_file(complete_pdf, as_attachment=True)
+    else:
+        return render_template('test.html', form=form)
+######################################################
+
+
+######################################################
 @app.route('/test', methods=['GET', 'POST'])
 def test():
     # for the other classes, I can just so SectionB.variable.data to grab the info
