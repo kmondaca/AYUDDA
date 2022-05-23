@@ -4,34 +4,18 @@
 
 </div>
 
-
-<!-- Make into form -->
-    #get concat version from SectionHIPAA of name
-    #get dob from SectionA
-    #get agency
-    #get request date
-    office = RadioField('Which Division of Deveopmental Disabilities office is closest?:',
-                               choices=[('Chandler', 'Chandler'),
-                                        ('Flagstaff', 'Flagstaff'),
-                                        ('Tucson', 'Tucson'),
-                                        ('Phoenix (West)', 'Phoenix (West)'),
-                                        ('Phoenix (Central)', 'Phoenix (Central)')])
-    #autofill the location of the office
-    permissions = SelectField("Permito que la informacion de salud protegida marcada a continuacion se comparta con el profesionalmedico, la agencia, el entorno educativo u otro indicado anteriormente::",
-                               choices=[('Expedientes medicos', 'Expedientes medicos'),
-                                        ('Informes/Expedientes de audiologia', 'Informes/Expedientes de audiologia'),
-                                        ('Informes del habla y lenguaje', 'Informes del habla y lenguaje'),
-                                        ('Informe de Plan 504 o Plan de Educacion Individual y Evaluacion mas reciente', 'Informe de Plan 504 o Plan de Educacion Individual y Evaluacion mas reciente'),
-                                        ('Registros de recien nacidos', 'Registros de recien nacidos'),
-                                        ('Informes psicologicos', 'Informes psicologicos'),
-                                        ('Informes de terapia fisica', 'Informes de terapia fisica'),
-                                        ('Registros de nacimiento y parto', 'Registros de nacimiento y parto'),
-                                        ('Informes de terapia ocupacional', 'Informes de terapia ocupacional'),
-                                        ('Expedientes de salud conductual', 'Expedientes de salud conductual'),
-                                        ('Otro (Especifique):', 'Otro (Especifique):')])
-    other = StringField("")
-    #get parent name
-    #requires real signature
-    #get date of authorization
+<div class="SectionRelease">
+<h1> Section Release</h1>
+<form method="POST">
+    {{form.hidden_tag()}}
+    {{form.office.label}}{{form.office}}
+    <br>
+    {{form.permissions.label}}{{form.permissions}}
+    <br>
+    {{form.other.label}}{{form.other}}
+    <br>
+    {{form.submit()}}
+</form>
+</div>
 
 {% endblock content %}
