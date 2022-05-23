@@ -43,58 +43,65 @@ class TestForm(FlaskForm):
 
 #will continue to have this coded in English, need to fix discriptions to Spanish
 class SectionA(FlaskForm):
-    childName = StringField('Full Name: ', validators=[DataRequired()])
-    childDOB = StringField("Date of Birth: ", validators=[DataRequired()])
-    childSex = RadioField('Sex:',
-                      choices=[('Male', 'Male'), ('Female', 'Female')])
-    AHCCCS =StringField('AHCCCS A Number (if applicable)')
-    language = StringField('Primary Language:', validators=[DataRequired()])
-    childAddress = StringField('Home Address:', validators=[DataRequired()])
-    childCity = StringField('City:', validators=[DataRequired()])
-    childState = StringField('State:', validators=[DataRequired()])
-    childZip = StringField('ZIP Code:', validators=[DataRequired()])
-    phone = StringField('phone', validators=[DataRequired()])
-    ethnicity = RadioField('Ethnicity:',
-                         choices=[('Asian', 'Asian'), ('Native Hawaiian or Other Pacific Islander', 'Native Hawaiian or Other Pacific Islander') , ('White', 'White'), ('Black or African American', 'Black or African American'), ('American Indian / Alaskan Native'), ('American Indian / Alaskan Native')])
-    tribe = StringField('Tribe (if applicable)')
-    childMailAddress = StringField('Mailing Address:', validators=[DataRequired()])
-    childMailCity = StringField('City:', validators=[DataRequired()])
-    childMailState = StringField('State:', validators=[DataRequired()])
-    childMailZip = StringField('ZIP Code:', validators=[DataRequired()])
-    conpref = RadioField('Contact Preference:',
-                         choices=[('phone', 'Phone'), ('email', 'Email'), ('both', 'both')])
+    childName = StringField('Nombre completo: ', validators=[DataRequired()])
+    childDOB = StringField("Fecha de nacimiento: ", validators=[DataRequired()])
+    childSex = RadioField('Sexo:',
+                      choices=[('Masculino', 'Masculino'), ('Femenino', 'Femenino')])
+    AHCCCS =StringField('Numero de cuenta de AHCCCS (Si corresponde):')
+    language = StringField('Idioma principal:', validators=[DataRequired()])
+    childAddress = StringField('Direccion residencial (Numero, Calle):', validators=[DataRequired()])
+    childCity = StringField('Ciudad:', validators=[DataRequired()])
+    childState = StringField('Estado:', validators=[DataRequired()])
+    childZip = StringField('Codigo postal:', validators=[DataRequired()])
+    phone = StringField('Teléfono:', validators=[DataRequired()])
+    ethnicity = RadioField('Etnia:',
+                         choices=[('Indígena de los EE UU/Alaska', 'Indígena de los EE UU/Alaska'),
+                                  ('Negra/Afroamericana (no Hispánica)', 'Negra/Afroamericana (no Hispánica)') ,
+                                  ('Asiática/Indígena de la Polinesia', 'Asiática/Indígena de la Polinesia'),
+                                  ('Hispánica o Latina', 'Hispánica o Latina'),
+                                  ('Otra'), ('Otra'),
+                                  ('Blanca (no Hispánica)', 'Blanca (no Hispánica)')])
+
+
+    tribe = StringField('Tribu (Si corresponde):')
+    childMailAddress = StringField('Dirección postal (Si corresponde):', validators=[DataRequired()])
+    childMailCity = StringField('Ciudad:', validators=[DataRequired()])
+    childMailState = StringField('Estado:', validators=[DataRequired()])
+    childMailZip = StringField('Código postal:', validators=[DataRequired()])
+    conpref = RadioField('Cómo prefiere comunicarse::',
+                         choices=[('Teléfono', 'Teléfono'), ('Correo electrónico', 'Correo electrónico'), ('Ambos', 'Ambos')])
     email = TextAreaField('')
-    vote = RadioField('Do you want to register to vote?:',
-                         choices=[('Yes', 'Yes'), ('No', 'No')])
-    submit = SubmitField('Submit')
+    vote = RadioField('¿Desea registrarse para votar?',
+                         choices=[('Sí', 'Sí'), ('No', 'No')])
+    submit = SubmitField('Enviar')
 
 
 class SectionA1(FlaskForm):
-    profName = StringField('Professionals name', validators=[DataRequired()])
-    profPhone = StringField('Professionals phone', validators=[DataRequired()])
-    type = StringField('Professional type', validators=[DataRequired()])
-    date = StringField('Evaluation date', validators=[DataRequired()])
-    submit = SubmitField('Submit')
+    profName = StringField('Nombre de contacto', validators=[DataRequired()])
+    profPhone = StringField('Teléfono de contacto', validators=[DataRequired()])
+    type = StringField('Tipo de profesional', validators=[DataRequired()])
+    date = StringField('Fecha de evaluación', validators=[DataRequired()])
+    submit = SubmitField('Enviar')
 
 class SectionB(FlaskForm):
-    parentName = StringField('Full Name: ', validators=[DataRequired()])
-    relationship = StringField("Relationship: ", validators=[DataRequired()])
-    parentPhone = StringField('phone', validators=[DataRequired()])
+    parentName = StringField('Nombre completo:', validators=[DataRequired()])
+    relationship = StringField("Parentesco:", validators=[DataRequired()])
+    parentPhone = StringField('Teléfono:', validators=[DataRequired()])
     parentEmail = TextAreaField('')
-    parentAddress = StringField('Address:', validators=[DataRequired()])
-    parentCity = StringField('City:', validators=[DataRequired()])
-    parentState = StringField('State:', validators=[DataRequired()])
-    parentZip = StringField('ZIP Code:', validators=[DataRequired()])
-    parentConpref = RadioField('Contact Preference:',
+    parentAddress = StringField('Dirección (si diferente al solicitante):', validators=[DataRequired()])
+    parentCity = StringField('Ciudad:', validators=[DataRequired()])
+    parentState = StringField('Estado:', validators=[DataRequired()])
+    parentZip = StringField('Código postal:', validators=[DataRequired()])
+    parentConpref = RadioField('Mejor manera de contactarlo:',
                          choices=[('phone', 'Phone'), ('email', 'Email'), ('both', 'both')])
-    legalName = StringField('Full Name: ', validators=[DataRequired()])
-    legalRelationship = StringField("Relationship: ", validators=[DataRequired()])
-    legalPhone = StringField('Phone', validators=[DataRequired()])
-    legalAddress = StringField('Address:', validators=[DataRequired()])
-    legalCity = StringField('City:', validators=[DataRequired()])
-    legalState = StringField('State:', validators=[DataRequired()])
-    legalZip = StringField('ZIP Code:', validators=[DataRequired()])
-    submit = SubmitField('Submit')
+    legalName = StringField('Nombre del tutor legal (Si diferente al anterior):', validators=[DataRequired()])
+    legalRelationship = StringField("Parentesco:", validators=[DataRequired()])
+    legalPhone = StringField('Teléfono:', validators=[DataRequired()])
+    legalAddress = StringField('Dirección:', validators=[DataRequired()])
+    legalCity = StringField('Ciudad:', validators=[DataRequired()])
+    legalState = StringField('Estado:', validators=[DataRequired()])
+    legalZip = StringField('Código postal:', validators=[DataRequired()])
+    submit = SubmitField('Enviar')
 
 class SectionC(FlaskForm):
     coverage = StringField('Type of Coverage:', validators=[DataRequired()])
@@ -104,13 +111,13 @@ class SectionC(FlaskForm):
     policyNum = StringField('Policy Number:', validators=[DataRequired()])
     policyDate = StringField('Effective Date:', validators=[DataRequired()])
     dob = StringField("Policy Holder's Date of Birth:", validators=[DataRequired()])
-    submit = SubmitField('Submit')
+    submit = SubmitField('Enviar')
 
 class SectionD(FlaskForm):
     program = StringField('Early Intervention Program or School Name and School District:', validators=[DataRequired()])
     typeSupport = StringField('Type of Support(IEP or 504 plan)', validators=[DataRequired()])
     eduDate = StringField('Dates Attended:', validators=[DataRequired()])
-    submit = SubmitField('Submit')
+    submit = SubmitField('Enviar')
 
 class SectionHIPAA(FlaskForm):
     #concat name ,last, first middle (cannot get previous since middle isn't specified
@@ -124,6 +131,7 @@ class SectionHIPAA(FlaskForm):
     #get Parent name
     #need a physical signature....
     authorizationDate = StringField("Date of Authorization:", validators=[DataRequired()])
+    submit = SubmitField('Enviar')
 
 class SectionRelease(FlaskForm):
     #get concat version from SectionHIPAA of name
@@ -153,6 +161,7 @@ class SectionRelease(FlaskForm):
     #get parent name
     #requires real signature
     #get date of authorization
+    submit = SubmitField('Enviar')
 ####################################################################
 # This is 90% of the magic right here (see https://pypi.org/project/fillpdf/):
 from fillpdf.fillpdfs import (

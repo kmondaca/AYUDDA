@@ -6,9 +6,20 @@
 
 <!-- I need to be able to have a loop for this, I would do this in a js file for web but unsure for flask... -->
 <div class="SectionA.1">
-  <h1> Section A.1</h1>
+  <h1> SECCIÓN A.1</h1>
     <form method="POST">
     {{form.hidden_tag()}}
+     <p>Profesionales que pueden proveer registros para toda discapacidad calificativa:
+      <ul>
+      <li>Psicólogo autorizado</li>
+      <li>Psicólogo escolar</li>
+      <li>Psiquiatra</li>
+      <li>Pediatra</li>
+      <li>Neurólogo</li>
+      <li>Equipo de intervención temprana</li>
+    </ul>
+       Los profesionales aceptados varían según la discapacidad. Consulte a su especialista en elegibilidad si tiene preguntas.</p>
+    <br>
     {{form.profName.label}}{{form.profName}}
     <br>
     {{form.profPhone.label}}{{form.profPhone}}
