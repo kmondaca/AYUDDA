@@ -4,18 +4,26 @@
 
 </div>
 
-<!-- need to convert to form-->
-class SectionHIPAA(FlaskForm):
-    #concat name ,last, first middle (cannot get previous since middle isn't specified
-    childLast = StringField("Child's first name:", validators=[DataRequired()])
-    childFirst = StringField("Child's last name:", validators=[DataRequired()])
-    childMiddle = StringField("Child's middle name:", validators=[DataRequired()])
-    #DOB request, gather from Section A
-    describeInfo = TextAreaField('')
-    agency = StringField("Agency requesting information:", validators=[DataRequired()])
-    requestDate= StringField("Date of Request:", validators=[DataRequired()])
-    #get Parent name
-    #need a physical signature....
-    authorizationDate = StringField("Date of Authorization:", validators=[DataRequired()])
+<div class="SectionA">
+<h1> Section HIPAA</h1>
+<form method="POST">
+    {{form.hidden_tag()}}
+    {{form.childLast.label}}{{form.childLast}}
+    <br>
+    {{form.childFirst.label}}{{form.childFirst}}
+    <br>
+    {{form.childMiddle.label}}{{form.childMiddle}}
+    <br>
+    {{form.describeInfo.label}}{{form.describeInfo}}
+    <br>
+    {{form.agency.label}}{{form.agency}}
+    <br>
+    {{form.requestDate.label}}{{form.requestDate}}
+    <br>
+    {{form.authorizationDate.label}}{{form.authorizationDate}}
+    <br>
+    {{form.submit()}}
+</form>
+</div>
 
 {% endblock content %}
