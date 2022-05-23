@@ -262,7 +262,14 @@ def spanish():
 def app():
     form =SectionA()
     if form.validate_on_submit():
-        print("HERE")
+        session['childName'] = form.childName.data
+        session['childDOB'] = form.childDOB.data
+        session['slang'] = form.childSex.data
+
+
+
+
+################################################
         data_for_pdf = dict(
             SecA_Name=form.childName.data,
             appDOB=form.childDOB.data,
