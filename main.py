@@ -258,15 +258,55 @@ def spanish():
 
     return render_template('spanish.html', form=form)  # app
 
+@app.route('/sectionA1')
+def sectionA1():
+    return render_template('SectionA1.html')
+
+@app.route('/sectionB')
+def sectionB():
+    return render_template('SectionB.html')
+
+@app.route('/sectionC')
+def sectionC():
+    return render_template('SectionC.html')
+
+@app.route('/sectionD')
+def sectionD():
+    return render_template('SectionD.html')
+
+@app.route('/sectionHIPPA')
+def HIPPA():
+    return render_template('HIPAA.html')
+
+@app.route('/release')
+def release():
+    return render_template('Release.html')
+
 @app.route('/app', methods=['GET', 'POST'])
 def app():
     form =SectionA()
     if form.validate_on_submit():
         session['childName'] = form.childName.data
         session['childDOB'] = form.childDOB.data
-        session['slang'] = form.childSex.data
+        session['childSex'] = form.childSex.data
+        session['AHCCCS'] = form.AHCCCS.data
+        session['language'] = form.language.data
+        session['childAddress'] = form.childAddress.data
+        session['childCity'] = form.childCity.data
+        session['childState'] = form.childState.data
+        session['childZip'] = form.childZip.data
+        session['phone'] = form.phone.data
+        session['ethnicity'] = form.ethnicity.data
+        session['tribe'] = form.tribe.data
+        session['childMailAddress'] = form.childMailAddress.data
+        session['childMailCity'] = form.childMailCity.data
+        session['childMailState'] = form.childMailState.data
+        session['childMailZip'] = form.childMailZip.data
+        session['conpref'] = form.conpref.data
+        session['email'] = form.email.data
+        session['vote'] = form.vote.data
 
-
+        return redirect(url_for("gracias"))  # only when form submitted
 
 
 ################################################
