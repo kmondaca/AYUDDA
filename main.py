@@ -274,8 +274,8 @@ def sectionC():
 def sectionD():
     return render_template('SectionD.html')
 
-@app.route('/sectionHIPPA')
-def HIPPA():
+@app.route('/sectionHIPAA')
+def HIPAA():
     return render_template('HIPAA.html')
 
 @app.route('/release')
@@ -340,8 +340,39 @@ def app():
 
             return redirect(url_for("sectionC"))  # only when form submitted
 
+            form = SectionC()
+            if form.validate_on_submit():
+                session['coverage'] = form.coverage.data
+                session['healthPlan'] = form.healthPlan.data
+                session['policyName'] = form.policyName.data
+                session['IDNum'] = form.IDNum.data
+                session['dob'] = form.dob.data
+                session['policyDate'] = form.policyDate.data
 
-################################################
+                return redirect(url_for("sectionD"))  # only when form submitted
+
+                form = SectionD()
+                if form.validate_on_submit():
+                    session['program'] = form.program.data
+                    session['typeSupport'] = form.typeSupport.data
+                    session['eduDate'] = form.eduDate.data
+
+                    return redirect(url_for("sectionA1"))  # only when form submitted
+
+                    form = SectionA1()
+                    if form.validate_on_submit():
+                        session['profName'] = form.profName.data
+                        session['profPhone'] = form.profPhone.data
+                        session['type'] = form.type.data
+                        session['date'] = form.date.data
+
+                        return redirect(url_for("sectionHIPAA"))  # only when form submitted
+
+
+                #####################################
+
+
+        ################################################
         data_for_pdf = dict(
             SecA_Name=form.childName.data,
             appDOB=form.childDOB.data,
