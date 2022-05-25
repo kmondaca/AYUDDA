@@ -284,29 +284,61 @@ def release():
 
 @app.route('/app', methods=['GET', 'POST'])
 def app():
-    form =SectionA()
-    if form.validate_on_submit():
-        session['childName'] = form.childName.data
-        session['childDOB'] = form.childDOB.data
-        session['childSex'] = form.childSex.data
-        session['AHCCCS'] = form.AHCCCS.data
-        session['language'] = form.language.data
-        session['childAddress'] = form.childAddress.data
-        session['childCity'] = form.childCity.data
-        session['childState'] = form.childState.data
-        session['childZip'] = form.childZip.data
-        session['phone'] = form.phone.data
-        session['ethnicity'] = form.ethnicity.data
-        session['tribe'] = form.tribe.data
-        session['childMailAddress'] = form.childMailAddress.data
-        session['childMailCity'] = form.childMailCity.data
-        session['childMailState'] = form.childMailState.data
-        session['childMailZip'] = form.childMailZip.data
-        session['conpref'] = form.conpref.data
-        session['email'] = form.email.data
-        session['vote'] = form.vote.data
+    #Section B
+    #Section A
+    #Section C
+    #Section D
+    #Section A.1
+    #HIPAA
+    #Release
 
-        return redirect(url_for("gracias"))  # only when form submitted
+    #maybe nested ifs until the end.....
+    form = SectionB()
+    if form.validate_on_submit():
+        session['parentName'] = form.parentName.data
+        session['relationship'] = form.relationship.data
+        session['parentPhone'] = form.parentPhone.data
+        session['parentEmail'] = form.parentEmail.data
+        session['parentAddress'] = form.parentAddress.data
+        session['parentCity'] = form.parentCity.data
+        session['parentState'] = form.parentState.data
+        session['parentZip'] = form.parentZip.data
+        session['parentConpref'] = form.parentConpref.data
+        session['legalName'] = form.legalName.data
+        session['legalRelationship'] = form.legalRelationship.data
+        session['legalPhone'] = form.legalPhone.data
+        session['legalAddress'] = form.legalAddress.data
+        session['legalCity'] = form.legalCity.data
+        session['legalState'] = form.legalState.data
+        session['legalZip'] = form.legalZip.data
+        session['conpref'] = form.conpref.data
+
+        return redirect(url_for("sectionA"))  # only when form submitted
+
+    #######################################################
+        form =SectionA()
+        if form.validate_on_submit():
+            session['childName'] = form.childName.data
+            session['childDOB'] = form.childDOB.data
+            session['childSex'] = form.childSex.data
+            session['AHCCCS'] = form.AHCCCS.data
+            session['language'] = form.language.data
+            session['childAddress'] = form.childAddress.data
+            session['childCity'] = form.childCity.data
+            session['childState'] = form.childState.data
+            session['childZip'] = form.childZip.data
+            session['phone'] = form.phone.data
+            session['ethnicity'] = form.ethnicity.data
+            session['tribe'] = form.tribe.data
+            session['childMailAddress'] = form.childMailAddress.data
+            session['childMailCity'] = form.childMailCity.data
+            session['childMailState'] = form.childMailState.data
+            session['childMailZip'] = form.childMailZip.data
+            session['conpref'] = form.conpref.data
+            session['email'] = form.email.data
+            session['vote'] = form.vote.data
+
+            return redirect(url_for("sectionC"))  # only when form submitted
 
 
 ################################################
