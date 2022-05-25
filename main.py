@@ -417,11 +417,12 @@ def app():
         complete_pdf = fill_one_pdf("DDD-2069A-S", data_for_pdf)
         return send_file(complete_pdf, as_attachment=True)
     else:
-        return render_template('test.html', form=form)
+        return render_template('test.html', form=form) #ahh what will I be rendering....
 ######################################################
 
 
 ######################################################
+""""
 @app.route('/test', methods=['GET', 'POST'])
 def test():
     # for the other classes, I can just so SectionB.variable.data to grab the info
@@ -456,7 +457,7 @@ def test():
     else:
         return render_template('test.html', form=form)
 
-
+"""
 
 
 if __name__ == '__main__':
