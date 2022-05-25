@@ -292,7 +292,8 @@ def app():
     #HIPAA
     #Release
 
-    #maybe nested ifs until the end.....
+    #maybe nested ifs until the end.....otherwise just move it to the respective rendering
+    #issues figuring out how to run it.....
     form = SectionB()
     if form.validate_on_submit():
         session['parentName'] = form.parentName.data
@@ -368,8 +369,25 @@ def app():
 
                         return redirect(url_for("sectionHIPAA"))  # only when form submitted
 
+                        form = SectionHIPAA()
+                        if form.validate_on_submit():
+                            session['childLast'] = form.childLast.data
+                            session['childFirst'] = form.childFirst.data
+                            session['childMiddle'] = form.childMiddle.data
+                            session['describeInfo'] = form.describeInfo.data
+                            session['agency'] = form.agency.data
+                            session['requestDate'] = form.requestDate.data
+                            session['authorizationDate'] = form.authorizationDate.data
 
-                #####################################
+                            return redirect(url_for("release"))  # only when form submitted
+
+                            form = SectionRelease()
+                            if form.validate_on_submit():
+                                session['office'] = form.office.data
+                                session['permissions'] = form.permissions.data
+                                session['other'] = form.other.data
+
+                                return redirect(url_for("release"))  # only when form submitted
 
 
         ################################################
