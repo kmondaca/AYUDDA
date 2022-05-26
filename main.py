@@ -88,11 +88,11 @@ class SectionB(FlaskForm):
     relationship = StringField("Parentesco:", validators=[DataRequired()])
     parentPhone = StringField('Teléfono:', validators=[DataRequired()])
     parentEmail = TextAreaField('')
-    parentAddress = StringField('Dirección (si diferente al solicitante):', validators=[DataRequired()])
-    parentCity = StringField('Ciudad:', validators=[DataRequired()])
-    parentState = StringField('Estado:', validators=[DataRequired()])
-    parentZip = StringField('Código postal:', validators=[DataRequired()])
-    parentConpref = RadioField('Mejor manera de contactarlo:',
+    parentAddress = StringField('Dirección (si diferente al solicitante):')
+    parentCity = StringField('Ciudad:')
+    parentState = StringField('Estado:')
+    parentZip = StringField('Código postal:')
+    parentConpref = SelectField('Mejor manera de contactarlo:',
                          choices=[('phone', 'Phone'), ('email', 'Email'), ('both', 'both')])
     legalName = StringField('Nombre del tutor legal (Si diferente al anterior):', validators=[DataRequired()])
     legalRelationship = StringField("Parentesco:", validators=[DataRequired()])
@@ -391,7 +391,7 @@ def sectionB():
 
         ################################################
         data_for_pdf = dict(
-            SecA_Name=form.childName.data,
+            SecA_AppName=form.childName.data,
             appDOB=form.childDOB.data,
             Sex=form.childSex.data,
             appAHCCCS=form.AHCCCS.data,
