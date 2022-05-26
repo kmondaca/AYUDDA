@@ -260,30 +260,101 @@ def spanish():
 
 @app.route('/sectionA1')
 def sectionA1():
+    form = SectionA1()
+    if form.validate_on_submit():
+        session['profName'] = form.profName.data
+        session['profPhone'] = form.profPhone.data
+        session['type'] = form.type.data
+        session['date'] = form.date.data
+
+        return redirect(url_for("sectionHIPAA"), form=form)  # only when form submitted
     return render_template('SectionA1.html')
 
-@app.route('/sectionB')
-def sectionB():
-    return render_template('SectionB.html')
+@app.route('/sectionA')
+def sectionA():
+    form = SectionA()
+    if form.validate_on_submit():
+        session['childName'] = form.childName.data
+        session['childDOB'] = form.childDOB.data
+        session['childSex'] = form.childSex.data
+        session['AHCCCS'] = form.AHCCCS.data
+        session['language'] = form.language.data
+        session['childAddress'] = form.childAddress.data
+        session['childCity'] = form.childCity.data
+        session['childState'] = form.childState.data
+        session['childZip'] = form.childZip.data
+        session['phone'] = form.phone.data
+        session['ethnicity'] = form.ethnicity.data
+        session['tribe'] = form.tribe.data
+        session['childMailAddress'] = form.childMailAddress.data
+        session['childMailCity'] = form.childMailCity.data
+        session['childMailState'] = form.childMailState.data
+        session['childMailZip'] = form.childMailZip.data
+        session['conpref'] = form.conpref.data
+        session['email'] = form.email.data
+        session['vote'] = form.vote.data
+
+        return redirect(url_for("sectionC"), form=form)  # only when form submitted
+
+    return render_template('SectionA.html')
 
 @app.route('/sectionC')
 def sectionC():
+    form = SectionC()
+    if form.validate_on_submit():
+        session['coverage'] = form.coverage.data
+        session['healthPlan'] = form.healthPlan.data
+        session['policyName'] = form.policyName.data
+        session['IDNum'] = form.IDNum.data
+        session['dob'] = form.dob.data
+        session['policyDate'] = form.policyDate.data
+
+        return redirect(url_for("sectionD"), form =form)  # only when form submitted
+
     return render_template('SectionC.html')
 
 @app.route('/sectionD')
 def sectionD():
+    form = SectionD()
+    if form.validate_on_submit():
+        session['program'] = form.program.data
+        session['typeSupport'] = form.typeSupport.data
+        session['eduDate'] = form.eduDate.data
+
+        return redirect(url_for("sectionA1"), form = form)  # only when form submitted
+
     return render_template('SectionD.html')
 
 @app.route('/sectionHIPAA')
 def HIPAA():
+    form = SectionHIPAA()
+    if form.validate_on_submit():
+        session['childLast'] = form.childLast.data
+        session['childFirst'] = form.childFirst.data
+        session['childMiddle'] = form.childMiddle.data
+        session['describeInfo'] = form.describeInfo.data
+        session['agency'] = form.agency.data
+        session['requestDate'] = form.requestDate.data
+        session['authorizationDate'] = form.authorizationDate.data
+
+        return redirect(url_for("release"), form=form)  # only when form submitted
+
     return render_template('HIPAA.html')
 
 @app.route('/release')
 def release():
+    form = SectionRelease()
+    if form.validate_on_submit():
+        session['office'] = form.office.data
+        session['permissions'] = form.permissions.data
+        session['other'] = form.other.data
+
+        return redirect(url_for("release"), form=form)  # only when form submitted
+
     return render_template('Release.html')
 
 @app.route('/app', methods=['GET', 'POST'])
-def app():
+def sectionB():
     #Section B
     #Section A
     #Section C
@@ -314,81 +385,9 @@ def app():
         session['legalZip'] = form.legalZip.data
         session['conpref'] = form.conpref.data
 
-        return redirect(url_for("sectionA"))  # only when form submitted
+        return redirect(url_for("sectionA"), form = form)  # only when form submitted
 
     #######################################################
-        form =SectionA()
-        if form.validate_on_submit():
-            session['childName'] = form.childName.data
-            session['childDOB'] = form.childDOB.data
-            session['childSex'] = form.childSex.data
-            session['AHCCCS'] = form.AHCCCS.data
-            session['language'] = form.language.data
-            session['childAddress'] = form.childAddress.data
-            session['childCity'] = form.childCity.data
-            session['childState'] = form.childState.data
-            session['childZip'] = form.childZip.data
-            session['phone'] = form.phone.data
-            session['ethnicity'] = form.ethnicity.data
-            session['tribe'] = form.tribe.data
-            session['childMailAddress'] = form.childMailAddress.data
-            session['childMailCity'] = form.childMailCity.data
-            session['childMailState'] = form.childMailState.data
-            session['childMailZip'] = form.childMailZip.data
-            session['conpref'] = form.conpref.data
-            session['email'] = form.email.data
-            session['vote'] = form.vote.data
-
-            return redirect(url_for("sectionC"))  # only when form submitted
-
-            form = SectionC()
-            if form.validate_on_submit():
-                session['coverage'] = form.coverage.data
-                session['healthPlan'] = form.healthPlan.data
-                session['policyName'] = form.policyName.data
-                session['IDNum'] = form.IDNum.data
-                session['dob'] = form.dob.data
-                session['policyDate'] = form.policyDate.data
-
-                return redirect(url_for("sectionD"))  # only when form submitted
-
-                form = SectionD()
-                if form.validate_on_submit():
-                    session['program'] = form.program.data
-                    session['typeSupport'] = form.typeSupport.data
-                    session['eduDate'] = form.eduDate.data
-
-                    return redirect(url_for("sectionA1"))  # only when form submitted
-
-                    form = SectionA1()
-                    if form.validate_on_submit():
-                        session['profName'] = form.profName.data
-                        session['profPhone'] = form.profPhone.data
-                        session['type'] = form.type.data
-                        session['date'] = form.date.data
-
-                        return redirect(url_for("sectionHIPAA"))  # only when form submitted
-
-                        form = SectionHIPAA()
-                        if form.validate_on_submit():
-                            session['childLast'] = form.childLast.data
-                            session['childFirst'] = form.childFirst.data
-                            session['childMiddle'] = form.childMiddle.data
-                            session['describeInfo'] = form.describeInfo.data
-                            session['agency'] = form.agency.data
-                            session['requestDate'] = form.requestDate.data
-                            session['authorizationDate'] = form.authorizationDate.data
-
-                            return redirect(url_for("release"))  # only when form submitted
-
-                            form = SectionRelease()
-                            if form.validate_on_submit():
-                                session['office'] = form.office.data
-                                session['permissions'] = form.permissions.data
-                                session['other'] = form.other.data
-
-                                return redirect(url_for("release"))  # only when form submitted
-
 
         ################################################
         data_for_pdf = dict(
@@ -417,7 +416,7 @@ def app():
         complete_pdf = fill_one_pdf("DDD-2069A-S", data_for_pdf)
         return send_file(complete_pdf, as_attachment=True)
     else:
-        return render_template('test.html', form=form) #ahh what will I be rendering....
+        return render_template('SectionB.html', form=form) #ahh what will I be rendering....
 ######################################################
 
 
