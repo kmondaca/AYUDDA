@@ -163,6 +163,7 @@ class SectionRelease(FlaskForm):
     #get date of authorization
     submit = SubmitField('Enviar')
 ####################################################################
+""""
 # This is 90% of the magic right here (see https://pypi.org/project/fillpdf/):
 from fillpdf.fillpdfs import (
     get_form_fields,
@@ -199,7 +200,7 @@ write_fillable_pdf(BLANK_FORM, COMPLETED_FORM, updates, flatten=True)
 # MAC ONLY
 os.system(f"open {COMPLETED_FORM}")
 
-
+"""
 ####################################################################
 
 @app.route('/english', methods=['GET', 'POST'])
