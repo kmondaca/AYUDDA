@@ -387,7 +387,7 @@ def sectionB():
         session['legalZip'] = form.legalZip.data
 
 
-        return redirect(url_for("gracias"))    # only when form submitted
+        return redirect(url_for("sectionA"))    # only when form submitted
 
     #######################################################
 
@@ -420,7 +420,7 @@ def sectionB():
         return send_file(complete_pdf, as_attachment=True)
     else:
     """
-        return render_template('SectionB.html', form=form) #ahh what will I be rendering....
+    return render_template('SectionB.html', form=form) #ahh what will I be rendering....
 ######################################################
 
 
