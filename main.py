@@ -273,6 +273,7 @@ def sectionA1():
 
 @app.route('/sectionA')
 def sectionA():
+
     form = SectionA()
     if form.validate_on_submit():
         session['childName'] = form.childName.data
@@ -296,9 +297,7 @@ def sectionA():
         session['vote'] = form.vote.data
 
         return redirect(url_for("sectionC"))  # only when form submitted
-
-    return render_template('SectionA.html',form=form)
-
+    return render_template('SectionA.html')
 
 @app.route('/sectionC')
 def sectionC():
@@ -385,46 +384,12 @@ def sectionB():
         session['legalCity'] = form.legalCity.data
         session['legalState'] = form.legalState.data
         session['legalZip'] = form.legalZip.data
-
-
+        #it is not reading this redirect, I have tried changing it to another to see if it
+        #would read it but no luck, really don't know what to do
         return redirect(url_for("sectionA"))    # only when form submitted
 
-    #######################################################
-
-        ################################################
-        """
-        data_for_pdf = dict(
-            SecA_AppName=form.childName.data,
-            appDOB=form.childDOB.data,
-            Sex=form.childSex.data,
-            appAHCCCS=form.AHCCCS.data,
-            lang=form.language.data,
-            HomeAdd=form.childAddress.data,
-            A_City1=form.childCity.data,
-            A_State1=form.childState.data,
-            A_Zip=form.childZip.data,
-            A_Phone=form.phone.data,
-            A_ethnicity=form.ethnicity.data,
-            A_tribe=form.tribe.data,
-            A_mailAdd=form.childMailAddress.data,
-            A_MailCity=form.childMailCity.data,
-            A_MailState=form.childMailState.data,
-            A_MailZip=form.childMailZip.data,
-            A_conpref = form.conpref.data,
-            A_email = form.email.data,
-            A_conchoice = form.conchoice.data,
-            A_vote = form.vote.data
-        )
-
-        complete_pdf = fill_one_pdf("DDD-2069A-S", data_for_pdf)
-        return send_file(complete_pdf, as_attachment=True)
-    else:
-    """
     return render_template('SectionB.html', form=form) #ahh what will I be rendering....
-######################################################
 
-
-######################################################
 """"
 @app.route('/test', methods=['GET', 'POST'])
 def test():
@@ -465,3 +430,33 @@ def test():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+#Once I can figure out how to 'talk' to the pdf, I will add this back to Section B
+    """
+        data_for_pdf = dict(
+            SecA_AppName=form.childName.data,
+            appDOB=form.childDOB.data,
+            Sex=form.childSex.data,
+            appAHCCCS=form.AHCCCS.data,
+            lang=form.language.data,
+            HomeAdd=form.childAddress.data,
+            A_City1=form.childCity.data,
+            A_State1=form.childState.data,
+            A_Zip=form.childZip.data,
+            A_Phone=form.phone.data,
+            A_ethnicity=form.ethnicity.data,
+            A_tribe=form.tribe.data,
+            A_mailAdd=form.childMailAddress.data,
+            A_MailCity=form.childMailCity.data,
+            A_MailState=form.childMailState.data,
+            A_MailZip=form.childMailZip.data,
+            A_conpref = form.conpref.data,
+            A_email = form.email.data,
+            A_conchoice = form.conchoice.data,
+            A_vote = form.vote.data
+        )
+
+        complete_pdf = fill_one_pdf("DDD-2069A-S", data_for_pdf)
+        return send_file(complete_pdf, as_attachment=True)
+    else:
+    """
