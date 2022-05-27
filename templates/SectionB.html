@@ -4,7 +4,7 @@
 <h1> SECCIÓN B. (Padre o Padre sustituto, si corresponde)</h1>
 </div>
 
-<div class="SectionB">
+<div class="SectionB d-flex align-items-center justify-content-center">
     <form method="POST">
     {{form.hidden_tag()}}
     {{form.parentName.label}}{{form.parentName}}
@@ -12,8 +12,6 @@
     {{form.relationship.label}}{{form.relationship}}
     <br>
     {{form.parentPhone.label}}{{form.parentPhone}}
-    <br>
-      Correo electrónico:
     <br>
     {{form.parentEmail.label}}{{form.parentEmail}}
     <br>
@@ -25,7 +23,7 @@
     <br>
     {{form.parentZip.label}}{{form.parentZip}}
     <br>
-    {{form.parentConpref.label}}{{form.date}}
+    {{form.parentConpref.label}}{{form.parentConpref}}
         <br>
       <p>(El tutor legal es una persona nombrada por un juez.)</p>
       <br>

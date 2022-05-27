@@ -64,10 +64,10 @@ class SectionA(FlaskForm):
 
 
     tribe = StringField('Tribu (Si corresponde):')
-    childMailAddress = StringField('Dirección postal (Si corresponde):', validators=[DataRequired()])
-    childMailCity = StringField('Ciudad:', validators=[DataRequired()])
-    childMailState = StringField('Estado:', validators=[DataRequired()])
-    childMailZip = StringField('Código postal:', validators=[DataRequired()])
+    childMailAddress = StringField('Dirección postal (Si corresponde):')
+    childMailCity = StringField('Ciudad:')
+    childMailState = StringField('Estado:')
+    childMailZip = StringField('Código postal:')
     conpref = RadioField('Cómo prefiere comunicarse::',
                          choices=[('Teléfono', 'Teléfono'), ('Correo electrónico', 'Correo electrónico'), ('Ambos', 'Ambos')])
     email = TextAreaField('')
@@ -87,20 +87,20 @@ class SectionB(FlaskForm):
     parentName = StringField('Nombre completo:', validators=[DataRequired()])
     relationship = StringField("Parentesco:", validators=[DataRequired()])
     parentPhone = StringField('Teléfono:', validators=[DataRequired()])
-    parentEmail = TextAreaField('')
+    parentEmail = StringField('Correo electrónico:')
     parentAddress = StringField('Dirección (si diferente al solicitante):')
     parentCity = StringField('Ciudad:')
     parentState = StringField('Estado:')
     parentZip = StringField('Código postal:')
-    parentConpref = SelectField('Mejor manera de contactarlo:',
-                         choices=[('phone', 'Phone'), ('email', 'Email'), ('both', 'both')])
-    legalName = StringField('Nombre del tutor legal (Si diferente al anterior):', validators=[DataRequired()])
-    legalRelationship = StringField("Parentesco:", validators=[DataRequired()])
-    legalPhone = StringField('Teléfono:', validators=[DataRequired()])
-    legalAddress = StringField('Dirección:', validators=[DataRequired()])
-    legalCity = StringField('Ciudad:', validators=[DataRequired()])
-    legalState = StringField('Estado:', validators=[DataRequired()])
-    legalZip = StringField('Código postal:', validators=[DataRequired()])
+    parentConpref = RadioField('Mejor manera de contactarlo:',
+                         choices=[('phone', 'Phone'), ('email', 'correo electronico'), ('both', 'ambos')])
+    legalName = StringField('Nombre del tutor legal (Si diferente al anterior):')
+    legalRelationship = StringField("Parentesco:")
+    legalPhone = StringField('Teléfono:')
+    legalAddress = StringField('Dirección:')
+    legalCity = StringField('Ciudad:')
+    legalState = StringField('Estado:')
+    legalZip = StringField('Código postal:')
     submit = SubmitField('Enviar')
 
 class SectionC(FlaskForm):
@@ -295,9 +295,10 @@ def sectionA():
         session['email'] = form.email.data
         session['vote'] = form.vote.data
 
-        return redirect(url_for("sectionC"), form=form)  # only when form submitted
+        return redirect(url_for("sectionC"))  # only when form submitted
 
-    return render_template('SectionA.html')
+    return render_template('SectionA.html',form=form)
+
 
 @app.route('/sectionC')
 def sectionC():
@@ -384,13 +385,14 @@ def sectionB():
         session['legalCity'] = form.legalCity.data
         session['legalState'] = form.legalState.data
         session['legalZip'] = form.legalZip.data
-        session['conpref'] = form.conpref.data
 
-        return redirect(url_for("sectionA"), form = form)  # only when form submitted
+
+        return redirect(url_for("gracias"))    # only when form submitted
 
     #######################################################
 
         ################################################
+        """
         data_for_pdf = dict(
             SecA_AppName=form.childName.data,
             appDOB=form.childDOB.data,
@@ -417,6 +419,7 @@ def sectionB():
         complete_pdf = fill_one_pdf("DDD-2069A-S", data_for_pdf)
         return send_file(complete_pdf, as_attachment=True)
     else:
+    """
         return render_template('SectionB.html', form=form) #ahh what will I be rendering....
 ######################################################
 
