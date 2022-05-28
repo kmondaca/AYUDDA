@@ -268,8 +268,8 @@ def sectionA1():
         session['type'] = form.type.data
         session['date'] = form.date.data
 
-        return redirect(url_for("sectionHIPAA"), form=form)  # only when form submitted
-    return render_template('SectionA1.html')
+        return redirect(url_for("sectionHIPAA"))  # only when form submitted
+    return render_template('SectionA1.html', form=form)
 
 @app.route('/sectionA')
 def sectionA():
@@ -295,9 +295,9 @@ def sectionA():
         session['conpref'] = form.conpref.data
         session['email'] = form.email.data
         session['vote'] = form.vote.data
-
         return redirect(url_for("sectionC"))  # only when form submitted
-    return render_template('SectionA.html')
+
+    return render_template('SectionA.html', form=form)
 
 @app.route('/sectionC')
 def sectionC():
@@ -310,9 +310,9 @@ def sectionC():
         session['dob'] = form.dob.data
         session['policyDate'] = form.policyDate.data
 
-        return redirect(url_for("sectionD"), form =form)  # only when form submitted
+        return redirect(url_for("sectionD"))  # only when form submitted
 
-    return render_template('SectionC.html')
+    return render_template('SectionC.html', form = form)
 
 @app.route('/sectionD')
 def sectionD():
@@ -322,9 +322,9 @@ def sectionD():
         session['typeSupport'] = form.typeSupport.data
         session['eduDate'] = form.eduDate.data
 
-        return redirect(url_for("sectionA1"), form = form)  # only when form submitted
+        return redirect(url_for("sectionA1"))  # only when form submitted
 
-    return render_template('SectionD.html')
+    return render_template('SectionD.html', form=form)
 
 @app.route('/sectionHIPAA')
 def HIPAA():
@@ -338,9 +338,9 @@ def HIPAA():
         session['requestDate'] = form.requestDate.data
         session['authorizationDate'] = form.authorizationDate.data
 
-        return redirect(url_for("release"), form=form)  # only when form submitted
+        return redirect(url_for("release"))  # only when form submitted
 
-    return render_template('HIPAA.html')
+    return render_template('HIPAA.html', form=form)
 
 @app.route('/release')
 def release():
@@ -350,9 +350,9 @@ def release():
         session['permissions'] = form.permissions.data
         session['other'] = form.other.data
 
-        return redirect(url_for("release"), form=form)  # only when form submitted
+        return redirect(url_for("release"))  # only when form submitted
 
-    return render_template('Release.html')
+    return render_template('Release.html', form=form)
 
 @app.route('/app', methods=['GET', 'POST'])
 def sectionB():
@@ -386,15 +386,16 @@ def sectionB():
         session['legalZip'] = form.legalZip.data
         #it is not reading this redirect, I have tried changing it to another to see if it
         #would read it but no luck, really don't know what to do
-        return redirect(url_for("sectionA"))    # only when form submitted
+        return redirect(url_for("sectionA"))  # only when form submitted
 
-    return render_template('SectionB.html', form=form) #ahh what will I be rendering....
+    return render_template('SectionB.html', form=form)  # ahh what will I be rendering..
+
+
 
 """"
 @app.route('/test', methods=['GET', 'POST'])
 def test():
     # for the other classes, I can just so SectionB.variable.data to grab the info
-    form = SectionA()
     if form.validate_on_submit():
         print("HERE")
         data_for_pdf = dict(
