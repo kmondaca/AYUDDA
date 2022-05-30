@@ -226,6 +226,10 @@ def english():
 def index():
     return render_template('index.html')
 
+@app.route('/falso')
+def falso():
+    return render_template('fake.html')
+
 @app.route('/thankyou')
 def thankyou():
     return render_template('thankyou.html')
@@ -386,7 +390,7 @@ def sectionB():
         session['legalZip'] = form.legalZip.data
         #it is not reading this redirect, I have tried changing it to another to see if it
         #would read it but no luck, really don't know what to do
-        return redirect(url_for("sectionA"))  # only when form submitted
+        return redirect(url_for("falso"))  # only when form submitted
 
     return render_template('SectionB.html', form=form)  # ahh what will I be rendering..
 
