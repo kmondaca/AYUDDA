@@ -53,7 +53,7 @@ class SectionA(FlaskForm):
     childCity = StringField('Ciudad:', validators=[DataRequired()])
     childState = StringField('Estado:', validators=[DataRequired()])
     childZip = StringField('Codigo postal:', validators=[DataRequired()])
-    phone = StringField('Teléfono:', validators=[DataRequired()])
+    childPhone = StringField('Teléfono:', validators=[DataRequired()])
     ethnicity = RadioField('Etnia:',
                          choices=[('Indígena de los EE UU/Alaska', 'Indígena de los EE UU/Alaska'),
                                   ('Negra/Afroamericana (no Hispánica)', 'Negra/Afroamericana (no Hispánica)') ,
@@ -68,9 +68,9 @@ class SectionA(FlaskForm):
     childMailCity = StringField('Ciudad:')
     childMailState = StringField('Estado:')
     childMailZip = StringField('Código postal:')
-    conpref = RadioField('Cómo prefiere comunicarse::',
+    childConpref = RadioField('Cómo prefiere comunicarse::',
                          choices=[('Teléfono', 'Teléfono'), ('Correo electrónico', 'Correo electrónico'), ('Ambos', 'Ambos')])
-    email = StringField('Correo electrónico:')
+    childEmail = StringField('Correo electrónico:')
     vote = RadioField('¿Desea registrarse para votar?',
                          choices=[('Sí', 'Sí'), ('No', 'No')])
     submit = SubmitField('Enviar')
@@ -277,7 +277,6 @@ def sectionA1():
 
 @app.route('/sectionA')
 def sectionA():
-
     form = SectionA()
     if form.validate_on_submit():
         session['childName'] = form.childName.data
@@ -289,17 +288,17 @@ def sectionA():
         session['childCity'] = form.childCity.data
         session['childState'] = form.childState.data
         session['childZip'] = form.childZip.data
-        session['phone'] = form.phone.data
+        session['childPhone'] = form.childPhone.data
         session['ethnicity'] = form.ethnicity.data
         session['tribe'] = form.tribe.data
         session['childMailAddress'] = form.childMailAddress.data
         session['childMailCity'] = form.childMailCity.data
         session['childMailState'] = form.childMailState.data
         session['childMailZip'] = form.childMailZip.data
-        session['conpref'] = form.conpref.data
-        session['email'] = form.email.data
+        session['childConpref'] = form.childConpref.data
+        session['childEmail'] = form.childEmail.data
         session['vote'] = form.vote.data
-        return redirect(url_for("sectionC"))  # only when form submitted
+        return redirect(url_for("falso"))  # only when form submitted
 
     return render_template('SectionA.html', form=form)
 
@@ -390,7 +389,7 @@ def sectionB():
         session['legalZip'] = form.legalZip.data
         #it is not reading this redirect, I have tried changing it to another to see if it
         #would read it but no luck, really don't know what to do
-        return redirect(url_for("falso"))  # only when form submitted
+        return redirect(url_for("sectionA"))  # only when form submitted
 
     return render_template('SectionB.html', form=form)  # ahh what will I be rendering..
 
