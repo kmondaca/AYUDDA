@@ -390,7 +390,7 @@ def sectionB():
         #would read it but no luck, really don't know what to do
         return redirect(url_for("sectionA"))  # only when form submitted
 
-    return render_template('SectionB.html', form=form)  # ahh what will I be rendering..
+    return render_template('SectionB.html', form=form)  #this form refers to the form we set on 371
 
 
 
