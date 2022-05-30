@@ -54,6 +54,8 @@ class SectionA(FlaskForm):
     childState = StringField('Estado:', validators=[DataRequired()])
     childZip = StringField('Codigo postal:', validators=[DataRequired()])
     childPhone = StringField('Teléfono:', validators=[DataRequired()])
+    #It doesn't like ethnicity for some reason
+    """"
     ethnicity = RadioField('Etnia:',
                          choices=[('Indígena de los EE UU/Alaska', 'Indígena de los EE UU/Alaska'),
                                   ('Negra/Afroamericana (no Hispánica)', 'Negra/Afroamericana (no Hispánica)') ,
@@ -62,7 +64,7 @@ class SectionA(FlaskForm):
                                   ('Otra'), ('Otra'),
                                   ('Blanca (no Hispánica)', 'Blanca (no Hispánica)')])
 
-
+"""
     tribe = StringField('Tribu (Si corresponde):')
     childMailAddress = StringField('Dirección postal (Si corresponde):')
     childMailCity = StringField('Ciudad:')
