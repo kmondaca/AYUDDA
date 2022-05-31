@@ -60,7 +60,7 @@ class SectionA(FlaskForm):
                                   ('Negra/Afroamericana (no Hispánica)', 'Negra/Afroamericana (no Hispánica)') ,
                                   ('Asiática/Indígena de la Polinesia', 'Asiática/Indígena de la Polinesia'),
                                   ('Hispánica o Latina', 'Hispánica o Latina'),
-                                  ('Otra'), ('Otra'),
+                                  ('Otra', 'Otra'),
                                   ('Blanca (no Hispánica)', 'Blanca (no Hispánica)')])
     tribe = StringField('Tribu (Si corresponde):')
     childMailAddress = StringField('Dirección postal (Si corresponde):')
