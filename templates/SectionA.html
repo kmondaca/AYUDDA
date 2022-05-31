@@ -4,7 +4,7 @@
 <h1> SECCIÓN A. (Información del solicitante)</h1>
 </div>
 
-<div class="SectionA">
+<div class="SectionA d-flex align-items-center justify-content-center">
 
 <form method="POST">
     {{form.hidden_tag()}}
@@ -14,7 +14,7 @@
     <br>
     {{form.childSex.label}}{{form.childSex}}
     <br>
-    {form.AHCCCS.label}}{{form.AHCCCS}}
+    {{form.AHCCCS.label}}{{form.AHCCCS}}
     <br>
     {{form.language.label}}{{form.language}}
       <br>

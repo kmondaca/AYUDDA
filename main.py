@@ -262,7 +262,7 @@ def spanish():
 
     return render_template('spanish.html', form=form)  # app
 
-@app.route('/sectionA1')
+@app.route('/sectionA1',methods=['GET', 'POST'])
 def sectionA1():
     form = SectionA1()
     if form.validate_on_submit():
@@ -274,7 +274,7 @@ def sectionA1():
         return redirect(url_for("sectionHIPAA"))  # only when form submitted
     return render_template('SectionA1.html', form=form)
 
-@app.route('/sectionA')
+@app.route('/sectionA',methods=['GET', 'POST'])
 def sectionA():
     form = SectionA()
     if form.validate_on_submit():
@@ -297,11 +297,11 @@ def sectionA():
         session['childConpref'] = form.childConpref.data
         session['childEmail'] = form.childEmail.data
         session['vote'] = form.vote.data
-        return redirect(url_for("falso"))  # only when form submitted
+        return redirect(url_for("sectionC"))  # only when form submitted
 
     return render_template('SectionA.html', form=form)
 
-@app.route('/sectionC')
+@app.route('/sectionC',methods=['GET', 'POST'])
 def sectionC():
     form = SectionC()
     if form.validate_on_submit():
@@ -316,7 +316,7 @@ def sectionC():
 
     return render_template('SectionC.html', form = form)
 
-@app.route('/sectionD')
+@app.route('/sectionD',methods=['GET', 'POST'])
 def sectionD():
     form = SectionD()
     if form.validate_on_submit():
@@ -328,7 +328,7 @@ def sectionD():
 
     return render_template('SectionD.html', form=form)
 
-@app.route('/sectionHIPAA')
+@app.route('/sectionHIPAA',methods=['GET', 'POST'])
 def HIPAA():
     form = SectionHIPAA()
     if form.validate_on_submit():
@@ -344,7 +344,7 @@ def HIPAA():
 
     return render_template('HIPAA.html', form=form)
 
-@app.route('/release')
+@app.route('/release',methods=['GET', 'POST'])
 def release():
     form = SectionRelease()
     if form.validate_on_submit():
