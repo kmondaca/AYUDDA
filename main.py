@@ -267,7 +267,6 @@ def sectionA1():
     form = SectionA1()
     if form.validate_on_submit():
         session['profName'] = form.profName.data
-        session['profPhone'] = form.profPhone.data
         session['type'] = form.type.data
         session['date'] = form.date.data
 
@@ -321,6 +320,7 @@ def sectionD():
     form = SectionD()
     if form.validate_on_submit():
         session['program'] = form.program.data
+        session['profPhone'] = form.profPhone.data
         session['typeSupport'] = form.typeSupport.data
         session['eduDate'] = form.eduDate.data
 
