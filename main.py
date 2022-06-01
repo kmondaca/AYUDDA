@@ -320,7 +320,6 @@ def sectionD():
     form = SectionD()
     if form.validate_on_submit():
         session['program'] = form.program.data
-        session['profPhone'] = form.profPhone.data
         session['typeSupport'] = form.typeSupport.data
         session['eduDate'] = form.eduDate.data
 
@@ -329,7 +328,7 @@ def sectionD():
     return render_template('SectionD.html', form=form)
 
 @app.route('/sectionHIPAA',methods=['GET', 'POST'])
-def HIPAA():
+def sectionHIPAA():
     form = SectionHIPAA()
     if form.validate_on_submit():
         session['childLast'] = form.childLast.data
@@ -394,7 +393,7 @@ def sectionB():
 
 
 
-""""
+
 @app.route('/test', methods=['GET', 'POST'])
 def test():
     # for the other classes, I can just so SectionB.variable.data to grab the info
@@ -428,7 +427,7 @@ def test():
     else:
         return render_template('test.html', form=form)
 
-"""
+
 
 
 if __name__ == '__main__':
