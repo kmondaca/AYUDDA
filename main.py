@@ -245,6 +245,7 @@ def einfo():
 def sinfo():
     return render_template('sinfo.html')
 
+
 @app.route('/spanish', methods=['GET', 'POST'])
 def spanish():
     form = SpanForm()
@@ -351,7 +352,7 @@ def release():
         session['permissions'] = form.permissions.data
         session['other'] = form.other.data
 
-        return redirect(url_for("release"))  # only when form submitted
+        return redirect(url_for("goodbye"))  # only when form submitted
 
     return render_template('Release.html', form=form)
 
@@ -393,7 +394,10 @@ def sectionB():
 
 @app.route('goodbye', methods=['GET', 'POST'])
 def goodbye():
-    all_pdf_fields = ['SecA_Name', 'DOB', ...]  # not the real field names, especially in the Spanish version!
+    #some of the spanish variables are actually in english jajajajajajajajajajaj
+    #I regret not looking at these variables sooner
+    all_pdf_fields = ['secA_AppName','APPLICANT_DOB','APPLICANT_Sex','secA_AHCCCS','secA_Language','secA_HomeAddress','secA_City1', 'secA_State1','secA_Zip1','SecA_Phone','secA_Ethnicity','secA_Tribe','secA_MailingAdd', 'secA_City2','secA_State2','secA_Zip2','secA_Contract','secA_ContactPrefer', 'secA_Vote'
+                      'SecA_nombre1', 'SecA_Tipo1', 'SecA_fecha1', 'SecA_nombre2','Sec_Tipo2','SecA_fecha2', ]  # not the real field names, especially in the Spanish version!
 
     data_for_pdf = {}
 
