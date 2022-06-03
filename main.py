@@ -391,9 +391,19 @@ def sectionB():
 
     return render_template('SectionB.html', form=form)  #this form refers to the form we set on 371
 
+@app.route('goodbye', methods=['GET', 'POST'])
+def goodbye():
+    all_pdf_fields = ['SecA_Name', 'DOB', ...]  # not the real field names, especially in the Spanish version!
 
+    data_for_pdf = {}
 
+    for key in all_pdf_fields:
+        if key not in session:
+        # oops! somehow this never got set!!
+        else:
+            data_for_pdf[key] = session[key]
 
+""""
 @app.route('/test', methods=['GET', 'POST'])
 def test():
     # for the other classes, I can just so SectionB.variable.data to grab the info
@@ -426,39 +436,9 @@ def test():
         return send_file(complete_pdf, as_attachment=True)
     else:
         return render_template('test.html', form=form)
-
+"""
 
 
 
 if __name__ == '__main__':
     app.run(debug=True)
-
-#Once I can figure out how to 'talk' to the pdf, I will add this back to Section B
-    """
-        data_for_pdf = dict(
-            SecA_AppName=form.childName.data,
-            appDOB=form.childDOB.data,
-            Sex=form.childSex.data,
-            appAHCCCS=form.AHCCCS.data,
-            lang=form.language.data,
-            HomeAdd=form.childAddress.data,
-            A_City1=form.childCity.data,
-            A_State1=form.childState.data,
-            A_Zip=form.childZip.data,
-            A_Phone=form.phone.data,
-            A_ethnicity=form.ethnicity.data,
-            A_tribe=form.tribe.data,
-            A_mailAdd=form.childMailAddress.data,
-            A_MailCity=form.childMailCity.data,
-            A_MailState=form.childMailState.data,
-            A_MailZip=form.childMailZip.data,
-            A_conpref = form.conpref.data,
-            A_email = form.email.data,
-            A_conchoice = form.conchoice.data,
-            A_vote = form.vote.data
-        )
-
-        complete_pdf = fill_one_pdf("DDD-2069A-S", data_for_pdf)
-        return send_file(complete_pdf, as_attachment=True)
-    else:
-    """
