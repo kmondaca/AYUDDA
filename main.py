@@ -370,25 +370,26 @@ def sectionB():
     #issues figuring out how to run it.....
     form = SectionB()
     if form.validate_on_submit():
-        session['parentName'] = form.parentName.data
-        session['relationship'] = form.relationship.data
-        session['parentPhone'] = form.parentPhone.data
-        session['parentEmail'] = form.parentEmail.data
-        session['parentAddress'] = form.parentAddress.data
-        session['parentCity'] = form.parentCity.data
-        session['parentState'] = form.parentState.data
-        session['parentZip'] = form.parentZip.data
-        session['parentConpref'] = form.parentConpref.data
-        session['legalName'] = form.legalName.data
-        session['legalRelationship'] = form.legalRelationship.data
-        session['legalPhone'] = form.legalPhone.data
-        session['legalAddress'] = form.legalAddress.data
-        session['legalCity'] = form.legalCity.data
-        session['legalState'] = form.legalState.data
-        session['legalZip'] = form.legalZip.data
+        session['secB_Name'] = form.parentName.data
+        session['secB_relationship1'] = form.relationship.data
+        session['secB_Phone1'] = form.parentPhone.data
+        session['secB_Email1'] = form.parentEmail.data
+        session['secB_Address1'] = form.parentAddress.data
+        session['secB_City1'] = form.parentCity.data
+        session['secB_State1'] = form.parentState.data
+        session['secB_Zip1'] = form.parentZip.data
+        session['secB_BestWay'] = form.parentConpref.data
+        session['secB_LGName'] = form.legalName.data
+        session['secB_Relationship2'] = form.legalRelationship.data
+        session['secB_Phone2'] = form.legalPhone.data
+        session['secB_Address2'] = form.legalAddress.data
+        session['secB_City2'] = form.legalCity.data
+        session['secB_State2'] = form.legalState.data
+        session['secB_Zip2'] = form.legalZip.data
         #it is not reading this redirect, I have tried changing it to another to see if it
         #would read it but no luck, really don't know what to do
         return redirect(url_for("sectionA"))  # only when form submitted
+
 
     return render_template('SectionB.html', form=form)  #this form refers to the form we set on 371
 
@@ -408,7 +409,8 @@ def goodbye():
 
     for key in all_pdf_fields:
         if key not in session:
-        # oops! somehow this never got set!!
+            print(key)
+            #could help me debug if I have any spelling issues
         else:
             data_for_pdf[key] = session[key]
 
