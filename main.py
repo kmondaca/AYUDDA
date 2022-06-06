@@ -278,25 +278,25 @@ def sectionA1():
 def sectionA():
     form = SectionA()
     if form.validate_on_submit():
-        session['childName'] = form.childName.data
-        session['childDOB'] = form.childDOB.data
-        session['childSex'] = form.childSex.data
-        session['AHCCCS'] = form.AHCCCS.data
-        session['language'] = form.language.data
-        session['childAddress'] = form.childAddress.data
-        session['childCity'] = form.childCity.data
-        session['childState'] = form.childState.data
-        session['childZip'] = form.childZip.data
-        session['childPhone'] = form.childPhone.data
-        session['ethnicity'] = form.ethnicity.data
-        session['tribe'] = form.tribe.data
-        session['childMailAddress'] = form.childMailAddress.data
-        session['childMailCity'] = form.childMailCity.data
-        session['childMailState'] = form.childMailState.data
-        session['childMailZip'] = form.childMailZip.data
-        session['childConpref'] = form.childConpref.data
-        session['childEmail'] = form.childEmail.data
-        session['vote'] = form.vote.data
+        session['secA_AppName'] = form.childName.data
+        session['APPLICANT_DOB'] = form.childDOB.data
+        session['APPLICANT_Sex'] = form.childSex.data
+        session['secA_AHCCCS'] = form.AHCCCS.data
+        session['secA_language'] = form.language.data
+        session['secA_HomeAddress'] = form.childAddress.data
+        session['secA_City1'] = form.childCity.data
+        session['secA_State1'] = form.childState.data
+        session['secA_Zip1'] = form.childZip.data
+        session['secA_Phone'] = form.childPhone.data
+        session['secA_Ethnicity'] = form.ethnicity.data
+        session['secA_Tribe'] = form.tribe.data
+        session['secA_MailingAdd'] = form.childMailAddress.data
+        session['secA_City2'] = form.childMailCity.data
+        session['secA_State2'] = form.childMailState.data
+        session['secA_Zip2'] = form.childMailZip.data
+        session['secA_ContactPrefer'] = form.childConpref.data
+        session['secA_Contact'] = form.childEmail.data
+        session['secA_Vote'] = form.vote.data
         return redirect(url_for("sectionC"))  # only when form submitted
 
     return render_template('SectionA.html', form=form)
@@ -397,7 +397,7 @@ def sectionB():
 def goodbye():
     #some of the spanish variables are actually in english jajajajajajajajajajaj
     #I regret not looking at these variables sooner
-    all_pdf_fields = ['secA_AppName','APPLICANT_DOB','APPLICANT_Sex','secA_AHCCCS','secA_Language','secA_HomeAddress','secA_City1', 'secA_State1','secA_Zip1','SecA_Phone','secA_Ethnicity','secA_Tribe','secA_MailingAdd', 'secA_City2','secA_State2','secA_Zip2','secA_Contract','secA_ContactPrefer', 'secA_Vote'
+    all_pdf_fields = ['secA_AppName','APPLICANT_DOB','APPLICANT_Sex','secA_AHCCCS','secA_Language','secA_HomeAddress','secA_City1', 'secA_State1','secA_Zip1','SecA_Phone','secA_Ethnicity','secA_Tribe','secA_MailingAdd', 'secA_City2','secA_State2','secA_Zip2','secA_Contact','secA_ContactPrefer', 'secA_Vote'
                       'SecA_nombre1', 'SecA_Tipo1', 'SecA_fecha1', 'SecA_nombre2','Sec_Tipo2','SecA_fecha2','SecA_nombre3','SecA_Tipo3','SecA_fecha3',
                       'secB_Name', 'secB_Relationship1', 'secB_Phone1', 'secB_Email1', 'secB_City1','secB_State1','secB_Zip1','secB_Relationship2','secB_Address1','secB_BestWay','secB_Phone2','secB_Alt','secB_LGName','secB_Address2', 'secB_City2', 'secB_Zip2', 'secB_State2',
                       'secCtipo1','secC_plan1','secCTitular1','secC_num1', 'secC_vigencia1','secC_naci1','secC_tipo2','secC_plan2','secC_Titular2','secC_num2','secC_vigencia2','secC_naci2',
