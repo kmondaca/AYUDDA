@@ -320,7 +320,7 @@ def sectionC():
         session['secC_Titular1'] = form.policyName.data
         session['secC_num1'] = form.IDNum.data
         session['secC_vigencia1'] = form.dob.data
-        session['secC_nacil1'] = form.policyDate.data
+        session['secC_naci1'] = form.policyDate.data
         #'secC_tipo2','secC_plan2','secC_Titular2','secC_num2','secC_vigencia2','secC_naci2',
         return redirect(url_for("sectionD"))  # only when form submitted
 
@@ -330,12 +330,13 @@ def sectionC():
 def sectionD():
     form = SectionD()
     if form.validate_on_submit():
-        session['SecD_estado1'] = form.program.data
-        session['SecD_Tipo1'] = form.typeSupport.data
-        session['SecD_fechas1'] = form.eduDate.data
+        session['secD_estado1'] = form.program.data
+        session['secD_tipo1'] = form.typeSupport.data
+        session['secD_fechas1'] = form.eduDate.data
         #unsure if I can assign the other values we already have here
         session['SIG_Name'] =SectionB().parentName.data
         session['SIG_Relationship']=SectionB().relationship.data
+        session['SIG_Date'] =SectionHIPAA().requestDate.data
         #'secD_estado2','secD_tipo2', 'secD_fechas2','SIG_Name','SIG_Relationship','SIG_Date',
         return redirect(url_for("sectionA1"))  # only when form submitted
 
@@ -437,7 +438,7 @@ def sectionB():
     form = SectionB()
     if form.validate_on_submit():
         session['secB_Name'] = form.parentName.data
-        session['secB_relationship1'] = form.relationship.data
+        session['secB_Relationship1'] = form.relationship.data
         session['secB_Phone1'] = form.parentPhone.data
         session['secB_Email1'] = form.parentEmail.data
         session['secB_Address1'] = form.parentAddress.data
@@ -463,7 +464,7 @@ def sectionB():
 def goodbye():
     #some of the spanish variables are actually in english jajajajajajajajajajaj
     #I regret not looking at these variables sooner
-    all_pdf_fields = ['secA_AppName','APPLICANT_DOB','APPLICANT_Sex','secA_AHCCCS','secA_Language','secA_HomeAddress','secA_City1', 'secA_State1','secA_Zip1','SecA_Phone','secA_Ethnicity','secA_Tribe','secA_MailingAdd', 'secA_City2','secA_State2','secA_Zip2','secA_Contact','secA_ContactPrefer', 'secA_Vote'
+    all_pdf_fields = ['secA_AppName','APPLICANT_DOB','APPLICANT_Sex','secA_AHCCCS','secA_Language','secA_HomeAddress','secA_City1', 'secA_State1','secA_Zip1','SecA_Phone','secA_Ethnicity','secA_Tribe','secA_MailingAdd', 'secA_City2','secA_State2','secA_Zip2','secA_Contact','secA_ContactPrefer', 'secA_Vote',
                       'SecA_nombre1', 'SecA_Tipo1', 'SecA_fecha1', 'SecA_nombre2','Sec_Tipo2','SecA_fecha2','SecA_nombre3','SecA_Tipo3','SecA_fecha3',
                       'secB_Name', 'secB_Relationship1', 'secB_Phone1', 'secB_Email1', 'secB_City1','secB_State1','secB_Zip1','secB_Relationship2','secB_Address1','secB_BestWay','secB_Phone2','secB_Alt','secB_LGName','secB_Address2', 'secB_City2', 'secB_Zip2', 'secB_State2',
                       'secC_tipo1','secC_plan1','secC_Titular1','secC_num1', 'secC_vigencia1','secC_naci1','secC_tipo2','secC_plan2','secC_Titular2','secC_num2','secC_vigencia2','secC_naci2',
