@@ -156,6 +156,18 @@ class SectionRelease(FlaskForm):
                                         ('Informes de terapia ocupacional', 'Informes de terapia ocupacional'),
                                         ('Expedientes de salud conductual', 'Expedientes de salud conductual'),
                                         ('Otro (Especifique):', 'Otro (Especifique):')])
+
+    InfoTipo1  = BooleanField('Expedientes medicos')
+    InfoTipo2 = BooleanField('Informes/Expedientes de audiologia')
+    InfoTipo3 = BooleanField('Informes del habla y lenguaje')
+    InfoTipo4 = BooleanField('Informe de Plan 504 o Plan de Educacion Individual y Evaluacion mas reciente')
+    InfoTipo5 = BooleanField('Registros de recien nacidos')
+    InfoTipo6 = BooleanField('Informes psicologicos')
+    InfoTipo7 = BooleanField('Informes de terapia fisica')
+    InfoTipo8 = BooleanField('Registros de nacimiento y parto')
+    InfoTipo9 = BooleanField('Informes de terapia ocupacional')
+    InfoTipo10 = BooleanField('Expedientes de salud conductual')
+    InfoTipo11 = BooleanField('Otro (Especifique)')
     other = StringField("")
     #get parent name
     #requires real signature
@@ -267,10 +279,10 @@ def spanish():
 def sectionA1():
     form = SectionA1()
     if form.validate_on_submit():
-        session['profName'] = form.profName.data
-        session['type'] = form.type.data
-        session['date'] = form.date.data
-
+        session['SecA_nombre1'] = form.profName.data
+        session['SecA_Tipo1'] = form.type.data
+        session['SecA_fecha1'] = form.date.data
+        #'SecA_nombre2','Sec_Tipo2','SecA_fecha2','SecA_nombre3','SecA_Tipo3','SecA_fecha3',
         return redirect(url_for("sectionHIPAA"))  # only when form submitted
     return render_template('SectionA1.html', form=form)
 
@@ -305,13 +317,13 @@ def sectionA():
 def sectionC():
     form = SectionC()
     if form.validate_on_submit():
-        session['coverage'] = form.coverage.data
-        session['healthPlan'] = form.healthPlan.data
-        session['policyName'] = form.policyName.data
-        session['IDNum'] = form.IDNum.data
-        session['dob'] = form.dob.data
-        session['policyDate'] = form.policyDate.data
-
+        session['secC_tipo1'] = form.coverage.data
+        session['secC_plan1'] = form.healthPlan.data
+        session['secC_Titular1'] = form.policyName.data
+        session['secC_num1'] = form.IDNum.data
+        session['secC_vigencia1'] = form.dob.data
+        session['secC_nacil1'] = form.policyDate.data
+        #'secC_tipo2','secC_plan2','secC_Titular2','secC_num2','secC_vigencia2','secC_naci2',
         return redirect(url_for("sectionD"))  # only when form submitted
 
     return render_template('SectionC.html', form = form)
@@ -320,10 +332,13 @@ def sectionC():
 def sectionD():
     form = SectionD()
     if form.validate_on_submit():
-        session['program'] = form.program.data
-        session['typeSupport'] = form.typeSupport.data
-        session['eduDate'] = form.eduDate.data
-
+        session['SecD_estado1'] = form.program.data
+        session['SecD_Tipo1'] = form.typeSupport.data
+        session['SecD_fechas1'] = form.eduDate.data
+        #unsure if I can assign the other values we already have here
+        session['SIG_Name'] =SectionB().parentName.data
+        session['SIG_Relationship']=SectionB().relationship.data
+        #'secD_estado2','secD_tipo2', 'secD_fechas2','SIG_Name','SIG_Relationship','SIG_Date',
         return redirect(url_for("sectionA1"))  # only when form submitted
 
     return render_template('SectionD.html', form=form)
@@ -332,14 +347,13 @@ def sectionD():
 def sectionHIPAA():
     form = SectionHIPAA()
     if form.validate_on_submit():
-        session['childLast'] = form.childLast.data
-        session['childFirst'] = form.childFirst.data
-        session['childMiddle'] = form.childMiddle.data
-        session['describeInfo'] = form.describeInfo.data
-        session['agency'] = form.agency.data
-        session['requestDate'] = form.requestDate.data
-        session['authorizationDate'] = form.authorizationDate.data
-
+        session['3_Name'] = form.childLast.data + " " + form.childFirst.data + " " + form.childMiddle.data
+        session['3_DOB'] = SectionA().childDOB.data
+        session['3_Describe'] = form.describeInfo.data
+        session['3_agency'] = form.agency.data
+        session['3_Date1'] = form.requestDate.data
+        session['3_Date2'] = form.authorizationDate.data
+        session['3_padre'] =  SectionB().parentName.data
         return redirect(url_for("release"))  # only when form submitted
 
     return render_template('HIPAA.html', form=form)
@@ -348,10 +362,62 @@ def sectionHIPAA():
 def release():
     form = SectionRelease()
     if form.validate_on_submit():
-        session['office'] = form.office.data
-        session['permissions'] = form.permissions.data
-        session['other'] = form.other.data
+        session['4_Name1'] = SectionA().childName.data
+        session['4_DOB'] = SectionA().childDOB.data
+        session['4_Date1'] = SectionHIPAA.requestDate.data
+        session['MedicalPro'] = form.office.data
 
+        #set the correct office
+        if form.office.data == 'Chandler':
+            session['DDD_Address1'] = '125 E Elliot Rd'
+            session['4_Zip1'] = '85225'
+            session['4_State1'] = 'AZ'
+            session['4_City1'] = 'Chandler'
+            session['4_Fax1'] = '(602) 542- 6870'
+            session['4_Phone1'] = '(480) 831-1009'
+        elif form.office.data == 'Flagstaff':
+            session['DDD_Address1'] = '1701 N 4th St'
+            session['4_Zip1'] = '86004'
+            session['4_State1'] = 'AZ'
+            session['4_City1'] = 'Flagstaff'
+            session['4_Fax1'] = '(602) 542- 6870'
+            session['4_Phone1'] = '(928) 637-0960'
+        elif form.office.data == 'Tucson':
+            session['DDD_Address1'] = '1455 S Alvernon Way'
+            session['4_Zip1'] = '85711'
+            session['4_State1'] = 'AZ'
+            session['4_City1'] = 'Tucson'
+            session['4_Fax1'] = '(602) 542- 6870'
+            session['4_Phone1'] = '(520) 638-2600'
+        elif form.office.data == 'Phoenix (Oeste)':
+            session['DDD_Address1'] = '4622 W Indian School Ste #D-12'
+            session['4_Zip1'] = '85031'
+            session['4_State1'] = 'AZ'
+            session['4_City1'] ='Phoenix'
+            session['4_Fax1'] = '(602) 542- 6870'
+            session['4_Phone1'] ='(602) 771-8888'
+        else:
+            session['DDD_Address1'] = '11420 N 19th Ave'
+            session['4_Zip1'] = '85029'
+            session['4_State1'] = 'AZ'
+            session['4_City1'] = 'Phoenix'
+            session['4_Fax1'] = '(602) 542- 6870'
+            session['4_Phone1'] = '(602) 485-0236'
+        session['permissions'] = form.permissions.data
+        session['4_Specify1'] = form.other.data
+        session['InfoTipo1'] = form.InfoTipo1.data
+        session['InfoTipo2'] = form.InfoTipo2.data
+        session['InfoTipo3'] = form.InfoTipo3.data
+        session['InfoTipo4'] = form.InfoTipo4.data
+        session['InfoTipo5'] = form.InfoTipo5.data
+        session['InfoTipo6'] = form.InfoTipo6.data
+        session['InfoTipo7'] = form.InfoTipo7.data
+        session['InfoTipo8'] = form.InfoTipo8.data
+        session['InfoTipo9'] = form.InfoTipo9.data
+        session['InfoTipo10'] = form.InfoTipo10.data
+        session['InfoTipo11'] = form.InfoTipo11.data
+        session['4_padre'] = SectionB().parentName.data
+        session['4_Date2'] = SectionHIPAA().authorizationDate.data
         return redirect(url_for("goodbye"))  # only when form submitted
 
     return render_template('Release.html', form=form)
@@ -400,7 +466,7 @@ def goodbye():
     all_pdf_fields = ['secA_AppName','APPLICANT_DOB','APPLICANT_Sex','secA_AHCCCS','secA_Language','secA_HomeAddress','secA_City1', 'secA_State1','secA_Zip1','SecA_Phone','secA_Ethnicity','secA_Tribe','secA_MailingAdd', 'secA_City2','secA_State2','secA_Zip2','secA_Contact','secA_ContactPrefer', 'secA_Vote'
                       'SecA_nombre1', 'SecA_Tipo1', 'SecA_fecha1', 'SecA_nombre2','Sec_Tipo2','SecA_fecha2','SecA_nombre3','SecA_Tipo3','SecA_fecha3',
                       'secB_Name', 'secB_Relationship1', 'secB_Phone1', 'secB_Email1', 'secB_City1','secB_State1','secB_Zip1','secB_Relationship2','secB_Address1','secB_BestWay','secB_Phone2','secB_Alt','secB_LGName','secB_Address2', 'secB_City2', 'secB_Zip2', 'secB_State2',
-                      'secCtipo1','secC_plan1','secCTitular1','secC_num1', 'secC_vigencia1','secC_naci1','secC_tipo2','secC_plan2','secC_Titular2','secC_num2','secC_vigencia2','secC_naci2',
+                      'secC_tipo1','secC_plan1','secC_Titular1','secC_num1', 'secC_vigencia1','secC_naci1','secC_tipo2','secC_plan2','secC_Titular2','secC_num2','secC_vigencia2','secC_naci2',
                       'secD_estado1', 'secD_tipo1','secD_fechas1', 'secD_estado2','secD_tipo2', 'secD_fechas2','SIG_Name','SIG_Relationship','SIG_Date',
                       '3_DOB', '3_Name', '3_Describe', '3_Date1','3_agency','3_padre','3_Date2',
                       '4_Name1','4_DOB', '4_Date1','MedicalPro', 'DDD_Address1','4_Zip1', '4_State1', '4_City1','4_Fax1', '4_Phone1', 'InfoTipo1', 'InfoTipo2','InfoTipo3, InfoTipo4','InfoTipo5','InfoTipo6','InfoTipo7', 'InfoTipo8','InfoTipo9','InfoTipo10', '4_Specify1', 'InfoTipo11','4_padre','4_Date2']  # not the real field names, especially in the Spanish version!
