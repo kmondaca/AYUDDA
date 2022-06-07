@@ -144,17 +144,28 @@ class SectionRelease(FlaskForm):
                                         ('Phoenix (Oeste)', 'Phoenix (Oeste)'),
                                         ('Phoenix (Central)', 'Phoenix (Central)')])
     #autofill the location of the office
-    InfoTipo1  = RadioField('Expedientes medicos', choices=[('Sí', 'Sí'), ('No', 'No')])
-    InfoTipo2 = RadioField('Informes/Expedientes de audiologia',choices=[('Sí', 'Sí'), ('No', 'No')])
-    InfoTipo3 = RadioField('Informes del habla y lenguaje',choices=[('Sí', 'Sí'), ('No', 'No')])
-    InfoTipo4 = RadioField('Informe de Plan 504 o Plan de Educacion Individual y Evaluacion mas reciente',choices=[('Sí', 'Sí'), ('No', 'No')])
-    InfoTipo5 = RadioField('Registros de recien nacidos',choices=[('Sí', 'Sí'), ('No', 'No')])
-    InfoTipo6 = RadioField('Informes psicologicos',choices=[('Sí', 'Sí'), ('No', 'No')])
-    InfoTipo7 = RadioField('Informes de terapia fisica',choices=[('Sí', 'Sí'), ('No', 'No')])
-    InfoTipo8 = RadioField('Registros de nacimiento y parto',choices=[('Sí', 'Sí'), ('No', 'No')])
-    InfoTipo9 = RadioField('Informes de terapia ocupacional',choices=[('Sí', 'Sí'), ('No', 'No')])
-    InfoTipo10 = RadioField('Expedientes de salud conductual',choices=[('Sí', 'Sí'), ('No', 'No')])
-    InfoTipo11 = RadioField('Informes/Expedientes de audiologia',choices=[('Sí', 'Sí'), ('No', 'No')])
+    InfoTipo1 = RadioField('Expedientes medicos',
+                           choices=[('Sí', 'Sí'), ('No', 'No')])
+    InfoTipo2 = RadioField('Informes/Expedientes de audiologia',
+                           choices=[('Sí', 'Sí'), ('No', 'No')])
+    InfoTipo3 = RadioField('Informes del habla y lenguaje',
+                           choices=[('Sí', 'Sí'), ('No', 'No')])
+    InfoTipo4 = RadioField('Informe de Plan 504 o Plan de Educacion Individual y Evaluacion mas reciente',
+                           choices=[('Sí', 'Sí'), ('No', 'No')])
+    InfoTipo5 = RadioField('Registros de recien nacidos',
+                           choices=[('Sí', 'Sí'), ('No', 'No')])
+    InfoTipo6 = RadioField('Informes psicologicos',
+                           choices=[('Sí', 'Sí'), ('No', 'No')])
+    InfoTipo7 = RadioField('Informes de terapia fisica',
+                           choices=[('Sí', 'Sí'), ('No', 'No')])
+    InfoTipo8 = RadioField('Registros de nacimiento y parto',
+                           choices=[('Sí', 'Sí'), ('No', 'No')])
+    InfoTipo9 = RadioField('Informes de terapia ocupacional',
+                           choices=[('Sí', 'Sí'), ('No', 'No')])
+    InfoTipo10 = RadioField('Expedientes de salud conductual',
+                            choices=[('Sí', 'Sí'), ('No', 'No')])
+    InfoTipo11 = RadioField('Informes/Expedientes de audiologia',
+                            choices=[('Sí', 'Sí'), ('No', 'No')])
     other = StringField("")
     #get parent name
     #requires real signature
@@ -281,12 +292,12 @@ def sectionA():
         session['APPLICANT_DOB'] = form.childDOB.data
         session['APPLICANT_Sex'] = form.childSex.data
         session['secA_AHCCCS'] = form.AHCCCS.data
-        session['secA_language'] = form.language.data
+        session['secA_Language'] = form.language.data
         session['secA_HomeAddress'] = form.childAddress.data
         session['secA_City1'] = form.childCity.data
         session['secA_State1'] = form.childState.data
         session['secA_Zip1'] = form.childZip.data
-        session['secA_Phone'] = form.childPhone.data
+        session['SecA_Phone'] = form.childPhone.data
         session['secA_Ethnicity'] = form.ethnicity.data
         session['secA_Tribe'] = form.tribe.data
         session['secA_MailingAdd'] = form.childMailAddress.data
@@ -349,10 +360,12 @@ def sectionHIPAA():
 def release():
     form = SectionRelease()
     if form.validate_on_submit():
+        print("In release")
         session['4_Name1'] = SectionA().childName.data
         session['4_DOB'] = SectionA().childDOB.data
         session['4_Date1'] = SectionHIPAA().requestDate.data
         session['MedicalPro'] = form.office.data
+        print("before office var setting")
         if form.office.data == 'Chandler':
             session['DDD_Address1'] = '125 E Elliot Rd'
             session['4_Zip1'] = '85225'
@@ -388,6 +401,7 @@ def release():
             session['4_City1'] = 'Phoenix'
             session['4_Fax1'] = '(602) 542- 6870'
             session['4_Phone1'] = '(602) 485-0236'
+        print("office info set")
         session['InfoTipo1'] = form.InfoTipo1.data
         session['InfoTipo2'] = form.InfoTipo2.data
         session['InfoTipo3'] = form.InfoTipo3.data
@@ -399,9 +413,11 @@ def release():
         session['InfoTipo9'] = form.InfoTipo9.data
         session['InfoTipo10'] = form.InfoTipo10.data
         session['InfoTipo11'] = form.InfoTipo11.data
+        print("Infotipos complete")
         session['4_Specify1'] = form.other.data
         session['4_padre'] = SectionB().parentName.data
         session['4_Date2'] = SectionHIPAA().authorizationDate.data
+        print("I am at the end of release")
         return redirect(url_for("goodbye"))  # only when form submitted
 
     return render_template('Release.html', form=form)
@@ -459,7 +475,7 @@ def goodbye():
 
     for key in all_pdf_fields:
         if key not in session:
-            print(key)
+            print(key + " is not here :(")
             #could help me debug if I have any spelling issues
         else:
             data_for_pdf[key] = session[key]
