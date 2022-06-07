@@ -144,6 +144,7 @@ class SectionRelease(FlaskForm):
                                         ('Phoenix (Oeste)', 'Phoenix (Oeste)'),
                                         ('Phoenix (Central)', 'Phoenix (Central)')])
     #autofill the location of the office
+    """"
     permissions = SelectField("Permito que la informacion de salud protegida marcada a continuacion se comparta con el profesionalmedico, la agencia, el entorno educativo u otro indicado anteriormente::",
                                choices=[('Expedientes medicos', 'Expedientes medicos'),
                                         ('Informes/Expedientes de audiologia', 'Informes/Expedientes de audiologia'),
@@ -156,18 +157,28 @@ class SectionRelease(FlaskForm):
                                         ('Informes de terapia ocupacional', 'Informes de terapia ocupacional'),
                                         ('Expedientes de salud conductual', 'Expedientes de salud conductual'),
                                         ('Otro (Especifique):', 'Otro (Especifique):')])
-
-    InfoTipo1  = BooleanField('Expedientes medicos')
-    InfoTipo2 = BooleanField('Informes/Expedientes de audiologia')
-    InfoTipo3 = BooleanField('Informes del habla y lenguaje')
-    InfoTipo4 = BooleanField('Informe de Plan 504 o Plan de Educacion Individual y Evaluacion mas reciente')
-    InfoTipo5 = BooleanField('Registros de recien nacidos')
-    InfoTipo6 = BooleanField('Informes psicologicos')
-    InfoTipo7 = BooleanField('Informes de terapia fisica')
-    InfoTipo8 = BooleanField('Registros de nacimiento y parto')
-    InfoTipo9 = BooleanField('Informes de terapia ocupacional')
-    InfoTipo10 = BooleanField('Expedientes de salud conductual')
-    InfoTipo11 = BooleanField('Otro (Especifique)')
+"""
+    InfoTipo1  = RadioField('Expedientes medicos', choices=[('Sí', 'Sí'), ('No', 'No')])
+    InfoTipInfoTipo1  = RadioField('Expedientes medicos', choices=[('Sí', 'Sí'), ('No', 'No')])
+    InfoTipo2 = RadioField('Informes/Expedientes de audiologia',choices=[('Sí', 'Sí'), ('No', 'No')])
+    InfoTipo3 = RadioField('Informes del habla y lenguaje',choices=[('Sí', 'Sí'), ('No', 'No')])
+    InfoTipo4 = RadioField('Informe de Plan 504 o Plan de Educacion Individual y Evaluacion mas reciente',choices=[('Sí', 'Sí'), ('No', 'No')])
+    InfoTipo5 = RadioField('Registros de recien nacidos',choices=[('Sí', 'Sí'), ('No', 'No')])
+    InfoTipo6 = RadioField('Informes psicologicos',choices=[('Sí', 'Sí'), ('No', 'No')])
+    InfoTipo7 = RadioField('Informes de terapia fisica',choices=[('Sí', 'Sí'), ('No', 'No')])
+    InfoTipo8 = RadioField('Registros de nacimiento y parto',choices=[('Sí', 'Sí'), ('No', 'No')])
+    InfoTipo9 = RadioField('Informes de terapia ocupacional',choices=[('Sí', 'Sí'), ('No', 'No')])
+    InfoTipo10 = RadioField('Expedientes de salud conductual',choices=[('Sí', 'Sí'), ('No', 'No')])
+    InfoTipo11 =o2 = RadioField('Informes/Expedientes de audiologia',choices=[('Sí', 'Sí'), ('No', 'No')])
+    InfoTipo3 = RadioField('Informes del habla y lenguaje',choices=[('Sí', 'Sí'), ('No', 'No')])
+    InfoTipo4 = RadioField('Informe de Plan 504 o Plan de Educacion Individual y Evaluacion mas reciente',choices=[('Sí', 'Sí'), ('No', 'No')])
+    InfoTipo5 = RadioField('Registros de recien nacidos',choices=[('Sí', 'Sí'), ('No', 'No')])
+    InfoTipo6 = RadioField('Informes psicologicos',choices=[('Sí', 'Sí'), ('No', 'No')])
+    InfoTipo7 = RadioField('Informes de terapia fisica',choices=[('Sí', 'Sí'), ('No', 'No')])
+    InfoTipo8 = RadioField('Registros de nacimiento y parto',choices=[('Sí', 'Sí'), ('No', 'No')])
+    InfoTipo9 = RadioField('Informes de terapia ocupacional',choices=[('Sí', 'Sí'), ('No', 'No')])
+    InfoTipo10 = RadioField('Expedientes de salud conductual',choices=[('Sí', 'Sí'), ('No', 'No')])
+    InfoTipo11 = RadioField('Otro',choices=[('Sí', 'Sí'), ('No', 'No')])
     other = StringField("")
     #get parent name
     #requires real signature
@@ -364,7 +375,7 @@ def release():
     if form.validate_on_submit():
         session['4_Name1'] = SectionA().childName.data
         session['4_DOB'] = SectionA().childDOB.data
-        session['4_Date1'] = SectionHIPAA.requestDate.data
+        session['4_Date1'] = SectionHIPAA().requestDate.data
         session['MedicalPro'] = form.office.data
 
         #set the correct office
@@ -459,7 +470,7 @@ def sectionB():
 
     return render_template('SectionB.html', form=form)  #this form refers to the form we set on 371
 
-@app.route('goodbye', methods=['GET', 'POST'])
+@app.route('/goodbye', methods=['GET', 'POST'])
 def goodbye():
     #some of the spanish variables are actually in english jajajajajajajajajajaj
     #I regret not looking at these variables sooner
