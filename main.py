@@ -71,7 +71,7 @@ class SectionA(FlaskForm):
                          choices=[('Teléfono', 'Teléfono'), ('Correo electrónico', 'Correo electrónico'), ('Ambos', 'Ambos')])
     childEmail = StringField('Correo electrónico:')
     vote = RadioField('¿Desea registrarse para votar?',
-                         choices=[('Sí', 'Sí'), ('No', 'No')])
+                         choices=[('Sí', 'Off'), ('No', 'No')])
     submit = SubmitField('Enviar')
 
 
@@ -145,27 +145,27 @@ class SectionRelease(FlaskForm):
                                         ('Phoenix (Central)', 'Phoenix (Central)')])
     #autofill the location of the office
     InfoTipo1 = RadioField('Expedientes medicos',
-                           choices=[('Sí', 'Sí'), ('No', 'No')])
+                           choices=[('Sí', 'Off'), ('No', 'No')])
     InfoTipo2 = RadioField('Informes/Expedientes de audiologia',
-                           choices=[('Sí', 'Sí'), ('No', 'No')])
+                           choices=[('Sí', 'Off'), ('No', 'No')])
     InfoTipo3 = RadioField('Informes del habla y lenguaje',
-                           choices=[('Sí', 'Sí'), ('No', 'No')])
+                           choices=[('Sí', 'Off'), ('No', 'No')])
     InfoTipo4 = RadioField('Informe de Plan 504 o Plan de Educacion Individual y Evaluacion mas reciente',
-                           choices=[('Sí', 'Sí'), ('No', 'No')])
+                           choices=[('Sí', 'Off'), ('No', 'No')])
     InfoTipo5 = RadioField('Registros de recien nacidos',
-                           choices=[('Sí', 'Sí'), ('No', 'No')])
+                           choices=[('Sí', 'Off'), ('No', 'No')])
     InfoTipo6 = RadioField('Informes psicologicos',
-                           choices=[('Sí', 'Sí'), ('No', 'No')])
+                           choices=[('Sí', 'Off'), ('No', 'No')])
     InfoTipo7 = RadioField('Informes de terapia fisica',
-                           choices=[('Sí', 'Sí'), ('No', 'No')])
+                           choices=[('Sí', 'Off'), ('No', 'No')])
     InfoTipo8 = RadioField('Registros de nacimiento y parto',
-                           choices=[('Sí', 'Sí'), ('No', 'No')])
+                           choices=[('Sí', 'Off'), ('No', 'No')])
     InfoTipo9 = RadioField('Informes de terapia ocupacional',
-                           choices=[('Sí', 'Sí'), ('No', 'No')])
+                           choices=[('Sí', 'Off'), ('No', 'No')])
     InfoTipo10 = RadioField('Expedientes de salud conductual',
-                            choices=[('Sí', 'Sí'), ('No', 'No')])
+                            choices=[('Sí', 'Off'), ('No', 'No')])
     InfoTipo11 = RadioField('Informes/Expedientes de audiologia',
-                            choices=[('Sí', 'Sí'), ('No', 'No')])
+                            choices=[('Sí', 'Off'), ('No', 'No')])
     other = StringField("")
     #get parent name
     #requires real signature
@@ -281,6 +281,14 @@ def sectionA1():
         session['SecA_Tipo1'] = form.type.data
         session['SecA_fecha1'] = form.date.data
         #'SecA_nombre2','Sec_Tipo2','SecA_fecha2','SecA_nombre3','SecA_Tipo3','SecA_fecha3',
+
+        #adding to satisfy the pdf
+        session['SecA_nombre2'] = ""
+        session['Sec_Tipo2'] = ""
+        session['SecA_fecha2'] = ""
+        session['SecA_nombre3'] = ""
+        session['SecA_Tipo3'] = ""
+        session['SecA_fecha3'] = ""
         return redirect(url_for("sectionHIPAA"))  # only when form submitted
     return render_template('SectionA1.html', form=form)
 
@@ -322,6 +330,14 @@ def sectionC():
         session['secC_vigencia1'] = form.dob.data
         session['secC_naci1'] = form.policyDate.data
         #'secC_tipo2','secC_plan2','secC_Titular2','secC_num2','secC_vigencia2','secC_naci2',
+
+        #just so the pdf filler doesn't complain
+        session['secC_tipo2'] = ""
+        session['secC_plan2'] = ""
+        session['secC_Titular2'] = ""
+        session['secC_num2'] = ""
+        session['secC_vigencia2'] = ""
+        session['secC_naci2'] = ""
         return redirect(url_for("sectionD"))  # only when form submitted
 
     return render_template('SectionC.html', form = form)
@@ -337,7 +353,13 @@ def sectionD():
         session['SIG_Name'] =SectionB().parentName.data
         session['SIG_Relationship']=SectionB().relationship.data
         session['SIG_Date'] =SectionHIPAA().requestDate.data
-        #'secD_estado2','secD_tipo2', 'secD_fechas2','SIG_Name','SIG_Relationship','SIG_Date',
+        #'secD_estado2','secD_tipo2', 'secD_fechas2',','SIG_Relationship','SIG_Date',
+
+        #just so the pdf doesn't complain
+        session['secD_estado2'] = ""
+        session['secD_tipo2'] = ""
+        session['secD_fechas2'] = ""
+
         return redirect(url_for("sectionA1"))  # only when form submitted
 
     return render_template('SectionD.html', form=form)
@@ -453,6 +475,9 @@ def sectionB():
         session['secB_City2'] = form.legalCity.data
         session['secB_State2'] = form.legalState.data
         session['secB_Zip2'] = form.legalZip.data
+
+        #just for the pdf to not complain
+        session['secB_Alt'] = ""
         #it is not reading this redirect, I have tried changing it to another to see if it
         #would read it but no luck, really don't know what to do
         return redirect(url_for("sectionA"))  # only when form submitted
@@ -470,7 +495,7 @@ def goodbye():
                       'secC_tipo1','secC_plan1','secC_Titular1','secC_num1', 'secC_vigencia1','secC_naci1','secC_tipo2','secC_plan2','secC_Titular2','secC_num2','secC_vigencia2','secC_naci2',
                       'secD_estado1', 'secD_tipo1','secD_fechas1', 'secD_estado2','secD_tipo2', 'secD_fechas2','SIG_Name','SIG_Relationship','SIG_Date',
                       '3_DOB', '3_Name', '3_Describe', '3_Date1','3_agency','3_padre','3_Date2',
-                      '4_Name1','4_DOB', '4_Date1','MedicalPro', 'DDD_Address1','4_Zip1', '4_State1', '4_City1','4_Fax1', '4_Phone1', 'InfoTipo1', 'InfoTipo2','InfoTipo3, InfoTipo4','InfoTipo5','InfoTipo6','InfoTipo7', 'InfoTipo8','InfoTipo9','InfoTipo10', '4_Specify1', 'InfoTipo11','4_padre','4_Date2']  # not the real field names, especially in the Spanish version!
+                      '4_Name1','4_DOB', '4_Date1','MedicalPro', 'DDD_Address1','4_Zip1', '4_State1', '4_City1','4_Fax1', '4_Phone1', 'InfoTipo1', 'InfoTipo2','InfoTipo3', 'InfoTipo4','InfoTipo5','InfoTipo6','InfoTipo7', 'InfoTipo8','InfoTipo9','InfoTipo10', '4_Specify1', 'InfoTipo11','4_padre','4_Date2']  # not the real field names, especially in the Spanish version!
 
     data_for_pdf = {}
 
@@ -480,6 +505,9 @@ def goodbye():
             #could help me debug if I have any spelling issues
         else:
             data_for_pdf[key] = session[key]
+
+    complete_pdf = fill_one_pdf("DDD-2069A-S", data_for_pdf)
+    return send_file(complete_pdf, as_attachment=True)
 
 """"
 @app.route('/test', methods=['GET', 'POST'])
