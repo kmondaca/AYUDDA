@@ -67,11 +67,11 @@ class SectionA(FlaskForm):
     childMailCity = StringField('Ciudad:')
     childMailState = StringField('Estado:')
     childMailZip = StringField('Código postal:')
-    childConpref = RadioField('Cómo prefiere comunicarse::',
-                         choices=[('Teléfono', 'Teléfono'), ('Correo electrónico', 'Correo electrónico'), ('Ambos', 'Ambos')])
+    childConpref = RadioField('Cómo prefiere comunicarse:',
+                         choices=[('Telefono', 'Telefono'), ('email', 'Correo electrónico'), ('Ambos', 'Ambos')])
     childEmail = StringField('Correo electrónico:')
     vote = RadioField('¿Desea registrarse para votar?',
-                         choices=[('True', 'Sí'), ('No', 'No')])
+                         choices=[(True, 'Sí'), ('No', 'No')])
     submit = SubmitField('Enviar')
 
 
@@ -92,7 +92,7 @@ class SectionB(FlaskForm):
     parentState = StringField('Estado:')
     parentZip = StringField('Código postal:')
     parentConpref = RadioField('Mejor manera de contactarlo:',
-                         choices=[('phone', 'Phone'), ('email', 'correo electronico'), ('both', 'ambos')])
+                         choices=[('Phone', 'Phone'), ('email', 'correo electronico'), ('both', 'ambos')])
     legalName = StringField('Nombre del tutor legal (Si diferente al anterior):')
     legalRelationship = StringField("Parentesco:")
     legalPhone = StringField('Teléfono:')
@@ -145,19 +145,19 @@ class SectionRelease(FlaskForm):
                                         ('Phoenix (Central)', 'Phoenix (Central)')])
     #autofill the location of the office
     InfoTipo1 = RadioField('Expedientes medicos',
-                           choices=[('true', 'Sí'), ('No', 'No')])
+                           choices=[('Off', 'Sí'), ('No', 'No')])
     InfoTipo2 = RadioField('Informes/Expedientes de audiologia',
-                           choices=[('true', 'Sí'), ('No', 'No')])
+                           choices=[('Off', 'Sí'), ('No', 'No')])
     InfoTipo3 = RadioField('Informes del habla y lenguaje',
-                           choices=[('true', 'Sí'), ('No', 'No')])
+                           choices=[('Off', 'Sí'), ('No', 'No')])
     InfoTipo4 = RadioField('Informe de Plan 504 o Plan de Educacion Individual y Evaluacion mas reciente',
-                           choices=[('True', 'Sí'), ('No', 'No')])
+                           choices=[('Off', 'Sí'), ('No', 'No')])
     InfoTipo5 = RadioField('Registros de recien nacidos',
-                           choices=[('True', 'Sí'), ('No', 'No')])
+                           choices=[('Off', 'Sí'), ('No', 'No')])
     InfoTipo6 = RadioField('Informes psicologicos',
-                           choices=[('True', 'Sí'), ('No', 'No')])
+                           choices=[('Off', 'Sí'), ('No', 'No')])
     InfoTipo7 = RadioField('Informes de terapia fisica',
-                           choices=[('True', 'Sí'), ('No', 'No')])
+                           choices=[('Off', 'Sí'), ('No', 'No')])
     InfoTipo8 = RadioField('Registros de nacimiento y parto',
                            choices=[('selected', 'Sí'), ('No', 'No')])
     InfoTipo9 = RadioField('Informes de terapia ocupacional',
@@ -489,7 +489,7 @@ def sectionB():
 def goodbye():
     #some of the spanish variables are actually in english jajajajajajajajajajaj
     #I regret not looking at these variables sooner
-    all_pdf_fields = ['secA_AppName','APPLICANT_DOB','APPLICANT_Sex','secA_AHCCCS','secA_Language','secA_HomeAddress','secA_City1', 'secA_State1','secA_Zip1','SecA_Phone','secA_Ethnicity','secA_Tribe','secA_MailingAdd', 'secA_City2','secA_State2','secA_Zip2','secA_Contact','secA_ContactPrefer', 'secA_Vote',
+        all_pdf_fields = ['secA_AppName','APPLICANT_DOB','APPLICANT_Sex','secA_AHCCCS','secA_Language','secA_HomeAddress','secA_City1', 'secA_State1','secA_Zip1','SecA_Phone','secA_Ethnicity','secA_Tribe','secA_MailingAdd', 'secA_City2','secA_State2','secA_Zip2','secA_Contact','secA_ContactPrefer', 'secA_Vote',
                       'SecA_nombre1', 'SecA_Tipo1', 'SecA_fecha1', 'SecA_nombre2','Sec_Tipo2','SecA_fecha2','SecA_nombre3','SecA_Tipo3','SecA_fecha3',
                       'secB_Name', 'secB_Relationship1', 'secB_Phone1', 'secB_Email1', 'secB_City1','secB_State1','secB_Zip1','secB_Relationship2','secB_Address1','secB_BestWay','secB_Phone2','secB_Alt','secB_LGName','secB_Address2', 'secB_City2', 'secB_Zip2', 'secB_State2',
                       'secC_tipo1','secC_plan1','secC_Titular1','secC_num1', 'secC_vigencia1','secC_naci1','secC_tipo2','secC_plan2','secC_Titular2','secC_num2','secC_vigencia2','secC_naci2',
@@ -497,17 +497,17 @@ def goodbye():
                       '3_DOB', '3_Name', '3_Describe', '3_Date1','3_agency','3_padre','3_Date2',
                       '4_Name1','4_DOB', '4_Date1','MedicalPro', 'DDD_Address1','4_Zip1', '4_State1', '4_City1','4_Fax1', '4_Phone1', 'InfoTipo1', 'InfoTipo2','InfoTipo3', 'InfoTipo4','InfoTipo5','InfoTipo6','InfoTipo7', 'InfoTipo8','InfoTipo9','InfoTipo10', '4_Specify1', 'InfoTipo11','4_padre','4_Date2']  # not the real field names, especially in the Spanish version!
 
-    data_for_pdf = {}
+        data_for_pdf = {}
 
-    for key in all_pdf_fields:
-        if key not in session:
-            print(key + " is not here :(")
-            #could help me debug if I have any spelling issues
-        else:
-            data_for_pdf[key] = session[key]
+        for key in all_pdf_fields:
+            if key not in session:
+                print(key + " is not here :(")
+                #could help me debug if I have any spelling issues
+            else:
+                data_for_pdf[key] = session[key]
 
-    complete_pdf = fill_one_pdf("DDD-2069A-S", data_for_pdf)
-    return send_file(complete_pdf, as_attachment=True)
+        complete_pdf = fill_one_pdf("DDD-2069A-S", data_for_pdf)
+        return send_file(complete_pdf, as_attachment=True)
 
 """"
 @app.route('/test', methods=['GET', 'POST'])
