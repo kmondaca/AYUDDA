@@ -92,7 +92,7 @@ class SectionB(FlaskForm):
     parentState = StringField('Estado:')
     parentZip = StringField('Código postal:')
     parentConpref = RadioField('Mejor manera de contactarlo:',
-                         choices=[('Phone', 'Phone'), ('email', 'correo electronico'), ('both', 'ambos')])
+                         choices=[('Telephono', 'Telephono'), ('email', 'correo electronico'), ('both', 'ambos')])
     legalName = StringField('Nombre del tutor legal (Si diferente al anterior):')
     legalRelationship = StringField("Parentesco:")
     legalPhone = StringField('Teléfono:')
@@ -145,21 +145,21 @@ class SectionRelease(FlaskForm):
                                         ('Phoenix (Central)', 'Phoenix (Central)')])
     #autofill the location of the office
     InfoTipo1 = RadioField('Expedientes medicos',
-                           choices=[('Off', 'Sí'), ('No', 'No')])
+                           choices=[(True, 'Sí'), ('No', 'No')])
     InfoTipo2 = RadioField('Informes/Expedientes de audiologia',
-                           choices=[('Off', 'Sí'), ('No', 'No')])
+                           choices=[(True, 'Sí'), ('No', 'No')])
     InfoTipo3 = RadioField('Informes del habla y lenguaje',
-                           choices=[('Off', 'Sí'), ('No', 'No')])
+                           choices=[(True, 'Sí'), ('No', 'No')])
     InfoTipo4 = RadioField('Informe de Plan 504 o Plan de Educacion Individual y Evaluacion mas reciente',
-                           choices=[('Off', 'Sí'), ('No', 'No')])
+                           choices=[(True, 'Sí'), ('No', 'No')])
     InfoTipo5 = RadioField('Registros de recien nacidos',
-                           choices=[('Off', 'Sí'), ('No', 'No')])
+                           choices=[(True, 'Sí'), ('No', 'No')])
     InfoTipo6 = RadioField('Informes psicologicos',
-                           choices=[('Off', 'Sí'), ('No', 'No')])
+                           choices=[(True, 'Sí'), ('No', 'No')])
     InfoTipo7 = RadioField('Informes de terapia fisica',
-                           choices=[('Off', 'Sí'), ('No', 'No')])
+                           choices=[(True, 'Sí'), ('No', 'No')])
     InfoTipo8 = RadioField('Registros de nacimiento y parto',
-                           choices=[('selected', 'Sí'), ('No', 'No')])
+                           choices=[(True, 'Sí'), ('No', 'No')])
     InfoTipo9 = RadioField('Informes de terapia ocupacional',
                            choices=[('selected', 'Sí'), ('No', 'No')])
     InfoTipo10 = RadioField('Expedientes de salud conductual',
