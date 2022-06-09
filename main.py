@@ -10,7 +10,6 @@ import os
 app = Flask(__name__) #create application
 
 app.config['SECRET_KEY'] = 'mykey'
-global vive
 
 
 class InfoForm(FlaskForm):
