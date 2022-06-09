@@ -42,7 +42,30 @@ class TestForm(FlaskForm):
     submit = SubmitField('Submit')
 
 #will continue to have this coded in English, need to fix discriptions to Spanish
+class SectionB(FlaskForm):
+    parentName = StringField('Nombre completo:', validators=[DataRequired()])
+    relationship = StringField("Parentesco:", validators=[DataRequired()])
+    parentPhone = StringField('Teléfono:', validators=[DataRequired()])
+    parentEmail = StringField('Correo electrónico:')
+    parentAddress = StringField('Dirección:')
+    parentCity = StringField('Ciudad:')
+    parentState = StringField('Estado:')
+    parentZip = StringField('Código postal:')
+    vive = RadioField('¿Vive el solicitante con usted?:',
+                         choices=[('Yes', 'Sí'), ('No', 'No')])
+    parentConpref = RadioField('Mejor manera de contactarlo:',
+                         choices=[('Off', 'Telefono'), ('email', 'Correo Electronico'), ('Ambos', 'Ambos')])
+    legalName = StringField('Nombre del tutor legal (Si diferente al anterior):')
+    legalRelationship = StringField("Parentesco:")
+    legalPhone = StringField('Teléfono:')
+    legalAddress = StringField('Dirección:')
+    legalCity = StringField('Ciudad:')
+    legalState = StringField('Estado:')
+    legalZip = StringField('Código postal:')
+    submit = SubmitField('Enviar')
+
 class SectionA(FlaskForm):
+    livesWith = SectionB().vive.data
     childName = StringField('Nombre completo: ', validators=[DataRequired()])
     childDOB = StringField("Fecha de nacimiento: ", validators=[DataRequired()])
     childSex = RadioField('Sexo:',
@@ -82,25 +105,7 @@ class SectionA1(FlaskForm):
     date = StringField('Fecha de evaluación', validators=[DataRequired()])
     submit = SubmitField('Enviar')
 
-class SectionB(FlaskForm):
-    parentName = StringField('Nombre completo:', validators=[DataRequired()])
-    relationship = StringField("Parentesco:", validators=[DataRequired()])
-    parentPhone = StringField('Teléfono:', validators=[DataRequired()])
-    parentEmail = StringField('Correo electrónico:')
-    parentAddress = StringField('Dirección (si diferente al solicitante):')
-    parentCity = StringField('Ciudad:')
-    parentState = StringField('Estado:')
-    parentZip = StringField('Código postal:')
-    parentConpref = RadioField('Mejor manera de contactarlo:',
-                         choices=[('Off', 'Telefono'), ('email', 'Correo Electronico'), ('Ambos', 'Ambos')])
-    legalName = StringField('Nombre del tutor legal (Si diferente al anterior):')
-    legalRelationship = StringField("Parentesco:")
-    legalPhone = StringField('Teléfono:')
-    legalAddress = StringField('Dirección:')
-    legalCity = StringField('Ciudad:')
-    legalState = StringField('Estado:')
-    legalZip = StringField('Código postal:')
-    submit = SubmitField('Enviar')
+
 
 class SectionC(FlaskForm):
     coverage = StringField('Tipo de cobertura(privada,pública, etc.):', validators=[DataRequired()])
