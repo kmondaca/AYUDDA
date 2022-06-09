@@ -1,4 +1,4 @@
-from flask import Flask, render_template, session, redirect, url_for, send_file
+from flask import Flask, render_template, session, redirect, url_for, send_file, g
 from flask_wtf import FlaskForm
 from wtforms import (StringField , SubmitField,BooleanField ,
                      RadioField , SelectField , TextField , TextAreaField)
@@ -10,6 +10,8 @@ import os
 app = Flask(__name__) #create application
 
 app.config['SECRET_KEY'] = 'mykey'
+global vive
+
 
 class InfoForm(FlaskForm):
     first = StringField('First Name: ', validators=[DataRequired()])
@@ -52,9 +54,9 @@ class SectionB(FlaskForm):
     parentState = StringField('Estado:')
     parentZip = StringField('Código postal:')
     vive = RadioField('¿Vive el solicitante con usted?:',
-                         choices=[('Yes', 'Sí'), ('No', 'No')])
+               choices=[('Sí', 'Sí'), ('No', 'No')])
     parentConpref = RadioField('Mejor manera de contactarlo:',
-                         choices=[('Off', 'Telefono'), ('email', 'Correo Electronico'), ('Ambos', 'Ambos')])
+                         choices=[('On', 'Telefono'), ('email', 'Correo Electronico'), ('Ambos', 'Ambos')])
     legalName = StringField('Nombre del tutor legal (Si diferente al anterior):')
     legalRelationship = StringField("Parentesco:")
     legalPhone = StringField('Teléfono:')
@@ -64,8 +66,8 @@ class SectionB(FlaskForm):
     legalZip = StringField('Código postal:')
     submit = SubmitField('Enviar')
 
-class SectionA(SectionB, FlaskForm):
-    #livesWith = SectionB().vive.data
+class SectionA(FlaskForm):
+    livesWith = viva
     childName = StringField('Nombre completo: ', validators=[DataRequired()])
     childDOB = StringField("Fecha de nacimiento: ", validators=[DataRequired()])
     childSex = RadioField('Sexo:',
@@ -74,6 +76,7 @@ class SectionA(SectionB, FlaskForm):
     language = StringField('Idioma principal:', validators=[DataRequired()])
 
     #could potentially skip asking for the child's address if we know they live with the parent
+
     if SectionB.vive != 'Yes':
         childAddress = StringField('Direccion residencial (Numero, Calle):', validators=[DataRequired()])
         childCity = StringField('Ciudad:', validators=[DataRequired()])
@@ -307,6 +310,7 @@ def sectionB():
         session['secB_City1'] = form.parentCity.data
         session['secB_State1'] = form.parentState.data
         session['secB_Zip1'] = form.parentZip.data
+        session['viva'] = form.vive.data
         session['secB_BestWay'] = form.parentConpref.data
         session['secB_LGName'] = form.legalName.data
         session['secB_Relationship2'] = form.legalRelationship.data
@@ -334,9 +338,14 @@ def sectionA():
         session['APPLICANT_Sex'] = form.childSex.data
         session['secA_AHCCCS'] = form.AHCCCS.data
         session['secA_Language'] = form.language.data
+        session['secA_HomeAddress'] = form.childAddress.data
+        session['secA_City1'] = form.childCity.data
+        session['secA_State1'] = form.childState.data
+        session['secA_Zip1'] = form.childZip.data
 
         #let's make sure we are still holding onto the data we get from the child
         #regardless if they live at home or not
+        """
         if SectionB().vive.data != 'Yes':
             session['secA_HomeAddress'] = form.childAddress.data
             session['secA_City1'] = form.childCity.data
@@ -347,7 +356,7 @@ def sectionA():
             session['secA_City1'] = SectionB().parentCity.data
             session['secA_State1'] = SectionB().parentState.data
             session['secA_Zip1'] = SectionB().parentZip.data
-
+        """
         session['SecA_Phone'] = form.childPhone.data
         session['secA_Ethnicity'] = form.ethnicity.data
         session['secA_Tribe'] = form.tribe.data
