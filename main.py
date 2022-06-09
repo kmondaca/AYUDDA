@@ -172,7 +172,7 @@ class SectionRelease(FlaskForm):
     #get date of authorization
     submit = SubmitField('Enviar')
 ####################################################################
-
+""""
 # This is 90% of the magic right here (see https://pypi.org/project/fillpdf/):
 from fillpdf.fillpdfs import (
     get_form_fields,
@@ -212,7 +212,7 @@ write_fillable_pdf(BLANK_FORM, COMPLETED_FORM, updates, flatten=True)
 # MAC ONLY
 os.system(f"open {COMPLETED_FORM}")
 
-
+"""
 ####################################################################
 
 @app.route('/english', methods=['GET', 'POST'])
@@ -315,8 +315,9 @@ def sectionA():
         session['secA_City2'] = form.childMailCity.data
         session['secA_State2'] = form.childMailState.data
         session['secA_Zip2'] = form.childMailZip.data
-        session['secA_ContactPrefer'] = form.childConpref.data
-        session['secA_Contact'] = form.childEmail.data
+        #switching contactprefer and contact to see if that resolves issue
+        session['secA_ContactPrefer'] =form.childEmail.data
+        session['secA_Contact'] =  form.childConpref.data
         session['secA_Vote'] = form.vote.data
         return redirect(url_for("sectionC"))  # only when form submitted
 
