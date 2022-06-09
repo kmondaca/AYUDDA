@@ -68,10 +68,10 @@ class SectionA(FlaskForm):
     childMailState = StringField('Estado:')
     childMailZip = StringField('Código postal:')
     childConpref = RadioField('Cómo prefiere comunicarse:',
-                         choices=[('Telefono', 'Telefono'), ('email', 'Correo electrónico'), ('Ambos', 'Ambos')])
-    childEmail = StringField('Correo electrónico:')
+                         choices=[('Teléfono', 'Teléfono'), ('Correo electrónico', 'Correo electrónico'), ('Ambos', 'Ambos')])
+    childEmail = StringField('Correo electrónico de usted:')
     vote = RadioField('¿Desea registrarse para votar?',
-                         choices=[(True, 'Sí'), ('No', 'No')])
+                         choices=[('Sí', 'Sí'), ('No', 'No')])
     submit = SubmitField('Enviar')
 
 
@@ -92,7 +92,7 @@ class SectionB(FlaskForm):
     parentState = StringField('Estado:')
     parentZip = StringField('Código postal:')
     parentConpref = RadioField('Mejor manera de contactarlo:',
-                         choices=[('Telephono', 'Telephono'), ('email', 'correo electronico'), ('both', 'ambos')])
+                         choices=[('Telefono', 'Telefono'), ('email', 'Correo Electronico'), ('Ambos', 'Ambos')])
     legalName = StringField('Nombre del tutor legal (Si diferente al anterior):')
     legalRelationship = StringField("Parentesco:")
     legalPhone = StringField('Teléfono:')
@@ -145,34 +145,34 @@ class SectionRelease(FlaskForm):
                                         ('Phoenix (Central)', 'Phoenix (Central)')])
     #autofill the location of the office
     InfoTipo1 = RadioField('Expedientes medicos',
-                           choices=[(True, 'Sí'), ('No', 'No')])
+                           choices=[('Off', 'Sí'), ('No', 'No')])
     InfoTipo2 = RadioField('Informes/Expedientes de audiologia',
-                           choices=[(True, 'Sí'), ('No', 'No')])
+                           choices=[('Off', 'Sí'), ('No', 'No')])
     InfoTipo3 = RadioField('Informes del habla y lenguaje',
-                           choices=[(True, 'Sí'), ('No', 'No')])
+                           choices=[('Off', 'Sí'), ('No', 'No')])
     InfoTipo4 = RadioField('Informe de Plan 504 o Plan de Educacion Individual y Evaluacion mas reciente',
-                           choices=[(True, 'Sí'), ('No', 'No')])
+                           choices=[('Off', 'Sí'), ('No', 'No')])
     InfoTipo5 = RadioField('Registros de recien nacidos',
-                           choices=[(True, 'Sí'), ('No', 'No')])
+                           choices=[('Off', 'Sí'), ('No', 'No')])
     InfoTipo6 = RadioField('Informes psicologicos',
-                           choices=[(True, 'Sí'), ('No', 'No')])
+                           choices=[('Off', 'Sí'), ('No', 'No')])
     InfoTipo7 = RadioField('Informes de terapia fisica',
-                           choices=[(True, 'Sí'), ('No', 'No')])
+                           choices=[('Off', 'Sí'), ('No', 'No')])
     InfoTipo8 = RadioField('Registros de nacimiento y parto',
-                           choices=[(True, 'Sí'), ('No', 'No')])
+                           choices=[('Off', 'Sí'), ('No', 'No')])
     InfoTipo9 = RadioField('Informes de terapia ocupacional',
-                           choices=[('selected', 'Sí'), ('No', 'No')])
+                           choices=[('Off', 'Sí'), ('No', 'No')])
     InfoTipo10 = RadioField('Expedientes de salud conductual',
-                            choices=[('selected', 'Sí'), ('No', 'No')])
+                            choices=[('Off', 'Sí'), ('No', 'No')])
     InfoTipo11 = RadioField('Informes/Expedientes de audiologia',
-                            choices=[('selected', 'Sí'), ('No', 'No')])
+                            choices=[('Off', 'Sí'), ('No', 'No')])
     other = StringField("")
     #get parent name
     #requires real signature
     #get date of authorization
     submit = SubmitField('Enviar')
 ####################################################################
-""""
+
 # This is 90% of the magic right here (see https://pypi.org/project/fillpdf/):
 from fillpdf.fillpdfs import (
     get_form_fields,
@@ -194,13 +194,14 @@ for childName, current_value in form_fields.items():
 
 # Prep data to fill out a few entries
 updates = dict(
-    SecA_Name="gfhgfd" ,
-    Sex="Female",
-    HomeAdd="La Casita",
-    A_City1="Cartagena, Colombia",
-    A1_name1="Abuela Alma",
-    A1_Type1="Matriarch",
-    A1_Date1="11/24/2021"
+    secA_AppName = "Doctor Strange",
+    secA_Contact="Teléphono",
+    #secA_ContactPrefer= "lionel@email.com",
+    secA_Vote = "Sí",
+    InfoTipo1 = True,
+    InfoTipo2 = "selected",
+    InfoTipo3 = "No"
+    
 )
 
 # Produce a non-editable version with entries filled in
@@ -209,7 +210,7 @@ write_fillable_pdf(BLANK_FORM, COMPLETED_FORM, updates, flatten=True)
 # MAC ONLY
 os.system(f"open {COMPLETED_FORM}")
 
-"""
+
 ####################################################################
 
 @app.route('/english', methods=['GET', 'POST'])
@@ -489,7 +490,9 @@ def sectionB():
 def goodbye():
     #some of the spanish variables are actually in english jajajajajajajajajajaj
     #I regret not looking at these variables sooner
-        all_pdf_fields = ['secA_AppName','APPLICANT_DOB','APPLICANT_Sex','secA_AHCCCS','secA_Language','secA_HomeAddress','secA_City1', 'secA_State1','secA_Zip1','SecA_Phone','secA_Ethnicity','secA_Tribe','secA_MailingAdd', 'secA_City2','secA_State2','secA_Zip2','secA_Contact','secA_ContactPrefer', 'secA_Vote',
+
+
+        all_pdf_fields = ['secA_AppName','APPLICANT_DOB','APPLICANT_Sex','secA_AHCCCS','secA_Language','secA_HomeAddress','secA_City1', 'secA_State1','secA_Zip1','SecA_Phone','secA_Ethnicity','secA_Tribe','secA_MailingAdd', 'secA_City2','secA_State2','secA_Zip2','secA_ContactPrefer', 'secA_Contact','secA_Vote',
                       'SecA_nombre1', 'SecA_Tipo1', 'SecA_fecha1', 'SecA_nombre2','Sec_Tipo2','SecA_fecha2','SecA_nombre3','SecA_Tipo3','SecA_fecha3',
                       'secB_Name', 'secB_Relationship1', 'secB_Phone1', 'secB_Email1', 'secB_City1','secB_State1','secB_Zip1','secB_Relationship2','secB_Address1','secB_BestWay','secB_Phone2','secB_Alt','secB_LGName','secB_Address2', 'secB_City2', 'secB_Zip2', 'secB_State2',
                       'secC_tipo1','secC_plan1','secC_Titular1','secC_num1', 'secC_vigencia1','secC_naci1','secC_tipo2','secC_plan2','secC_Titular2','secC_num2','secC_vigencia2','secC_naci2',
@@ -509,41 +512,21 @@ def goodbye():
         complete_pdf = fill_one_pdf("DDD-2069A-S", data_for_pdf)
         return send_file(complete_pdf, as_attachment=True)
 
-""""
+
 @app.route('/test', methods=['GET', 'POST'])
 def test():
     # for the other classes, I can just so SectionB.variable.data to grab the info
+    form = SectionA()
     if form.validate_on_submit():
         print("HERE")
         data_for_pdf = dict(
-            SecA_Name=form.Childname.data,
-            appDOB=form.childDOB.data,
-            Sex=form.childSex.data,
-            HomeAdd=form.childAddress.data,
-            A_City1=form.childCity.data,
-            A_State1=form.childState.data,
-            A_Zip=form.childZip.data,
-            A_Phone=form.phone.data,
-            A_ethnicity=form.ethnicity.data,
-            A_tribe=form.tribe.data,
-            A_mailAdd=form.childMailAddress.data,
-            A_MailCity=form.childMailCity.data,
-            A_MailState=form.childMailState.data,
-            A_MailZip=form.childMailZip.data,
-            A_conpref = form.conpref.data,
-            A_email = form.email.data,
-            A_conchoice = form.conchoice.data,
-            A_vote = form.vote.data,
-            A1_name1="Abuela Alma",
-            A1_Type1="Matriarch",
-            A1_Date1="11/24/2021"
+            secA_Contact = form.childEmail,
+            secA_ContactPrefer = form.childEmail
         )
         complete_pdf = fill_one_pdf("DDD-2069A-S", data_for_pdf)
         return send_file(complete_pdf, as_attachment=True)
     else:
         return render_template('test.html', form=form)
-"""
-
 
 
 if __name__ == '__main__':
