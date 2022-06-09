@@ -518,8 +518,8 @@ def test():
     if form.validate_on_submit():
         print("HERE")
         data_for_pdf = dict(
-            secA_Contact = form.childEmail,
-            secA_ContactPrefer = form.childEmail
+            secA_Contact = form.childEmail.data,
+            secA_ContactPrefer = form.childEmail.data
         )
         complete_pdf = fill_one_pdf("DDD-2069A-S", data_for_pdf)
         return send_file(complete_pdf, as_attachment=True)
