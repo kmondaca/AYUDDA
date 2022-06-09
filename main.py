@@ -145,34 +145,34 @@ class SectionRelease(FlaskForm):
                                         ('Phoenix (Central)', 'Phoenix (Central)')])
     #autofill the location of the office
     InfoTipo1 = RadioField('Expedientes medicos',
-                           choices=[('Off', 'Sí'), ('No', 'No')])
+                           choices=[('On', 'Sí'), ('Off', 'No')])
     InfoTipo2 = RadioField('Informes/Expedientes de audiologia',
-                           choices=[('Off', 'Sí'), ('No', 'No')])
+                           choices=[('On', 'Sí'), ('Off', 'No')])
     InfoTipo3 = RadioField('Informes del habla y lenguaje',
-                           choices=[('Off', 'Sí'), ('No', 'No')])
+                           choices=[('On', 'Sí'), ('Off', 'No')])
     InfoTipo4 = RadioField('Informe de Plan 504 o Plan de Educacion Individual y Evaluacion mas reciente',
-                           choices=[('Off', 'Sí'), ('No', 'No')])
+                           choices=[('On', 'Sí'), ('Off', 'No')])
     InfoTipo5 = RadioField('Registros de recien nacidos',
-                           choices=[('Off', 'Sí'), ('No', 'No')])
+                           choices=[('On', 'Sí'), ('Off', 'No')])
     InfoTipo6 = RadioField('Informes psicologicos',
-                           choices=[('Off', 'Sí'), ('No', 'No')])
+                           choices=[('On', 'Sí'), ('Off', 'No')])
     InfoTipo7 = RadioField('Informes de terapia fisica',
-                           choices=[('Off', 'Sí'), ('No', 'No')])
+                           choices=[('On', 'Sí'), ('Off', 'No')])
     InfoTipo8 = RadioField('Registros de nacimiento y parto',
-                           choices=[('Off', 'Sí'), ('No', 'No')])
+                           choices=[('On', 'Sí'), ('Off', 'No')])
     InfoTipo9 = RadioField('Informes de terapia ocupacional',
-                           choices=[('Off', 'Sí'), ('No', 'No')])
+                           choices=[('On', 'Sí'), ('Off', 'No')])
     InfoTipo10 = RadioField('Expedientes de salud conductual',
-                            choices=[('Off', 'Sí'), ('No', 'No')])
+                            choices=[('On', 'Sí'), ('Off', 'No')])
     InfoTipo11 = RadioField('Informes/Expedientes de audiologia',
-                            choices=[('Off', 'Sí'), ('No', 'No')])
+                            choices=[('On', 'Sí'), ('Off', 'No')])
     other = StringField("")
     #get parent name
     #requires real signature
     #get date of authorization
     submit = SubmitField('Enviar')
 ####################################################################
-""""
+
 # This is 90% of the magic right here (see https://pypi.org/project/fillpdf/):
 from fillpdf.fillpdfs import (
     get_form_fields,
@@ -195,7 +195,11 @@ for childName, current_value in form_fields.items():
 # Prep data to fill out a few entries
 updates = dict(
     secA_AppName = "Doctor Strange",
-    secA_Contact="Correo electrónico"
+    InfoTipo1 = "On",
+    InfoTipo2 = "Off",
+    InfoTipo3 = "On",
+    InfoTipo4 = "Off"
+    #secA_Contact="Correo electrónico"
     #secA_ContactPrefer= "lionel@email.com",
     #secA_Vote = "Sí",
 
@@ -208,7 +212,7 @@ write_fillable_pdf(BLANK_FORM, COMPLETED_FORM, updates, flatten=True)
 # MAC ONLY
 os.system(f"open {COMPLETED_FORM}")
 
-"""
+
 ####################################################################
 
 @app.route('/english', methods=['GET', 'POST'])
