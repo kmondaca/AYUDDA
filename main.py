@@ -64,19 +64,23 @@ class SectionB(FlaskForm):
     legalZip = StringField('Código postal:')
     submit = SubmitField('Enviar')
 
-class SectionA(FlaskForm):
-    livesWith = SectionB().vive.data
+class SectionA(SectionB, FlaskForm):
+    #livesWith = SectionB().vive.data
     childName = StringField('Nombre completo: ', validators=[DataRequired()])
     childDOB = StringField("Fecha de nacimiento: ", validators=[DataRequired()])
     childSex = RadioField('Sexo:',
                       choices=[('Masculino', 'Masculino'), ('Femenino', 'Femenino')])
     AHCCCS =StringField('Numero de cuenta de AHCCCS (Si corresponde):')
     language = StringField('Idioma principal:', validators=[DataRequired()])
-    childAddress = StringField('Direccion residencial (Numero, Calle):', validators=[DataRequired()])
-    childCity = StringField('Ciudad:', validators=[DataRequired()])
-    childState = StringField('Estado:', validators=[DataRequired()])
-    childZip = StringField('Codigo postal:', validators=[DataRequired()])
-    childPhone = StringField('Teléfono:', validators=[DataRequired()])
+
+    #could potentially skip asking for the child's address if we know they live with the parent
+    if SectionB.vive != 'Yes':
+        childAddress = StringField('Direccion residencial (Numero, Calle):', validators=[DataRequired()])
+        childCity = StringField('Ciudad:', validators=[DataRequired()])
+        childState = StringField('Estado:', validators=[DataRequired()])
+        childZip = StringField('Codigo postal:', validators=[DataRequired()])
+
+    childPhone = StringField('Telefono:', validators=[DataRequired()])
     #It doesn't like ethnicity for some reason
     ethnicity = RadioField('Etnia:',
                          choices=[('Indígena de los EE UU/Alaska', 'Indígena de los EE UU/Alaska'),
@@ -281,24 +285,45 @@ def spanish():
 
     return render_template('spanish.html', form=form)  # app
 
-@app.route('/sectionA1',methods=['GET', 'POST'])
-def sectionA1():
-    form = SectionA1()
-    if form.validate_on_submit():
-        session['SecA_nombre1'] = form.profName.data
-        session['SecA_Tipo1'] = form.type.data
-        session['SecA_fecha1'] = form.date.data
-        #'SecA_nombre2','Sec_Tipo2','SecA_fecha2','SecA_nombre3','SecA_Tipo3','SecA_fecha3',
+@app.route('/app', methods=['GET', 'POST'])
+def sectionB():
+    #Section B
+    #Section A
+    #Section C
+    #Section D
+    #Section A.1
+    #HIPAA
+    #Release
 
-        #adding to satisfy the pdf
-        session['SecA_nombre2'] = ""
-        session['Sec_Tipo2'] = ""
-        session['SecA_fecha2'] = ""
-        session['SecA_nombre3'] = ""
-        session['SecA_Tipo3'] = ""
-        session['SecA_fecha3'] = ""
-        return redirect(url_for("sectionHIPAA"))  # only when form submitted
-    return render_template('SectionA1.html', form=form)
+    #maybe nested ifs until the end.....otherwise just move it to the respective rendering
+    #issues figuring out how to run it.....
+    form = SectionB()
+    if form.validate_on_submit():
+        session['secB_Name'] = form.parentName.data
+        session['secB_Relationship1'] = form.relationship.data
+        session['secB_Phone1'] = form.parentPhone.data
+        session['secB_Email1'] = form.parentEmail.data
+        session['secB_Address1'] = form.parentAddress.data
+        session['secB_City1'] = form.parentCity.data
+        session['secB_State1'] = form.parentState.data
+        session['secB_Zip1'] = form.parentZip.data
+        session['secB_BestWay'] = form.parentConpref.data
+        session['secB_LGName'] = form.legalName.data
+        session['secB_Relationship2'] = form.legalRelationship.data
+        session['secB_Phone2'] = form.legalPhone.data
+        session['secB_Address2'] = form.legalAddress.data
+        session['secB_City2'] = form.legalCity.data
+        session['secB_State2'] = form.legalState.data
+        session['secB_Zip2'] = form.legalZip.data
+
+        #just for the pdf to not complain
+        session['secB_Alt'] = ""
+        #it is not reading this redirect, I have tried changing it to another to see if it
+        #would read it but no luck, really don't know what to do
+        return redirect(url_for("sectionA"))  # only when form submitted
+
+
+    return render_template('SectionB.html', form=form)  #this form refers to the form we set on 371
 
 @app.route('/sectionA',methods=['GET', 'POST'])
 def sectionA():
@@ -309,10 +334,20 @@ def sectionA():
         session['APPLICANT_Sex'] = form.childSex.data
         session['secA_AHCCCS'] = form.AHCCCS.data
         session['secA_Language'] = form.language.data
-        session['secA_HomeAddress'] = form.childAddress.data
-        session['secA_City1'] = form.childCity.data
-        session['secA_State1'] = form.childState.data
-        session['secA_Zip1'] = form.childZip.data
+
+        #let's make sure we are still holding onto the data we get from the child
+        #regardless if they live at home or not
+        if SectionB().vive.data != 'Yes':
+            session['secA_HomeAddress'] = form.childAddress.data
+            session['secA_City1'] = form.childCity.data
+            session['secA_State1'] = form.childState.data
+            session['secA_Zip1'] = form.childZip.data
+        else:
+            session['secA_HomeAddress'] = SectionB().parentAddress.data
+            session['secA_City1'] = SectionB().parentCity.data
+            session['secA_State1'] = SectionB().parentState.data
+            session['secA_Zip1'] = SectionB().parentZip.data
+
         session['SecA_Phone'] = form.childPhone.data
         session['secA_Ethnicity'] = form.ethnicity.data
         session['secA_Tribe'] = form.tribe.data
@@ -327,6 +362,7 @@ def sectionA():
         return redirect(url_for("sectionC"))  # only when form submitted
 
     return render_template('SectionA.html', form=form)
+
 
 @app.route('/sectionC',methods=['GET', 'POST'])
 def sectionC():
@@ -372,6 +408,27 @@ def sectionD():
         return redirect(url_for("sectionA1"))  # only when form submitted
 
     return render_template('SectionD.html', form=form)
+
+
+@app.route('/sectionA1',methods=['GET', 'POST'])
+def sectionA1():
+    form = SectionA1()
+    if form.validate_on_submit():
+        session['SecA_nombre1'] = form.profName.data
+        session['SecA_Tipo1'] = form.type.data
+        session['SecA_fecha1'] = form.date.data
+        #'SecA_nombre2','Sec_Tipo2','SecA_fecha2','SecA_nombre3','SecA_Tipo3','SecA_fecha3',
+
+        #adding to satisfy the pdf
+        session['SecA_nombre2'] = ""
+        session['Sec_Tipo2'] = ""
+        session['SecA_fecha2'] = ""
+        session['SecA_nombre3'] = ""
+        session['SecA_Tipo3'] = ""
+        session['SecA_fecha3'] = ""
+        return redirect(url_for("sectionHIPAA"))  # only when form submitted
+    return render_template('SectionA1.html', form=form)
+
 
 @app.route('/sectionHIPAA',methods=['GET', 'POST'])
 def sectionHIPAA():
@@ -454,45 +511,7 @@ def release():
 
     return render_template('Release.html', form=form)
 
-@app.route('/app', methods=['GET', 'POST'])
-def sectionB():
-    #Section B
-    #Section A
-    #Section C
-    #Section D
-    #Section A.1
-    #HIPAA
-    #Release
 
-    #maybe nested ifs until the end.....otherwise just move it to the respective rendering
-    #issues figuring out how to run it.....
-    form = SectionB()
-    if form.validate_on_submit():
-        session['secB_Name'] = form.parentName.data
-        session['secB_Relationship1'] = form.relationship.data
-        session['secB_Phone1'] = form.parentPhone.data
-        session['secB_Email1'] = form.parentEmail.data
-        session['secB_Address1'] = form.parentAddress.data
-        session['secB_City1'] = form.parentCity.data
-        session['secB_State1'] = form.parentState.data
-        session['secB_Zip1'] = form.parentZip.data
-        session['secB_BestWay'] = form.parentConpref.data
-        session['secB_LGName'] = form.legalName.data
-        session['secB_Relationship2'] = form.legalRelationship.data
-        session['secB_Phone2'] = form.legalPhone.data
-        session['secB_Address2'] = form.legalAddress.data
-        session['secB_City2'] = form.legalCity.data
-        session['secB_State2'] = form.legalState.data
-        session['secB_Zip2'] = form.legalZip.data
-
-        #just for the pdf to not complain
-        session['secB_Alt'] = ""
-        #it is not reading this redirect, I have tried changing it to another to see if it
-        #would read it but no luck, really don't know what to do
-        return redirect(url_for("sectionA"))  # only when form submitted
-
-
-    return render_template('SectionB.html', form=form)  #this form refers to the form we set on 371
 
 @app.route('/goodbye', methods=['GET', 'POST'])
 def goodbye():
