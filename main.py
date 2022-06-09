@@ -68,7 +68,7 @@ class SectionA(FlaskForm):
     childMailState = StringField('Estado:')
     childMailZip = StringField('Código postal:')
     childConpref = RadioField('Cómo prefiere comunicarse:',
-                         choices=[('Teléfono', 'Teléfono'), ('Correo electrónico', 'Correo electrónico'), ('Ambos', 'Ambos')])
+                         choices=['Teléfono', 'Correo electrónico', 'Ambos'])
     childEmail = StringField('Correo electrónico de usted:')
     vote = RadioField('¿Desea registrarse para votar?',
                          choices=[('Sí', 'Sí'), ('No', 'No')])
@@ -92,7 +92,7 @@ class SectionB(FlaskForm):
     parentState = StringField('Estado:')
     parentZip = StringField('Código postal:')
     parentConpref = RadioField('Mejor manera de contactarlo:',
-                         choices=[('Telefono', 'Telefono'), ('email', 'Correo Electronico'), ('Ambos', 'Ambos')])
+                         choices=[('Off', 'Telefono'), ('email', 'Correo Electronico'), ('Ambos', 'Ambos')])
     legalName = StringField('Nombre del tutor legal (Si diferente al anterior):')
     legalRelationship = StringField("Parentesco:")
     legalPhone = StringField('Teléfono:')
@@ -172,7 +172,7 @@ class SectionRelease(FlaskForm):
     #get date of authorization
     submit = SubmitField('Enviar')
 ####################################################################
-
+""""
 # This is 90% of the magic right here (see https://pypi.org/project/fillpdf/):
 from fillpdf.fillpdfs import (
     get_form_fields,
@@ -195,12 +195,10 @@ for childName, current_value in form_fields.items():
 # Prep data to fill out a few entries
 updates = dict(
     secA_AppName = "Doctor Strange",
-    secA_Contact="Teléphono",
+    secA_Contact="Correo electrónico"
     #secA_ContactPrefer= "lionel@email.com",
-    secA_Vote = "Sí",
-    InfoTipo1 = True,
-    InfoTipo2 = "selected",
-    InfoTipo3 = "No"
+    #secA_Vote = "Sí",
+
     
 )
 
@@ -210,7 +208,7 @@ write_fillable_pdf(BLANK_FORM, COMPLETED_FORM, updates, flatten=True)
 # MAC ONLY
 os.system(f"open {COMPLETED_FORM}")
 
-
+"""
 ####################################################################
 
 @app.route('/english', methods=['GET', 'POST'])
