@@ -341,7 +341,7 @@ def sectionA():
 
         #let's make sure we are still holding onto the data we get from the child
         #regardless if they live at home or not
-        """
+
         if SectionB().vive.data != 'Yes':
             session['secA_HomeAddress'] = form.childAddress.data
             session['secA_City1'] = form.childCity.data
@@ -352,7 +352,7 @@ def sectionA():
             session['secA_City1'] = SectionB().parentCity.data
             session['secA_State1'] = SectionB().parentState.data
             session['secA_Zip1'] = SectionB().parentZip.data
-        """
+
         session['SecA_Phone'] = form.childPhone.data
         session['secA_Ethnicity'] = form.ethnicity.data
         session['secA_Tribe'] = form.tribe.data
