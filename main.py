@@ -72,15 +72,11 @@ class SectionA(FlaskForm):
                       choices=[('Masculino', 'Masculino'), ('Femenino', 'Femenino')])
     AHCCCS =StringField('Numero de cuenta de AHCCCS (Si corresponde):')
     language = StringField('Idioma principal:', validators=[DataRequired()])
-
-    #could potentially skip asking for the child's address if we know they live with the parent
     childAddress = StringField('Direccion residencial (Numero, Calle):', validators=[DataRequired()])
     childCity = StringField('Ciudad:', validators=[DataRequired()])
     childState = StringField('Estado:', validators=[DataRequired()])
     childZip = StringField('Codigo postal:', validators=[DataRequired()])
-
     childPhone = StringField('Telefono:', validators=[DataRequired()])
-    #It doesn't like ethnicity for some reason
     ethnicity = RadioField('Etnia:',
                          choices=[('Indígena de los EE UU/Alaska', 'Indígena de los EE UU/Alaska'),
                                   ('Negra/Afroamericana (no Hispánica)', 'Negra/Afroamericana (no Hispánica)') ,

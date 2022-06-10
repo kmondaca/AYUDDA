@@ -24,9 +24,10 @@
     <br>
     {{form.language.label}}{{form.language}}
     <br>
-    {% if not session['viva'] == "Sí" %}
+    {% if not session['viva'] == "Yes" %}
       <br>
         {{form.childAddress.label}}{{form.childAddress}}
+    <br>
         {{form.childCity.label}}{{form.childCity}}
          <br>
         {{form.childState.label}}{{form.childState}}
