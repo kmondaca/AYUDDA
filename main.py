@@ -1,4 +1,4 @@
-from flask import Flask, render_template, session, redirect, url_for, send_file, g
+from flask import Flask, render_template, session, redirect, url_for, send_file
 from flask_wtf import FlaskForm
 from wtforms import (StringField , SubmitField,BooleanField ,
                      RadioField , SelectField , TextField , TextAreaField)
@@ -55,7 +55,7 @@ class SectionB(FlaskForm):
     vive = RadioField('¿Vive el solicitante con usted?:',
                choices=[('Yes', 'Sí'), ('No', 'No')])
     parentConpref = RadioField('Mejor manera de contactarlo:',
-                         choices=[('On', 'Telefono'), ('email', 'Correo Electronico'), ('Ambos', 'Ambos')])
+                         choices=[('Telefono', 'Telefono'), ('email', 'Correo Electronico'), ('Ambos', 'Ambos')])
     legalName = StringField('Nombre del tutor legal (Si diferente al anterior):')
     legalRelationship = StringField("Parentesco:")
     legalPhone = StringField('Teléfono:')
@@ -72,10 +72,10 @@ class SectionA(FlaskForm):
                       choices=[('Masculino', 'Masculino'), ('Femenino', 'Femenino')])
     AHCCCS =StringField('Numero de cuenta de AHCCCS (Si corresponde):')
     language = StringField('Idioma principal:', validators=[DataRequired()])
-    childAddress = StringField('Direccion residencial (Numero, Calle):', validators=[DataRequired()])
-    childCity = StringField('Ciudad:', validators=[DataRequired()])
-    childState = StringField('Estado:', validators=[DataRequired()])
-    childZip = StringField('Codigo postal:', validators=[DataRequired()])
+    childAddress = StringField('Direccion residencial (Numero, Calle):')
+    childCity = StringField('Ciudad:')
+    childState = StringField('Estado:')
+    childZip = StringField('Codigo postal:')
     childPhone = StringField('Telefono:', validators=[DataRequired()])
     ethnicity = RadioField('Etnia:',
                          choices=[('Indígena de los EE UU/Alaska', 'Indígena de los EE UU/Alaska'),
@@ -93,7 +93,7 @@ class SectionA(FlaskForm):
                          choices=['Teléfono', 'Correo electrónico', 'Ambos'])
     childEmail = StringField('Correo electrónico de usted:')
     vote = RadioField('¿Desea registrarse para votar?',
-                        # choices=[('On', 'Sí'), ('Off', 'No')])
+                         choices=[('Sí', 'Sí'), ('No', 'No')])
     submit = SubmitField('Enviar')
 
 
