@@ -66,7 +66,6 @@ class SectionB(FlaskForm):
     submit = SubmitField('Enviar')
 
 class SectionA(FlaskForm):
-    livesWith = session['viva']
     childName = StringField('Nombre completo: ', validators=[DataRequired()])
     childDOB = StringField("Fecha de nacimiento: ", validators=[DataRequired()])
     childSex = RadioField('Sexo:',
@@ -75,12 +74,10 @@ class SectionA(FlaskForm):
     language = StringField('Idioma principal:', validators=[DataRequired()])
 
     #could potentially skip asking for the child's address if we know they live with the parent
-
-    if livesWith != 'Yes':
-        childAddress = StringField('Direccion residencial (Numero, Calle):', validators=[DataRequired()])
-        childCity = StringField('Ciudad:', validators=[DataRequired()])
-        childState = StringField('Estado:', validators=[DataRequired()])
-        childZip = StringField('Codigo postal:', validators=[DataRequired()])
+    childAddress = StringField('Direccion residencial (Numero, Calle):', validators=[DataRequired()])
+    childCity = StringField('Ciudad:', validators=[DataRequired()])
+    childState = StringField('Estado:', validators=[DataRequired()])
+    childZip = StringField('Codigo postal:', validators=[DataRequired()])
 
     childPhone = StringField('Telefono:', validators=[DataRequired()])
     #It doesn't like ethnicity for some reason
