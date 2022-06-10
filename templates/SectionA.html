@@ -5,13 +5,13 @@
 </div>
 
 <div class="SectionA d-flex align-items-center justify-content-center">
-
+<!--
 {% if session['viva'] %}
   <p>{{ session['viva'] }}</p>
 {% else %}
   <p>:(</p>
 {% endif %}
-
+-->
 <form method="POST">
     {{form.hidden_tag()}}
     {{form.childName.label}}{{form.childName}}
@@ -23,17 +23,16 @@
     {{form.AHCCCS.label}}{{form.AHCCCS}}
     <br>
     {{form.language.label}}{{form.language}}
+    <br>
     {% if not session['viva'] == "Sí" %}
       <br>
-     {{form.childAddress.label}}{{form.childAddress}}
-
+        {{form.childAddress.label}}{{form.childAddress}}
+        {{form.childCity.label}}{{form.childCity}}
+         <br>
+        {{form.childState.label}}{{form.childState}}
+        <br>
+        {{form.childZip.label}}{{form.childZip}}
     {% endif %}
-      <br>
-    {{form.childCity.label}}{{form.childCity}}
-      <br>
-    {{form.childState.label}}{{form.childState}}
-      <br>
-    {{form.childZip.label}}{{form.childZip}}
       <br>
     {{form.childPhone.label}}{{form.childPhone}}
       <br>
@@ -41,7 +40,7 @@
       <br>
     {{form.tribe.label}}{{form.tribe}}
       <br>
-     {{form.childMailAddress.label}}{{form.childMailAddress}}
+    {{form.childMailAddress.label}}{{form.childMailAddress}}
       <br>
     {{form.childMailCity.label}}{{form.childMailCity}}
       <br>
