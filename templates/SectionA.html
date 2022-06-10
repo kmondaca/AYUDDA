@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="jumbotron">
-<h1> SECCIÓN A. (Información del solicitante)</h1>
+<h1> Información del solicitante:</h1>
 </div>
 
 <div class="SectionA d-flex align-items-center justify-content-center">
@@ -19,11 +19,9 @@
     {{form.childDOB.label}}{{form.childDOB}}
     <br>
     {{form.childSex.label}}{{form.childSex}}
-    <br>
     {{form.AHCCCS.label}}{{form.AHCCCS}}
     <br>
     {{form.language.label}}{{form.language}}
-    <br>
     {% if not session['viva'] == "Yes" %}
       <br>
         {{form.childAddress.label}}{{form.childAddress}}
@@ -38,7 +36,6 @@
     {{form.childPhone.label}}{{form.childPhone}}
       <br>
    {{form.ethnicity.label}}{{form.ethnicity}}
-      <br>
     {{form.tribe.label}}{{form.tribe}}
       <br>
     {{form.childMailAddress.label}}{{form.childMailAddress}}
@@ -50,12 +47,14 @@
     {{form.childMailZip.label}}{{form.childMailZip}}
       <br>
     {{form.childConpref.label}}{{form.childConpref}}
-    <br>
     {{form.childEmail.label}}{{form.childEmail}}
     <br>
     {{form.vote.label}}{{form.vote}}
-    <br>
     {{form.submit()}}
+    <br>
+    <br>
+    <br>
+    <br>
 </form>
 </div>
 
