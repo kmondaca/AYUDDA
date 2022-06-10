@@ -6,6 +6,12 @@
 
 <div class="SectionA d-flex align-items-center justify-content-center">
 
+{% if session['viva'] %}
+  <p>{{ session['viva'] }}</p>
+{% else %}
+  <p>:(</p>
+{% endif %}
+
 <form method="POST">
     {{form.hidden_tag()}}
     {{form.childName.label}}{{form.childName}}
@@ -17,8 +23,11 @@
     {{form.AHCCCS.label}}{{form.AHCCCS}}
     <br>
     {{form.language.label}}{{form.language}}
+    {% if not session['viva'] == "Sí" %}
       <br>
      {{form.childAddress.label}}{{form.childAddress}}
+
+    {% endif %}
       <br>
     {{form.childCity.label}}{{form.childCity}}
       <br>
