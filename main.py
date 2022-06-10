@@ -93,7 +93,7 @@ class SectionA(FlaskForm):
                          choices=['Teléfono', 'Correo electrónico', 'Ambos'])
     childEmail = StringField('Correo electrónico de usted:')
     vote = RadioField('¿Desea registrarse para votar?',
-                         choices=[('Sí', 'Sí'), ('No', 'No')])
+                        # choices=[('On', 'Sí'), ('Off', 'No')])
     submit = SubmitField('Enviar')
 
 
