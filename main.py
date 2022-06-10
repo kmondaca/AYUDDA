@@ -53,7 +53,7 @@ class SectionB(FlaskForm):
     parentState = StringField('Estado:')
     parentZip = StringField('Código postal:')
     vive = RadioField('¿Vive el solicitante con usted?:',
-               choices=[('Sí', 'Sí'), ('No', 'No')])
+               choices=[('Yes', 'Sí'), ('No', 'No')])
     parentConpref = RadioField('Mejor manera de contactarlo:',
                          choices=[('On', 'Telefono'), ('email', 'Correo Electronico'), ('Ambos', 'Ambos')])
     legalName = StringField('Nombre del tutor legal (Si diferente al anterior):')
