@@ -390,20 +390,20 @@ def sectionA1():
     if form.validate_on_submit():
         session['countProf'] = form.numProf.data
 
-        # I want to loop through the amount of referrals they have
-        for num in session['countProf']:
-            session['SecA_nombre1'] = form.profName.data
-            session['SecA_Tipo1'] = form.type.data
-            session['SecA_fecha1'] = form.date.data
-
-
-        # adding to satisfy the pdf
+        # Initializing in case the user only has 1 or 2 referrals
         session['SecA_nombre2'] = ""
         session['Sec_Tipo2'] = ""
         session['SecA_fecha2'] = ""
         session['SecA_nombre3'] = ""
         session['SecA_Tipo3'] = ""
         session['SecA_fecha3'] = ""
+
+        # I want to loop through the amount of referrals they have
+        for num in session['countProf']:
+            session[f"SecA_nombre{num}"] = form.profName.data
+            session[f"SecA_Tipo{num}"] = form.type.data
+            session[f"SecA_fecha{num}"] = form.date.data
+
         return redirect(url_for("sectionHIPAA"))  # only when form submitted
     return render_template('SectionA1.html', form=form)
 
