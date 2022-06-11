@@ -7,19 +7,23 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-info">
-    <a class="navbar-brand" href="{{ url_for('index')}}">AYUDDA</a>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-info">
-    <a class="navbar-brand" href="{{ url_for('einfo')}}">English</a>
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-info">
-    <a class="navbar-brand" href="{{ url_for('sinfo')}}">Español</a>
+    <nav class="navbar navbar-expand-xl navbar-light bg-info">
+        <a class="navbar-brand" href="{{ url_for('index')}}">
+    <img src="/static/alogo.png" width="150" height="150" alt="">
+  </a>
+
+    <nav class="navbar navbar-expand-xl navbar-light bg-info">
+        <a class="navbar-brand" href="{{ url_for('einfo')}}"><h1>English</h1></a>
+
+        <nav class="navbar navbar-expand-xl navbar-light bg-info">
+            <a class="navbar-brand" href="{{ url_for('sinfo')}}"><h1>Español</h1></a>
 
         </nav>
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-info">
-    <a class="navbar-brand" href="{{ url_for('sectionB')}}">Solicitud para la determinación de elegibilidad</a>
+        <nav class="navbar navbar-expand-xl navbar-light bg-info">
+            <a class="navbar-brand" href="{{ url_for('sectionB')}}"><h1>Solicitud en español</h1></a>
 
         </nav>
 </nav>
