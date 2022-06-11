@@ -277,7 +277,7 @@ def spanish():
         Preferred Language: session['slang'] 
         Phone number: session['sphone'] 
         Contact preference: session['sconpref'] 
-        Choice: session['sconchoice']
+        Question: session['sconchoice']
         Email: session['semail']
         """
 
