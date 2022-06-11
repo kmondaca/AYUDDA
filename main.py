@@ -183,10 +183,7 @@ for childName, current_value in form_fields.items():
 # Prep data to fill out a few entries
 updates = dict(
     secA_AppName = "Doctor Strange",
-    InfoTipo1 = "On",
-    InfoTipo2 = "Off",
-    InfoTipo3 = "On",
-    InfoTipo4 = "Off"
+    secA_Phone = "6025661185"
     #secA_Contact="Correo electrónico"
     #secA_ContactPrefer= "lionel@email.com",
     #secA_Vote = "Sí",
@@ -493,7 +490,7 @@ def release():
 def goodbye():
 # The creators of the pdf also kept some of the variables in English
 
-    all_pdf_fields = ['secA_AppName','APPLICANT_DOB','APPLICANT_Sex','secA_AHCCCS','secA_Language','secA_HomeAddress','secA_City1', 'secA_State1','secA_Zip1','SecA_Phone','secA_Ethnicity','secA_Tribe','secA_MailingAdd', 'secA_City2','secA_State2','secA_Zip2','secA_ContactPrefer', 'secA_Contact','secA_Vote',
+    all_pdf_fields = ['secA_AppName','APPLICANT_DOB','APPLICANT_Sex','secA_AHCCCS','secA_Language','secA_HomeAddress','secA_City1', 'secA_State1','secA_Zip1','secA_Phone','secA_Ethnicity','secA_Tribe','secA_MailingAdd', 'secA_City2','secA_State2','secA_Zip2','secA_ContactPrefer', 'secA_Contact','secA_Vote',
                       'SecA_nombre1', 'SecA_Tipo1', 'SecA_fecha1', 'SecA_nombre2','Sec_Tipo2','SecA_fecha2','SecA_nombre3','SecA_Tipo3','SecA_fecha3',
                       'secB_Name', 'secB_Relationship1', 'secB_Phone1', 'secB_Email1', 'secB_City1','secB_State1','secB_Zip1','secB_Relationship2','secB_Address1','secB_BestWay','secB_Phone2','secB_Alt','secB_LGName','secB_Address2', 'secB_City2', 'secB_Zip2', 'secB_State2',
                       'secC_tipo1','secC_plan1','secC_Titular1','secC_num1', 'secC_vigencia1','secC_naci1','secC_tipo2','secC_plan2','secC_Titular2','secC_num2','secC_vigencia2','secC_naci2',
