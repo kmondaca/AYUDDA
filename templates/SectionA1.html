@@ -23,13 +23,13 @@
     {{form.numProf.label}}{{form.numProf}}
 
     {% for num in session['numProf'] %}
-        {{form.profName.label}}{{form.profName}}
+        {{form.profName.label}}{{form.profName{num}}}
         <br>
-        {{form.profPhone.label}}{{form.profPhone}}
+        {{form.profPhone.label}}{{form.profPhone{num}}}
         <br>
-        {{form.type.label}}{{form.type}}
+        {{form.type.label}}{{form.type{num}}}
          <br>
-        {{form.date.label}}{{form.date}}
+        {{form.date.label}}{{form.date{num}}}
         <br>
     {% endfor %}
       {{form.submit()}}
