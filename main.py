@@ -95,6 +95,7 @@ class SectionAForm(FlaskForm):
 
 
 class SectionA1Form(FlaskForm):
+    numProf = RadioField('¿Cuántas referencias profesionales tienes?', choices = [1, 2, 3])
     profName = StringField('Nombre de contacto', validators=[DataRequired()])
     profPhone = StringField('Teléfono de contacto', validators=[DataRequired()])
     type = StringField('Tipo de profesional', validators=[DataRequired()])
@@ -387,9 +388,14 @@ def sectionD():
 def sectionA1():
     form = SectionA1Form()
     if form.validate_on_submit():
-        session['SecA_nombre1'] = form.profName.data
-        session['SecA_Tipo1'] = form.type.data
-        session['SecA_fecha1'] = form.date.data
+        session['countProf'] = form.numProf.data
+
+        # I want to loop through the amount of referrals they have
+        for num in session['countProf']:
+            session['SecA_nombre1'] = form.profName.data
+            session['SecA_Tipo1'] = form.type.data
+            session['SecA_fecha1'] = form.date.data
+
 
         # adding to satisfy the pdf
         session['SecA_nombre2'] = ""
