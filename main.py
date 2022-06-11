@@ -65,7 +65,7 @@ class SectionBForm(FlaskForm):
     legalZip = StringField('Código postal:')
     submit = SubmitField('Enviar')
 
-class SectionA(FlaskForm):
+class SectionAForm(FlaskForm):
     childName = StringField('Nombre completo: ', validators=[DataRequired()])
     childDOB = StringField("Fecha de nacimiento: ", validators=[DataRequired()])
     childSex = RadioField('Sexo:',
@@ -97,7 +97,7 @@ class SectionA(FlaskForm):
     submit = SubmitField('Enviar')
 
 
-class SectionA1(FlaskForm):
+class SectionA1Form(FlaskForm):
     profName = StringField('Nombre de contacto', validators=[DataRequired()])
     profPhone = StringField('Teléfono de contacto', validators=[DataRequired()])
     type = StringField('Tipo de profesional', validators=[DataRequired()])
@@ -106,7 +106,7 @@ class SectionA1(FlaskForm):
 
 
 
-class SectionC(FlaskForm):
+class SectionCForm(FlaskForm):
     coverage = StringField('Tipo de cobertura(privada,pública, etc.):', validators=[DataRequired()])
     healthPlan = StringField('Nombre del plan de salud:', validators=[DataRequired()])
     policyName = StringField('Nombre del titular de la póliza:', validators=[DataRequired()])
@@ -116,13 +116,13 @@ class SectionC(FlaskForm):
     dob = StringField("Fecha de nacimiento del titular:", validators=[DataRequired()])
     submit = SubmitField('Enviar')
 
-class SectionD(FlaskForm):
+class SectionDForm(FlaskForm):
     program = StringField('Estado del Programa de Intervención Temprana o Nombre de la escuela y del distrito escolar:', validators=[DataRequired()])
     typeSupport = StringField('Tipo de Apoyo (Servicios o tipo de plan tal cómo Plande Educación Individual o Plan 504):', validators=[DataRequired()])
     eduDate = StringField('Fechas que asistió:', validators=[DataRequired()])
     submit = SubmitField('Enviar')
 
-class SectionHIPAA(FlaskForm):
+class SectionHIPAAForm(FlaskForm):
     #concat name ,last, first middle (cannot get previous since middle isn't specified
     childLast = StringField("Nombre de persona/cliente cuya información de la salud se compartirá:", validators=[DataRequired()])
     childFirst = StringField("Apellido de persona/cliente cuya información de la salud se compartirá::", validators=[DataRequired()])
@@ -136,7 +136,7 @@ class SectionHIPAA(FlaskForm):
     authorizationDate = StringField("Fecha de autorización:", validators=[DataRequired()])
     submit = SubmitField('Enviar')
 
-class SectionRelease(FlaskForm):
+class SectionReleaseForm(FlaskForm):
     #get concat version from SectionHIPAA of name
     #get dob from SectionA
     #get agency
@@ -323,7 +323,7 @@ def sectionB():
 
 @app.route('/sectionA',methods=['GET', 'POST'])
 def sectionA():
-    form = SectionA()
+    form = SectionAForm()
     if form.validate_on_submit():
         session['secA_AppName'] = form.childName.data
         session['APPLICANT_DOB'] = form.childDOB.data
@@ -366,7 +366,7 @@ def sectionA():
 
 @app.route('/sectionC',methods=['GET', 'POST'])
 def sectionC():
-    form = SectionC()
+    form = SectionCForm()
     if form.validate_on_submit():
         session['secC_tipo1'] = form.coverage.data
         session['secC_plan1'] = form.healthPlan.data
@@ -389,15 +389,15 @@ def sectionC():
 
 @app.route('/sectionD',methods=['GET', 'POST'])
 def sectionD():
-    form = SectionD()
+    form = SectionDForm()
     if form.validate_on_submit():
         session['secD_estado1'] = form.program.data
         session['secD_tipo1'] = form.typeSupport.data
         session['secD_fechas1'] = form.eduDate.data
         #unsure if I can assign the other values we already have here
-        session['SIG_Name'] =SectionB.parentName.data
-        session['SIG_Relationship']=SectionB.relationship.data
-        session['SIG_Date'] =SectionHIPAA.requestDate.data
+        session['SIG_Name'] = session['secB_Name']
+        session['SIG_Relationship']=session['secB_Relationship1']
+        session['SIG_Date'] = session['3_Date1']
         #'secD_estado2','secD_tipo2', 'secD_fechas2',','SIG_Relationship','SIG_Date',
 
         #just so the pdf doesn't complain
@@ -412,7 +412,7 @@ def sectionD():
 
 @app.route('/sectionA1',methods=['GET', 'POST'])
 def sectionA1():
-    form = SectionA1()
+    form = SectionA1Form()
     if form.validate_on_submit():
         session['SecA_nombre1'] = form.profName.data
         session['SecA_Tipo1'] = form.type.data
@@ -432,27 +432,27 @@ def sectionA1():
 
 @app.route('/sectionHIPAA',methods=['GET', 'POST'])
 def sectionHIPAA():
-    form = SectionHIPAA()
+    form = SectionHIPAAForm()
     if form.validate_on_submit():
         session['3_Name'] = form.childLast.data + " " + form.childFirst.data + " " + form.childMiddle.data
-        session['3_DOB'] = SectionA.childDOB.data
+        session['3_DOB'] = session['APPLICANT_DOB']
         session['3_Describe'] = form.describeInfo.data
         session['3_agency'] = form.agency.data
         session['3_Date1'] = form.requestDate.data
         session['3_Date2'] = form.authorizationDate.data
-        session['3_padre'] =  SectionB.parentName.data
+        session['3_padre'] =  session['secB_Name']
         return redirect(url_for("release"))  # only when form submitted
 
     return render_template('HIPAA.html', form=form)
 
 @app.route('/release',methods=['GET', 'POST'])
 def release():
-    form = SectionRelease()
+    form = SectionReleaseForm()
     if form.validate_on_submit():
         print("In release")
-        session['4_Name1'] = SectionA.childName.data
-        session['4_DOB'] = SectionA.childDOB.data
-        session['4_Date1'] = SectionHIPAA.requestDate.data
+        session['4_Name1'] = session['secA_AppName']
+        session['4_DOB'] = session['APPLICANT_DOB']
+        session['4_Date1'] = session['3_Date1']
         session['MedicalPro'] = form.office.data
         print("before office var setting")
         if form.office.data == 'Chandler':
@@ -504,8 +504,8 @@ def release():
         session['InfoTipo11'] = form.InfoTipo11.data
         print("Infotipos complete")
         session['4_Specify1'] = form.other.data
-        session['4_padre'] = SectionB.parentName.data
-        session['4_Date2'] = SectionHIPAA.authorizationDate.data
+        session['4_padre'] = session['secB_Name']
+        session['4_Date2'] = session['3_Date1']
         print("I am at the end of release")
         return redirect(url_for("goodbye"))  # only when form submitted
 
@@ -543,7 +543,7 @@ def goodbye():
 @app.route('/test', methods=['GET', 'POST'])
 def test():
     # for the other classes, I can just so SectionB.variable.data to grab the info
-    form = SectionA()
+    form = SectionAForm()
     if form.validate_on_submit():
         print("HERE")
         data_for_pdf = dict(
