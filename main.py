@@ -43,7 +43,7 @@ class TestForm(FlaskForm):
     submit = SubmitField('Submit')
 
 #will continue to have this coded in English, need to fix discriptions to Spanish
-class SectionB(FlaskForm):
+class SectionBForm(FlaskForm):
     parentName = StringField('Nombre completo:', validators=[DataRequired()])
     relationship = StringField("Parentesco:", validators=[DataRequired()])
     parentPhone = StringField('Teléfono:', validators=[DataRequired()])
@@ -292,7 +292,7 @@ def sectionB():
 
     #maybe nested ifs until the end.....otherwise just move it to the respective rendering
     #issues figuring out how to run it.....
-    form = SectionB()
+    form = SectionBForm()
     if form.validate_on_submit():
         session['secB_Name'] = form.parentName.data
         session['secB_Relationship1'] = form.relationship.data
@@ -343,10 +343,10 @@ def sectionA():
             session['secA_State1'] = form.childState.data
             session['secA_Zip1'] = form.childZip.data
         else:
-            session['secA_HomeAddress'] = SectionB().parentAddress.data
-            session['secA_City1'] = SectionB().parentCity.data
-            session['secA_State1'] = SectionB().parentState.data
-            session['secA_Zip1'] = SectionB().parentZip.data
+            session['secA_HomeAddress'] = session['secB_Address1']
+            session['secA_City1'] = session['secB_City1']
+            session['secA_State1'] = session['secB_State1']
+            session['secA_Zip1'] = session['secB_Zip1']
 
         session['SecA_Phone'] = form.childPhone.data
         session['secA_Ethnicity'] = form.ethnicity.data
@@ -395,9 +395,9 @@ def sectionD():
         session['secD_tipo1'] = form.typeSupport.data
         session['secD_fechas1'] = form.eduDate.data
         #unsure if I can assign the other values we already have here
-        session['SIG_Name'] =SectionB().parentName.data
-        session['SIG_Relationship']=SectionB().relationship.data
-        session['SIG_Date'] =SectionHIPAA().requestDate.data
+        session['SIG_Name'] =SectionB.parentName.data
+        session['SIG_Relationship']=SectionB.relationship.data
+        session['SIG_Date'] =SectionHIPAA.requestDate.data
         #'secD_estado2','secD_tipo2', 'secD_fechas2',','SIG_Relationship','SIG_Date',
 
         #just so the pdf doesn't complain
@@ -435,12 +435,12 @@ def sectionHIPAA():
     form = SectionHIPAA()
     if form.validate_on_submit():
         session['3_Name'] = form.childLast.data + " " + form.childFirst.data + " " + form.childMiddle.data
-        session['3_DOB'] = SectionA().childDOB.data
+        session['3_DOB'] = SectionA.childDOB.data
         session['3_Describe'] = form.describeInfo.data
         session['3_agency'] = form.agency.data
         session['3_Date1'] = form.requestDate.data
         session['3_Date2'] = form.authorizationDate.data
-        session['3_padre'] =  SectionB().parentName.data
+        session['3_padre'] =  SectionB.parentName.data
         return redirect(url_for("release"))  # only when form submitted
 
     return render_template('HIPAA.html', form=form)
@@ -450,9 +450,9 @@ def release():
     form = SectionRelease()
     if form.validate_on_submit():
         print("In release")
-        session['4_Name1'] = SectionA().childName.data
-        session['4_DOB'] = SectionA().childDOB.data
-        session['4_Date1'] = SectionHIPAA().requestDate.data
+        session['4_Name1'] = SectionA.childName.data
+        session['4_DOB'] = SectionA.childDOB.data
+        session['4_Date1'] = SectionHIPAA.requestDate.data
         session['MedicalPro'] = form.office.data
         print("before office var setting")
         if form.office.data == 'Chandler':
@@ -504,8 +504,8 @@ def release():
         session['InfoTipo11'] = form.InfoTipo11.data
         print("Infotipos complete")
         session['4_Specify1'] = form.other.data
-        session['4_padre'] = SectionB().parentName.data
-        session['4_Date2'] = SectionHIPAA().authorizationDate.data
+        session['4_padre'] = SectionB.parentName.data
+        session['4_Date2'] = SectionHIPAA.authorizationDate.data
         print("I am at the end of release")
         return redirect(url_for("goodbye"))  # only when form submitted
 
