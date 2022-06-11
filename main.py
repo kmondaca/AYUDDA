@@ -110,7 +110,6 @@ class SectionCForm(FlaskForm):
     IDNum = StringField('Número de ID/Grupo:', validators=[DataRequired()])
     policyNum = StringField('Número de póliza:', validators=[DataRequired()])
     policyDate = StringField('Fecha de vigencia:', validators=[DataRequired()])
-    dob = StringField("Fecha de nacimiento del titular:", validators=[DataRequired()])
     submit = SubmitField('Enviar')
 
 class SectionDForm(FlaskForm):
@@ -120,13 +119,12 @@ class SectionDForm(FlaskForm):
     submit = SubmitField('Enviar')
 
 class SectionHIPAAForm(FlaskForm):
-    childLast = StringField("Nombre de persona/cliente cuya información de la salud se compartirá:", validators=[DataRequired()])
-    childFirst = StringField("Apellido de persona/cliente cuya información de la salud se compartirá::", validators=[DataRequired()])
-    childMiddle = StringField("Segundo de persona/cliente cuya información de la salud se compartirá::", validators=[DataRequired()])
+    childLast = StringField("NOMBRE de persona/cliente cuya información de la salud se compartirá:", validators=[DataRequired()])
+    childFirst = StringField("APELLIDO de persona/cliente cuya información de la salud se compartirá::", validators=[DataRequired()])
+    childMiddle = StringField("SEGUNDO de persona/cliente cuya información de la salud se compartirá::", validators=[DataRequired()])
     describeInfo = TextAreaField('')
     agency = StringField("Persona/Agencia que solicita o necesita la información:", validators=[DataRequired()])
     requestDate= StringField("Fecha de solicitud:", validators=[DataRequired()])
-    authorizationDate = StringField("Fecha de autorización:", validators=[DataRequired()])
     submit = SubmitField('Enviar')
 
 class SectionReleaseForm(FlaskForm):
