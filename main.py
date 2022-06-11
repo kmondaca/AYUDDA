@@ -5,6 +5,7 @@ from wtforms import (StringField , SubmitField,BooleanField ,
 
 from wtforms.validators import DataRequired
 from util import fill_one_pdf
+from datetime import date
 import os
 
 app = Flask(__name__) # This creates the application
@@ -328,7 +329,7 @@ def sectionA():
             session['secA_State1'] = session['secB_State1']
             session['secA_Zip1'] = session['secB_Zip1']
 
-        session['SecA_Phone'] = form.childPhone.data
+        session['secA_Phone'] = form.childPhone.data
         session['secA_Ethnicity'] = form.ethnicity.data
         session['secA_Tribe'] = form.tribe.data
         session['secA_MailingAdd'] = form.childMailAddress.data
@@ -352,7 +353,7 @@ def sectionC():
         session['secC_plan1'] = form.healthPlan.data
         session['secC_Titular1'] = form.policyName.data
         session['secC_num1'] = form.IDNum.data
-        session['secC_vigencia1'] = form.dob.data
+        session['secC_vigencia1'] = form.policyDate.data
         session['secC_naci1'] = session['APPLICANT_DOB']
 
         # just so the pdf filler doesn't complain
@@ -375,7 +376,7 @@ def sectionD():
         session['secD_fechas1'] = form.eduDate.data
         session['SIG_Name'] = session['secB_Name']
         session['SIG_Relationship']=session['secB_Relationship1']
-        session['SIG_Date'] = session['3_Date1']
+        session['SIG_Date'] = date.today()
 
         # just so the pdf doesn't complain
         session['secD_estado2'] = ""
@@ -415,7 +416,7 @@ def sectionHIPAA():
         session['3_Describe'] = form.describeInfo.data
         session['3_agency'] = form.agency.data
         session['3_Date1'] = form.requestDate.data
-        session['3_Date2'] = form.authorizationDate.data
+        session['3_Date2'] = date.today()
         session['3_padre'] =  session['secB_Name']
         return redirect(url_for("release"))  # only when form submitted
 
@@ -481,7 +482,7 @@ def release():
         print("Infotipos complete")
         session['4_Specify1'] = form.other.data
         session['4_padre'] = session['secB_Name']
-        session['4_Date2'] = session['3_Date1']
+        session['4_Date2'] = date.today()
         print("I am at the end of release")
 
         return redirect(url_for("goodbye"))  # only when form submitted
