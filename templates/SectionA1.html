@@ -20,19 +20,16 @@
     </ul>
        Los profesionales aceptados varían según la discapacidad. Consulte a su especialista en elegibilidad si tiene preguntas.</p>
     <br>
-    {{form.numProf.label}}{{form.numProf}}
+    {{form.profName.label}}{{form.profName}}
+     <br>
+    {{form.profPhone.label}}{{form.profPhone}}
+    <br>
+    {{form.type.label}}{{form.type}}
+    <br>
+    {{form.date.label}}{{form.date}}
+    <br>
 
-    {% for num in session['numProf'] %}
-        {{form.profName.label}}{{form.profName{num}}}
-        <br>
-        {{form.profPhone.label}}{{form.profPhone{num}}}
-        <br>
-        {{form.type.label}}{{form.type{num}}}
-         <br>
-        {{form.date.label}}{{form.date{num}}}
-        <br>
-    {% endfor %}
-      {{form.submit()}}
+    {{form.submit()}}
     </form>
 </div>
 {% endblock content %}
