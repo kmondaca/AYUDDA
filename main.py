@@ -7,11 +7,11 @@ from wtforms.validators import DataRequired
 from util import fill_one_pdf
 import os
 
-app = Flask(__name__) #create application
+app = Flask(__name__) # This creates the application
 
 app.config['SECRET_KEY'] = 'mykey'
 
-
+# classes
 class InfoForm(FlaskForm):
     first = StringField('First Name: ', validators=[DataRequired()])
     last = StringField('Last Name: ', validators=[DataRequired()])
@@ -22,9 +22,6 @@ class InfoForm(FlaskForm):
     email = TextAreaField('')
     conchoice =TextAreaField('')
     submit = SubmitField('Submit')
-
-
-##############################
 
 class SpanForm(FlaskForm):
     sfirst = StringField('Primer nombre: ', validators=[DataRequired()])
@@ -42,7 +39,6 @@ class TestForm(FlaskForm):
     dob = StringField("Date of Birth: ", validators=[DataRequired()])
     submit = SubmitField('Submit')
 
-#will continue to have this coded in English, need to fix discriptions to Spanish
 class SectionBForm(FlaskForm):
     parentName = StringField('Nombre completo:', validators=[DataRequired()])
     relationship = StringField("Parentesco:", validators=[DataRequired()])
@@ -123,31 +119,23 @@ class SectionDForm(FlaskForm):
     submit = SubmitField('Enviar')
 
 class SectionHIPAAForm(FlaskForm):
-    #concat name ,last, first middle (cannot get previous since middle isn't specified
     childLast = StringField("Nombre de persona/cliente cuya información de la salud se compartirá:", validators=[DataRequired()])
     childFirst = StringField("Apellido de persona/cliente cuya información de la salud se compartirá::", validators=[DataRequired()])
     childMiddle = StringField("Segundo de persona/cliente cuya información de la salud se compartirá::", validators=[DataRequired()])
-    #DOB request, gather from Section A
     describeInfo = TextAreaField('')
     agency = StringField("Persona/Agencia que solicita o necesita la información:", validators=[DataRequired()])
     requestDate= StringField("Fecha de solicitud:", validators=[DataRequired()])
-    #get Parent name
-    #need a physical signature....
     authorizationDate = StringField("Fecha de autorización:", validators=[DataRequired()])
     submit = SubmitField('Enviar')
 
 class SectionReleaseForm(FlaskForm):
-    #get concat version from SectionHIPAA of name
-    #get dob from SectionA
-    #get agency
-    #get request date
     office = RadioField('¿Qué oficina de la División de Discapacidades del Desarrollo es la más cercana?:',
                                choices=[('Chandler', 'Chandler'),
                                         ('Flagstaff', 'Flagstaff'),
                                         ('Tucson', 'Tucson'),
                                         ('Phoenix (Oeste)', 'Phoenix (Oeste)'),
                                         ('Phoenix (Central)', 'Phoenix (Central)')])
-    #autofill the location of the office
+    # autofill the location of the office
     InfoTipo1 = RadioField('Expedientes medicos',
                            choices=[('On', 'Sí'), ('Off', 'No')])
     InfoTipo2 = RadioField('Informes/Expedientes de audiologia',
@@ -171,9 +159,6 @@ class SectionReleaseForm(FlaskForm):
     InfoTipo11 = RadioField('Informes/Expedientes de audiologia',
                             choices=[('On', 'Sí'), ('Off', 'No')])
     other = StringField("")
-    #get parent name
-    #requires real signature
-    #get date of authorization
     submit = SubmitField('Enviar')
 ####################################################################
 """"
@@ -231,11 +216,10 @@ def english():
         session['conpref'] = form.conpref.data
         session['conchoice'] = form.conchoice.data
         session['email'] = form.email.data
-        #session['submit'] = form.submit.data
 
-        return redirect(url_for("thankyou"))#only when form submitted
+        return redirect(url_for("thankyou"))# only when form submitted
 
-    return render_template('english.html',form=form) #app
+    return render_template('english.html',form=form)
 
 
 @app.route('/')
@@ -274,24 +258,22 @@ def spanish():
         session['sconpref'] = form.sconpref.data
         session['sconchoice'] = form.sconchoice.data
         session['semail'] = form.semail.data
-        # session['submit'] = form.submit.data
 
         return redirect(url_for("gracias"))  # only when form submitted
 
-    return render_template('spanish.html', form=form)  # app
+    return render_template('spanish.html', form=form)
 
 @app.route('/app', methods=['GET', 'POST'])
 def sectionB():
-    #Section B
-    #Section A
-    #Section C
-    #Section D
-    #Section A.1
-    #HIPAA
-    #Release
+    # The order of how I want this to render is as follows:
+    # Section B
+    # Section A
+    # Section C
+    # Section D
+    # Section A.1
+    # HIPAA
+    # Release
 
-    #maybe nested ifs until the end.....otherwise just move it to the respective rendering
-    #issues figuring out how to run it.....
     form = SectionBForm()
     if form.validate_on_submit():
         session['secB_Name'] = form.parentName.data
@@ -312,14 +294,12 @@ def sectionB():
         session['secB_State2'] = form.legalState.data
         session['secB_Zip2'] = form.legalZip.data
 
-        #just for the pdf to not complain
         session['secB_Alt'] = ""
-        #it is not reading this redirect, I have tried changing it to another to see if it
-        #would read it but no luck, really don't know what to do
+
         return redirect(url_for("sectionA"))  # only when form submitted
 
 
-    return render_template('SectionB.html', form=form)  #this form refers to the form we set on 371
+    return render_template('SectionB.html', form=form)
 
 @app.route('/sectionA',methods=['GET', 'POST'])
 def sectionA():
@@ -334,9 +314,9 @@ def sectionA():
         session['secA_City1'] = form.childCity.data
         session['secA_State1'] = form.childState.data
         session['secA_Zip1'] = form.childZip.data
-        #let's make sure we are still holding onto the data we get from the child
-        #regardless if they live at home or not
 
+        # let's make sure we are still holding onto the data we get from the child
+        # regardless if they live at home or not
         if session['viva'] != 'Yes':
             session['secA_HomeAddress'] = form.childAddress.data
             session['secA_City1'] = form.childCity.data
@@ -355,7 +335,7 @@ def sectionA():
         session['secA_City2'] = form.childMailCity.data
         session['secA_State2'] = form.childMailState.data
         session['secA_Zip2'] = form.childMailZip.data
-        #switching contactprefer and contact to see if that resolves issue
+        #switched contactprefer and contact because of how the PDF recognizes the user data
         session['secA_ContactPrefer'] =form.childEmail.data
         session['secA_Contact'] =  form.childConpref.data
         session['secA_Vote'] = form.vote.data
@@ -374,9 +354,8 @@ def sectionC():
         session['secC_num1'] = form.IDNum.data
         session['secC_vigencia1'] = form.dob.data
         session['secC_naci1'] = form.policyDate.data
-        #'secC_tipo2','secC_plan2','secC_Titular2','secC_num2','secC_vigencia2','secC_naci2',
 
-        #just so the pdf filler doesn't complain
+        # just so the pdf filler doesn't complain
         session['secC_tipo2'] = ""
         session['secC_plan2'] = ""
         session['secC_Titular2'] = ""
@@ -394,13 +373,11 @@ def sectionD():
         session['secD_estado1'] = form.program.data
         session['secD_tipo1'] = form.typeSupport.data
         session['secD_fechas1'] = form.eduDate.data
-        #unsure if I can assign the other values we already have here
         session['SIG_Name'] = session['secB_Name']
         session['SIG_Relationship']=session['secB_Relationship1']
         session['SIG_Date'] = session['3_Date1']
-        #'secD_estado2','secD_tipo2', 'secD_fechas2',','SIG_Relationship','SIG_Date',
 
-        #just so the pdf doesn't complain
+        # just so the pdf doesn't complain
         session['secD_estado2'] = ""
         session['secD_tipo2'] = ""
         session['secD_fechas2'] = ""
@@ -417,9 +394,8 @@ def sectionA1():
         session['SecA_nombre1'] = form.profName.data
         session['SecA_Tipo1'] = form.type.data
         session['SecA_fecha1'] = form.date.data
-        #'SecA_nombre2','Sec_Tipo2','SecA_fecha2','SecA_nombre3','SecA_Tipo3','SecA_fecha3',
 
-        #adding to satisfy the pdf
+        # adding to satisfy the pdf
         session['SecA_nombre2'] = ""
         session['Sec_Tipo2'] = ""
         session['SecA_fecha2'] = ""
@@ -449,8 +425,8 @@ def sectionHIPAA():
 def release():
     form = SectionReleaseForm()
     if form.validate_on_submit():
-        print("In release")
-        session['4_Name1'] = session['secA_AppName']
+        # 4_Name1 will get the concatenated version of the Applicant name
+        session['4_Name1'] = session['3_Name']
         session['4_DOB'] = session['APPLICANT_DOB']
         session['4_Date1'] = session['3_Date1']
         session['MedicalPro'] = form.office.data
@@ -507,6 +483,7 @@ def release():
         session['4_padre'] = session['secB_Name']
         session['4_Date2'] = session['3_Date1']
         print("I am at the end of release")
+
         return redirect(url_for("goodbye"))  # only when form submitted
 
     return render_template('Release.html', form=form)
@@ -515,11 +492,8 @@ def release():
 
 @app.route('/goodbye', methods=['GET', 'POST'])
 def goodbye():
-    #some of the spanish variables are actually in english jajajajajajajajajajaj
-    #I regret not looking at these variables sooner
-
-
-        all_pdf_fields = ['secA_AppName','APPLICANT_DOB','APPLICANT_Sex','secA_AHCCCS','secA_Language','secA_HomeAddress','secA_City1', 'secA_State1','secA_Zip1','SecA_Phone','secA_Ethnicity','secA_Tribe','secA_MailingAdd', 'secA_City2','secA_State2','secA_Zip2','secA_ContactPrefer', 'secA_Contact','secA_Vote',
+    # The creators of the pdf also kept some of the variables in English
+     all_pdf_fields = ['secA_AppName','APPLICANT_DOB','APPLICANT_Sex','secA_AHCCCS','secA_Language','secA_HomeAddress','secA_City1', 'secA_State1','secA_Zip1','SecA_Phone','secA_Ethnicity','secA_Tribe','secA_MailingAdd', 'secA_City2','secA_State2','secA_Zip2','secA_ContactPrefer', 'secA_Contact','secA_Vote',
                       'SecA_nombre1', 'SecA_Tipo1', 'SecA_fecha1', 'SecA_nombre2','Sec_Tipo2','SecA_fecha2','SecA_nombre3','SecA_Tipo3','SecA_fecha3',
                       'secB_Name', 'secB_Relationship1', 'secB_Phone1', 'secB_Email1', 'secB_City1','secB_State1','secB_Zip1','secB_Relationship2','secB_Address1','secB_BestWay','secB_Phone2','secB_Alt','secB_LGName','secB_Address2', 'secB_City2', 'secB_Zip2', 'secB_State2',
                       'secC_tipo1','secC_plan1','secC_Titular1','secC_num1', 'secC_vigencia1','secC_naci1','secC_tipo2','secC_plan2','secC_Titular2','secC_num2','secC_vigencia2','secC_naci2',
@@ -527,17 +501,17 @@ def goodbye():
                       '3_DOB', '3_Name', '3_Describe', '3_Date1','3_agency','3_padre','3_Date2',
                       '4_Name1','4_DOB', '4_Date1','MedicalPro', 'DDD_Address1','4_Zip1', '4_State1', '4_City1','4_Fax1', '4_Phone1', 'InfoTipo1', 'InfoTipo2','InfoTipo3', 'InfoTipo4','InfoTipo5','InfoTipo6','InfoTipo7', 'InfoTipo8','InfoTipo9','InfoTipo10', '4_Specify1', 'InfoTipo11','4_padre','4_Date2']  # not the real field names, especially in the Spanish version!
 
-        data_for_pdf = {}
+    data_for_pdf = {}
 
-        for key in all_pdf_fields:
-            if key not in session:
-                print(key + " is not here :(")
-                #could help me debug if I have any spelling issues
-            else:
-                data_for_pdf[key] = session[key]
+    for key in all_pdf_fields:
+        if key not in session:
+            print(key + " is not here :(")
+            #could help me debug if I have any spelling issues
+        else:
+            data_for_pdf[key] = session[key]
 
-        complete_pdf = fill_one_pdf("DDD-2069A-S", data_for_pdf)
-        return send_file(complete_pdf, as_attachment=True)
+    complete_pdf = fill_one_pdf("DDD-2069A-S", data_for_pdf)
+    return send_file(complete_pdf, as_attachment=True)
 
 
 @app.route('/test', methods=['GET', 'POST'])
