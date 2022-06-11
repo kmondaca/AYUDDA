@@ -269,16 +269,14 @@ def spanish():
         APP_GMAIL_ADDRESS = "ayudda.app@gmail.com"
 
         subject = "Questions from" + session['sfirst'] + session['slast']
-        recipient = ["kmondaca@ymail.com", "cschatz@mills.edu"]
-        contents =
-        
-        'First name:' + session['sfirst']
-        'Last Name:'+ session['slast']
-        'Preferred Language:'+ session['slang']
-        'Phone number:'+ session['sphone']
-        'Contact preference:'+ session['sconpref']
-        'Question:' + session['sconchoice']
-        'Email:' + session['semail']
+        recipient = "kmondaca@ymail.com"
+        contents = ['First name:' + session['sfirst'],
+        'Last Name:'+ session['slast'],
+        'Preferred Language:'+ session['slang'],
+        'Phone number:'+ session['sphone'],
+        'Contact preference:'+ session['sconpref'],
+        'Question:' + session['sconchoice'],
+        'Email:' + session['semail']]
 
 
         with yagmail.SMTP(APP_GMAIL_ADDRESS, APP_PASSWORD) as yag:
