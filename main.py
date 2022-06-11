@@ -270,16 +270,16 @@ def spanish():
 
         subject = "Questions from" + session['sfirst'] + session['slast']
         recipient = ["kmondaca@ymail.com", "cschatz@mills.edu"]
-        contents = """
+        contents =
         
-        First name: session['sfirst']
-        Last Name: session['slast'] 
-        Preferred Language: session['slang'] 
-        Phone number: session['sphone'] 
-        Contact preference: session['sconpref'] 
-        Question: session['sconchoice']
-        Email: session['semail']
-        """
+        'First name:' + session['sfirst']
+        'Last Name:'+ session['slast']
+        'Preferred Language:'+ session['slang']
+        'Phone number:'+ session['sphone']
+        'Contact preference:'+ session['sconpref']
+        'Question:' + session['sconchoice']
+        'Email:' + session['semail']
+
 
         with yagmail.SMTP(APP_GMAIL_ADDRESS, APP_PASSWORD) as yag:
             yag.send(recipient, subject, contents)
