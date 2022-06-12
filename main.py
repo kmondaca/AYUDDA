@@ -546,6 +546,7 @@ def goodbye():
         else:
             data_for_pdf[key] = session[key]
 
+
     complete_pdf = fill_one_pdf(f"yes-{session['secA_Contact']}-{session['secA_Vote']}-vote-S", data_for_pdf)
     return send_file(complete_pdf, as_attachment=True)
 
