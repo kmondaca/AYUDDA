@@ -87,10 +87,10 @@ class SectionAForm(FlaskForm):
     childMailState = StringField('Estado:')
     childMailZip = StringField('Código postal:')
     childConpref = RadioField('Cómo prefiere comunicarse:',
-                         choices=[('phone','Teléfono'), ('email','Correo electrónico'), ('both','Ambos')])
+                         choices=[('telephone','Teléfono'), ('email','Correo electrónico'), ('both','Ambos')])
     childEmail = StringField('Correo electrónico de usted:')
     vote = RadioField('¿Desea registrarse para votar?',
-                         choices=[('Yes', 'Sí'), ('No', 'No')])
+                         choices=[('yes', 'Sí'), ('no', 'No')])
     submit = SubmitField('Enviar')
 
 
@@ -546,7 +546,7 @@ def goodbye():
         else:
             data_for_pdf[key] = session[key]
 
-    complete_pdf = fill_one_pdf("DDD-2069A-S", data_for_pdf)
+    complete_pdf = fill_one_pdf(f"{session['secA_Vote']}-{session['secA_Contact']}-blank.pdf", data_for_pdf)
     return send_file(complete_pdf, as_attachment=True)
 
 
