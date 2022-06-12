@@ -95,18 +95,18 @@ class SectionAForm(FlaskForm):
 
 
 class SectionA1Form(FlaskForm):
-    profName = StringField('Nombre de contacto', validators=[DataRequired()])
-    profPhone = StringField('Teléfono de contacto', validators=[DataRequired()])
-    type = StringField('Tipo de profesional', validators=[DataRequired()])
-    date = StringField('Fecha de evaluación', validators=[DataRequired()])
-    profName2 = StringField('Nombre de contacto')
-    profPhone2 = StringField('Teléfono de contacto')
-    type2 = StringField('Tipo de profesional')
-    date2 = StringField('Fecha de evaluación')
-    profName3 = StringField('Nombre de contacto')
-    profPhone3 = StringField('Teléfono de contacto')
-    type3 = StringField('Tipo de profesional')
-    date3 = StringField('Fecha de evaluación')
+    profName = StringField('Nombre de contacto: ', validators=[DataRequired()])
+    profPhone = StringField('Teléfono de contacto: ', validators=[DataRequired()])
+    type = StringField('Tipo de profesional: ', validators=[DataRequired()])
+    date = StringField('Fecha de evaluación: ', validators=[DataRequired()])
+    profName2 = StringField('Nombre de contacto: ')
+    profPhone2 = StringField('Teléfono de contacto: ')
+    type2 = StringField('Tipo de profesional: ')
+    date2 = StringField('Fecha de evaluación: ')
+    profName3 = StringField('Nombre de contacto: ')
+    profPhone3 = StringField('Teléfono de contacto: ')
+    type3 = StringField('Tipo de profesional: ')
+    date3 = StringField('Fecha de evaluación: ')
     submit = SubmitField('Enviar')
 
 
