@@ -233,6 +233,26 @@ def english():
         session['conchoice'] = form.conchoice.data
         session['email'] = form.email.data
 
+        import yagmail
+
+        APP_PASSWORD = "asgjqxybengsypbj"
+        APP_GMAIL_ADDRESS = "ayudda.app@gmail.com"
+
+        subject = "Questions from " + session['first'] + " " + session['last']
+        recipient = "kmondaca@ymail.com"
+        contents = ['First name:' + " " + session['first'],
+        'Last Name: '+ session['last'],
+        'Preferred Language: '+ session['lang'],
+        'Phone number: '+ session['phone'],
+        'Contact preference: '+ session['conpref'],
+        'Question: ' + session['conchoice'],
+        'Email: ' + session['email']]
+
+
+        with yagmail.SMTP(APP_GMAIL_ADDRESS, APP_PASSWORD) as yag:
+            yag.send(recipient, subject, contents)
+            print("Email sent.")
+
         return redirect(url_for("thankyou"))# only when form submitted
 
     return render_template('english.html',form=form)
