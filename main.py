@@ -112,12 +112,19 @@ class SectionA1Form(FlaskForm):
 
 
 class SectionCForm(FlaskForm):
-    coverage = StringField('Tipo de cobertura(privada,pública, etc.):', validators=[DataRequired()])
-    healthPlan = StringField('Nombre del plan de salud:', validators=[DataRequired()])
-    policyName = StringField('Nombre del titular de la póliza:', validators=[DataRequired()])
-    IDNum = StringField('Número de ID/Grupo:', validators=[DataRequired()])
-    policyNum = StringField('Número de póliza:', validators=[DataRequired()])
-    policyDate = StringField('Fecha de vigencia:', validators=[DataRequired()])
+    # Not requiring since many might not have health insurance
+    coverage = StringField('Tipo de cobertura(privada,pública, etc.):')
+    healthPlan = StringField('Nombre del plan de salud:')
+    policyName = StringField('Nombre del titular de la póliza:')
+    IDNum = StringField('Número de ID/Grupo:')
+    policyNum = StringField('Número de póliza:')
+    policyDate = StringField('Fecha de vigencia:')
+    coverage2 = StringField('Tipo de cobertura(privada,pública, etc.):')
+    healthPlan2 = StringField('Nombre del plan de salud:')
+    policyName2 = StringField('Nombre del titular de la póliza:')
+    IDNum2 = StringField('Número de ID/Grupo:')
+    policyNum2 = StringField('Número de póliza:')
+    policyDate2 = StringField('Fecha de vigencia:')
     submit = SubmitField('Enviar')
 
 class SectionDForm(FlaskForm):
@@ -380,12 +387,12 @@ def sectionC():
         session['secC_naci1'] = session['APPLICANT_DOB']
 
         # just so the pdf filler doesn't complain
-        session['secC_tipo2'] = ""
-        session['secC_plan2'] = ""
-        session['secC_Titular2'] = ""
-        session['secC_num2'] = ""
-        session['secC_vigencia2'] = ""
-        session['secC_naci2'] = ""
+        session['secC_tipo2'] = form.coverage2.data
+        session['secC_plan2'] = form.healthPlan2.data
+        session['secC_Titular2'] = form.policyName2.data
+        session['secC_num2'] = form.IDNum2.data
+        session['secC_vigencia2'] = form.policyDate2.data
+        session['secC_naci2'] = session['APPLICANT_DOB']
         return redirect(url_for("sectionD"))  # only when form submitted
 
     return render_template('SectionC.html', form = form)

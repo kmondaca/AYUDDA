@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="jumbotron">
-  <h1>Seguro médico:</h1>
+  <h1>Seguro médico del solicitante:</h1>
 </div>
 
 <!-- can ask if there is another option -->
@@ -9,20 +9,39 @@
 
     <form method="POST">
     {{form.hidden_tag()}}
+        <h4><i>Si el solicitante no tiene seguro, por favor déjelo en blanco.</i></h4>
+        <br>
+    <h5>Primera cobertura: </h5>
     {{form.coverage.label}}{{form.coverage}}
     <br>
     {{form.healthPlan.label}}{{form.healthPlan}}
     <br>
     {{form.policyName.label}}{{form.policyName}}
     <br>
-          <!-- is there a way to have two variables correspond to a certain spot, or do I need to concat -->
     {{form.IDNum.label}}{{form.IDNum}}
     <br>
     {{form.policyNum.label}}{{form.policyNum}}
     <br>
     {{form.policyDate.label}}{{form.policyDate}}
+     <br>
+        <br>
+      <h5>Segunda cobertura: </h5>
+    {{form.coverage2.label}}{{form.coverage2}}
+    <br>
+    {{form.healthPlan2.label}}{{form.healthPlan2}}
+    <br>
+    {{form.policyName2.label}}{{form.policyName2}}
+    <br>
+    {{form.IDNum2.label}}{{form.IDNum2}}
+    <br>
+    {{form.policyNum2.label}}{{form.policyNum2}}
+    <br>
+    {{form.policyDate2.label}}{{form.policyDate2}}
     <br>
       {{form.submit()}}
+        <br>
+        <br>
+        <br>
     </form>
 </div>
 
