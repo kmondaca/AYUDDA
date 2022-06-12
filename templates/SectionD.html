@@ -1,20 +1,31 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="jumbotron">
-
+ <h1>Intervención temprana e historial académico:</h1>
 </div>
 
- <h1>Intervención temprana e Historial académico:</h1>
+
 <!-- ask if another option -->
 <div class="SectionD d-flex align-items-center justify-content-center">
 
     <form method="POST">
     {{form.hidden_tag()}}
+        <h4><i>Si el solicitante no hizo un programa de intervención temprana ni asiste a la escuela, déjelo en blanco</i></h4>
+        <br>
+        <h5>Primero:</h5>
     {{form.program.label}}{{form.program}}
     <br>
     {{form.typeSupport.label}}{{form.typeSupport}}
     <br>
     {{form.eduDate.label}}{{form.eduDate}}
+    <br>
+        <br>
+      <h5>Segundo:</h5>
+    {{form.program2.label}}{{form.program2}}
+    <br>
+    {{form.typeSupport2.label}}{{form.typeSupport2}}
+    <br>
+    {{form.eduDate2.label}}{{form.eduDate2}}
     <br>
       {{form.submit()}}
     </form>

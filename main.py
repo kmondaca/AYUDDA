@@ -112,7 +112,7 @@ class SectionA1Form(FlaskForm):
 
 
 class SectionCForm(FlaskForm):
-    # Not requiring since many might not have health insurance
+    # Not requiring data since many might not have health insurance
     coverage = StringField('Tipo de cobertura(privada,pública, etc.):')
     healthPlan = StringField('Nombre del plan de salud:')
     policyName = StringField('Nombre del titular de la póliza:')
@@ -128,9 +128,14 @@ class SectionCForm(FlaskForm):
     submit = SubmitField('Enviar')
 
 class SectionDForm(FlaskForm):
-    program = StringField('Estado del Programa de Intervención Temprana o Nombre de la escuela y del distrito escolar:', validators=[DataRequired()])
-    typeSupport = StringField('Tipo de Apoyo (Servicios o tipo de plan tal cómo Plande Educación Individual o Plan 504):', validators=[DataRequired()])
-    eduDate = StringField('Fechas que asistió:', validators=[DataRequired()])
+    # Not requiring data because not all applicants are in school
+
+    program = StringField('Estado del Programa de Intervención Temprana o Nombre de la escuela y del distrito escolar:')
+    typeSupport = StringField('Tipo de Apoyo (Servicios o tipo de plan tal cómo Plande Educación Individual o Plan 504):')
+    eduDate = StringField('Fechas que asistió:')
+    program2 = StringField('Estado del Programa de Intervención Temprana o Nombre de la escuela y del distrito escolar:')
+    typeSupport2 = StringField('Tipo de Apoyo (Servicios o tipo de plan tal cómo Plande Educación Individual o Plan 504):')
+    eduDate2 = StringField('Fechas que asistió:')
     submit = SubmitField('Enviar')
 
 class SectionHIPAAForm(FlaskForm):
@@ -404,14 +409,13 @@ def sectionD():
         session['secD_estado1'] = form.program.data
         session['secD_tipo1'] = form.typeSupport.data
         session['secD_fechas1'] = form.eduDate.data
+        session['secD_estado2'] = form.program2.data
+        session['secD_tipo2'] = form.typeSupport2.data
+        session['secD_fechas2'] = form.eduDate2.data
         session['SIG_Name'] = session['secB_Name']
         session['SIG_Relationship']=session['secB_Relationship1']
         session['SIG_Date'] = date.today()
 
-        # just so the pdf doesn't complain
-        session['secD_estado2'] = ""
-        session['secD_tipo2'] = ""
-        session['secD_fechas2'] = ""
 
         return redirect(url_for("sectionA1"))  # only when form submitted
 
