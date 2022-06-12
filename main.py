@@ -87,10 +87,10 @@ class SectionAForm(FlaskForm):
     childMailState = StringField('Estado:')
     childMailZip = StringField('Código postal:')
     childConpref = RadioField('Cómo prefiere comunicarse:',
-                         choices=['Teléfono', 'Correo electrónico', 'Ambos'])
+                         choices=[('phone','Teléfono'), ('email','Correo electrónico'), ('both','Ambos')])
     childEmail = StringField('Correo electrónico de usted:')
     vote = RadioField('¿Desea registrarse para votar?',
-                         choices=[('Sí', 'Sí'), ('No', 'No')])
+                         choices=[('Yes', 'Sí'), ('No', 'No')])
     submit = SubmitField('Enviar')
 
 
