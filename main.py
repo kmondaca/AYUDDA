@@ -432,7 +432,7 @@ def sectionA1():
         session['SecA_nombre2'] = form.profName2.data + " " + form.profPhone2.data
         session['Sec_Tipo2'] = form.type2.data
         session['SecA_fecha2'] = form.date2.data
-        session['SecA_nombre3'] = form.profName3 + " " + form.profPhone3
+        session['SecA_nombre3'] = form.profName3.data + " " + form.profPhone3.data
         session['SecA_Tipo3'] = form.type3.data
         session['SecA_fecha3'] = form.date3
 
@@ -546,7 +546,7 @@ def goodbye():
         else:
             data_for_pdf[key] = session[key]
 
-    complete_pdf = fill_one_pdf(f"{session['secA_Vote']}-{session['secA_Contact']}-blank.pdf", data_for_pdf)
+    complete_pdf = fill_one_pdf(f"yes-{session['secA_Contact']}-{session['secA_Vote']}-vote-S", data_for_pdf)
     return send_file(complete_pdf, as_attachment=True)
 
 
