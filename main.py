@@ -178,47 +178,7 @@ class SectionReleaseForm(FlaskForm):
     InfoTipo11 = RadioField('Informes/Expedientes de audiologia',
                             choices=[('On', 'Sí'), ('Off', 'No')])
     other = StringField("")
-    submit = SubmitField('Enviar')
-####################################################################
-""""
-# This is 90% of the magic right here (see https://pypi.org/project/fillpdf/):
-from fillpdf.fillpdfs import (
-    get_form_fields,
-    write_fillable_pdf,
-)
-
-# constants for filenames
-BLANK_FORM = "DDD-2069A-S-blank.pdf"
-COMPLETED_FORM = "DDD-2069A-S-completed.pdf"
-
-#pdf is in directory it knows what to get
-form_fields = get_form_fields(BLANK_FORM)
-
-# Just to see how everything starts out
-for childName, current_value in form_fields.items():
-    if current_value == "":
-        current_value = "<blank>"
-    print(f"{childName}: {current_value}")
-
-# Prep data to fill out a few entries
-updates = dict(
-    secA_AppName = "Doctor Strange",
-    secA_Phone = "6025661185"
-    #secA_Contact="Correo electrónico"
-    #secA_ContactPrefer= "lionel@email.com",
-    #secA_Vote = "Sí",
-
-    
-)
-
-# Produce a non-editable version with entries filled in
-write_fillable_pdf(BLANK_FORM, COMPLETED_FORM, updates, flatten=True)
-
-# MAC ONLY
-os.system(f"open {COMPLETED_FORM}")
-
-"""
-####################################################################
+    submit = SubmitField('Obtener PDF completo')
 
 @app.route('/english', methods=['GET', 'POST'])
 def english():
