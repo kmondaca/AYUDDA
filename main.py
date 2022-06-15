@@ -410,11 +410,11 @@ def sectionA1():
         session['SecA_Tipo1'] = form.type.data
         session['SecA_fecha1'] = form.date.data
         session['SecA_nombre2'] = form.profName2.data + " " + form.profPhone2.data
-        session['Sec_Tipo2'] = form.type2.data
+        session['SecA_Tipo2'] = form.type2.data
         session['SecA_fecha2'] = form.date2.data
         session['SecA_nombre3'] = form.profName3.data + " " + form.profPhone3.data
         session['SecA_Tipo3'] = form.type3.data
-        session['SecA_fecha3'] = form.date3
+        session['SecA_fecha3'] = form.date3.data
 
 
         return redirect(url_for("sectionHIPAA"))  # only when form submitted
