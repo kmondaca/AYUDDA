@@ -377,7 +377,6 @@ def sectionC():
         session['secC_Titular2'] = form.policyName2.data
         session['secC_num2'] = form.IDNum2.data
         session['secC_vigencia2'] = form.policyDate2.data
-
         # check if they included a second option
         if session['secC_tipo2']== '':
             session['secC_naci2'] = ''
